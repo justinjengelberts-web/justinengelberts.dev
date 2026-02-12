@@ -12,9 +12,9 @@ const content = {
     title: "Refundely",
     subtitle: "AI-Powered Invoice Management & SEPA Payment Platform",
     overview: "Overview",
-    overviewText: "Refundely is an enterprise-grade SaaS platform designed specifically for the Dutch rental and property management industry. It automates the tedious, error-prone process of manual invoice processing and deposit refunds. Companies traditionally spend 5-10 minutes per invoice manually opening documents, entering data, verifying IBANs, and generating SEPA payment files. Refundely reduces this to just 30 seconds through AI-powered extraction and automated workflows.",
+    overviewText: "Refundely is an enterprise-grade SaaS platform designed for the European rental and property management industry. It automates the tedious, error-prone process of manual invoice processing and deposit refunds. Companies traditionally spend 5-10 minutes per invoice manually opening documents, entering data, verifying IBANs, and generating SEPA payment files. Refundely reduces this to just 30 seconds through AI-powered extraction and automated workflows.",
     challenge: "The Challenge",
-    challengeText: "Rental companies and property managers in the Netherlands and Belgium process hundreds of deposit refunds monthly. Each refund requires extracting invoice data, verifying bank details, generating compliant SEPA XML files, and maintaining audit trails for financial compliance. Manual processing is slow, error-prone, and doesn't scale. The solution needed to handle sensitive financial data securely while integrating with existing banking workflows.",
+    challengeText: "Rental companies and property managers across Europe process hundreds of deposit refunds monthly. Each refund requires extracting invoice data, verifying bank details, generating compliant SEPA XML files, and maintaining audit trails for financial compliance. Manual processing is slow, error-prone, and doesn't scale. The solution needed to handle sensitive financial data securely while integrating with existing banking workflows.",
     solution: "The Solution",
     solutionPoints: [
       {
@@ -64,9 +64,9 @@ const content = {
     title: "Refundely",
     subtitle: "AI-Aangedreven Factuurbeheer & SEPA Betalingsplatform",
     overview: "Overzicht",
-    overviewText: "Refundely is een enterprise-grade SaaS-platform specifiek ontworpen voor de Nederlandse verhuur- en vastgoedbeheersector. Het automatiseert het tijdrovende, foutgevoelige proces van handmatige factuurverwerking en borgteruggaves. Bedrijven besteden traditioneel 5-10 minuten per factuur aan het handmatig openen van documenten, invoeren van gegevens, verifiëren van IBANs en genereren van SEPA-betalingsbestanden. Refundely reduceert dit tot slechts 30 seconden door AI-gestuurde extractie en geautomatiseerde workflows.",
+    overviewText: "Refundely is een enterprise-grade SaaS-platform ontworpen voor de Europese verhuur- en vastgoedbeheersector. Het automatiseert het tijdrovende, foutgevoelige proces van handmatige factuurverwerking en borgteruggaves. Bedrijven besteden traditioneel 5-10 minuten per factuur aan het handmatig openen van documenten, invoeren van gegevens, verifiëren van IBANs en genereren van SEPA-betalingsbestanden. Refundely reduceert dit tot slechts 30 seconden door AI-gestuurde extractie en geautomatiseerde workflows.",
     challenge: "De Uitdaging",
-    challengeText: "Verhuurbedrijven en vastgoedbeheerders in Nederland en België verwerken maandelijks honderden borgteruggaves. Elke teruggave vereist het extraheren van factuurgegevens, verifiëren van bankgegevens, genereren van SEPA XML-bestanden en bijhouden van audit trails voor financiële compliance. Handmatige verwerking is traag, foutgevoelig en schaalt niet. De oplossing moest gevoelige financiële data veilig verwerken en integreren met bestaande bankworkflows.",
+    challengeText: "Verhuurbedrijven en vastgoedbeheerders in Europa verwerken maandelijks honderden borgteruggaves. Elke teruggave vereist het extraheren van factuurgegevens, verifiëren van bankgegevens, genereren van SEPA XML-bestanden en bijhouden van audit trails voor financiële compliance. Handmatige verwerking is traag, foutgevoelig en schaalt niet. De oplossing moest gevoelige financiële data veilig verwerken en integreren met bestaande bankworkflows.",
     solution: "De Oplossing",
     solutionPoints: [
       {
