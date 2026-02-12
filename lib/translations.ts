@@ -92,10 +92,10 @@ export const translations = {
   nl: {
     // Hero
     hero: {
-      headline: "Ik bouw software die",
-      words: ["schaalbaar", "intelligent", "intuïtief", "AI-powered", "high-performance"],
-      mobileWords: ["schaalbaar", "intelligent", "intuïtief", "AI-powered"],
-      wordsSuffix: " is",
+      headline: "Ik bouw",
+      words: ["schaalbaar", "intelligent", "intuïtief", "AI-powered", "anders"],
+      mobileWords: ["schaalbaar", "intelligent", "intuïtief", "anders"],
+      wordsSuffix: "",
       description:
         "Stop met bouwen op het tempo van gisteren. Ik combineer full-stack engineering met AI-native workflows om high-end SaaS-oplossingen en complexe datatools sneller dan ooit te leveren.",
       viewWork: "Bekijk mijn werk",
