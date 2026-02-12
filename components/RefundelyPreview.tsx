@@ -51,9 +51,9 @@ export function RefundelyPreview() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-200/30 rounded-full blur-3xl" />
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-row items-center justify-center gap-4 md:gap-12 px-2 md:px-0">
-        {/* Brand */}
-        <div className="text-left md:text-center">
+      <div className="relative z-10 grid grid-cols-3 md:flex md:flex-row items-center md:justify-center md:gap-12 w-full md:w-auto px-3 md:px-0">
+        {/* Brand - takes 2 columns on mobile */}
+        <div className="col-span-2 text-left md:text-center pl-1 md:pl-0">
           <div className="text-2xl md:text-4xl font-black tracking-tight">
             <span className="text-slate-900">Re</span>
             <span className="text-emerald-600">fundely</span>
@@ -64,7 +64,8 @@ export function RefundelyPreview() {
         </div>
 
 
-        {/* Steps */}
+        {/* Steps - takes 1 column on mobile, centered */}
+        <div className="col-span-1 flex justify-center">
         <div className="bg-white rounded-lg md:rounded-xl shadow-lg border border-slate-100 p-1.5 md:p-4">
           <div className="space-y-0.5 md:space-y-2">
             {steps.map((step, index) => {
@@ -172,6 +173,7 @@ export function RefundelyPreview() {
               );
             })}
           </div>
+        </div>
         </div>
       </div>
 
