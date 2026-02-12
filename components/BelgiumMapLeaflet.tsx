@@ -275,7 +275,7 @@ export default function BelgiumMapLeaflet() {
 
       {/* Company count overlay with export button - OUTSIDE MapContainer */}
       {companyCount && (
-        <div className="absolute bottom-3 left-3 z-[1000] bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg border border-slate-200">
+        <div className="absolute bottom-3 right-3 z-[1000] bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg border border-slate-200">
           <div className="text-lg font-bold text-blue-600">
             {companyCount.toLocaleString("nl-BE")}
           </div>

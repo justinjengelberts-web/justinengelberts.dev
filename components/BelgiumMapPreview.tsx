@@ -40,7 +40,7 @@ export function BelgiumMapPreview() {
 
       {/* KBO badge */}
       <div className="absolute top-3 right-3 z-[1000] flex items-center gap-1">
-        <div className="px-1.5 py-0.5 bg-orange-500 rounded text-[8px] font-bold text-white shadow-sm">
+        <div className="px-2.5 py-1 bg-orange-500 rounded text-[11px] font-bold text-white shadow-sm">
           KBO
         </div>
       </div>
