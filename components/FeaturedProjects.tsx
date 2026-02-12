@@ -68,16 +68,18 @@ export function FeaturedProjects() {
                 {/* Content */}
                 <div className="p-6">
                   <Link href={`/projects/${project.slug}`}>
-                    <h3 className="text-xl font-semibold text-white mb-3 hover:text-zinc-300 transition-colors cursor-pointer">
-                      {project.slug === "refundely" ? (
-                        <span className="font-black tracking-tight">
-                          <span className="text-white">Re</span>
-                          <span className="text-emerald-500">fundely</span>
+                    {project.slug === "refundely" ? (
+                      <span className="inline-block bg-white px-3 py-1.5 rounded-lg mb-3 hover:bg-gray-100 transition-colors cursor-pointer">
+                        <span className="text-xl font-black tracking-tight">
+                          <span className="text-slate-900">Re</span>
+                          <span className="text-emerald-600">fundely</span>
                         </span>
-                      ) : (
-                        project.title
-                      )}
-                    </h3>
+                      </span>
+                    ) : (
+                      <h3 className="text-xl font-semibold text-white mb-3 hover:text-zinc-300 transition-colors cursor-pointer">
+                        {project.title}
+                      </h3>
+                    )}
                   </Link>
                   <p className="text-zinc-400 text-sm leading-relaxed mb-4">
                     {project.description}
