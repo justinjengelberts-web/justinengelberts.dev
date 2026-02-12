@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Mail } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 
 const USFlag = () => (
@@ -127,9 +127,10 @@ export function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-white/20 rounded-full hover:bg-white/10 transition-colors"
+                  className="text-zinc-400 hover:text-white transition-colors"
+                  aria-label="Contact"
                 >
-                  {t.nav.getInTouch}
+                  <Mail className="w-5 h-5" />
                 </a>
               </div>
             </motion.div>
