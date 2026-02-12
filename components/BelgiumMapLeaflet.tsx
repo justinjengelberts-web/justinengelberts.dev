@@ -339,7 +339,10 @@ export default function BelgiumMapLeaflet() {
       {/* Click hint - OUTSIDE MapContainer */}
       {!clickPoint && (
         <div className="absolute bottom-3 right-3 z-[1000] bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2">
-          <div className="text-[10px] text-white">Klik binnen België om bedrijven te selecteren</div>
+          <div className="text-[10px] text-white">
+            <span className="md:hidden">Klik om bedrijven te selecteren</span>
+            <span className="hidden md:inline">Klik binnen België om bedrijven te selecteren</span>
+          </div>
         </div>
       )}
     </div>
