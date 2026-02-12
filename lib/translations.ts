@@ -82,7 +82,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      title: "Let's Talk About Your Next Project",
+      title: "Let's Talk About Our Next Project",
       subtitle:
         "Looking for an AI-native developer who ships fast and builds to last?",
       getInTouch: "Get in Touch",
@@ -172,7 +172,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      title: "Laten We Praten Over Je Volgende Project",
+      title: "Laten We Praten Over Ons Volgende Project",
       subtitle:
         "Op zoek naar een AI-native developer die snel levert en bouwt voor de lange termijn?",
       getInTouch: "Neem Contact Op",
