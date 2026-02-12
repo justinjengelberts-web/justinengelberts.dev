@@ -55,7 +55,7 @@ export const translations = {
           slug: "refundely",
           title: "Refundely",
           description:
-            "AI-powered invoice management and SEPA payment platform for the Dutch rental industry. Uses Mistral AI with intelligent model fallback: starts with a small model, validates quality, and escalates to larger models only when needed. Serverless edge functions handle OCR and data extraction.",
+            "AI-powered invoice management and SEPA payment platform for the European rental industry. Uses Mistral AI with intelligent model fallback: starts with a small model, validates quality, and escalates to larger models only when needed. IBANs are encrypted with AES-256-GCM, and serverless edge functions handle OCR and data extraction.",
           techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
@@ -145,7 +145,7 @@ export const translations = {
           slug: "refundely",
           title: "Refundely",
           description:
-            "AI-aangedreven factuurbeheer en SEPA-betalingsplatform voor de Nederlandse verhuursector. Gebruikt Mistral AI met slimme model-fallback: start goedkoop, valideert kwaliteit, en escaleert alleen wanneer nodig. Serverless edge functions voor OCR en data-extractie.",
+            "AI-aangedreven factuurbeheer en SEPA-betalingsplatform voor de Europese verhuursector. Gebruikt Mistral AI met slimme model-fallback: start goedkoop, valideert kwaliteit, en escaleert alleen wanneer nodig. IBANs worden versleuteld met AES-256-GCM, en serverless edge functions voor OCR en data-extractie.",
           techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
