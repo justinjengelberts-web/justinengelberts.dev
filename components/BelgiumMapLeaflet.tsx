@@ -102,6 +102,15 @@ export default function BelgiumMapLeaflet() {
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Detect mobile for initial zoom level - more zoomed out on mobile to show all of Belgium
+  const [initialZoom, setInitialZoom] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Set zoom based on screen width - lower zoom on mobile to show full Belgium
+    const isMobile = window.innerWidth < 768;
+    setInitialZoom(isMobile ? 6.3 : 7);
+  }, []);
+
   // Load GeoJSON on mount - using pre-computed files for performance
   useEffect(() => {
     // Load all GeoJSON files in parallel for faster loading
@@ -188,9 +197,10 @@ export default function BelgiumMapLeaflet() {
           border-top-color: rgba(0, 0, 0, 0.8) !important;
         }
       `}</style>
+      {initialZoom && (
       <MapContainer
         center={[50.5, 4.5]}
-        zoom={7}
+        zoom={initialZoom}
         className="w-full h-full"
         zoomControl={false}
         attributionControl={false}
@@ -272,6 +282,7 @@ export default function BelgiumMapLeaflet() {
 
       <MapClickHandler onMapClick={handleMapClick} />
     </MapContainer>
+      )}
 
       {/* Company count overlay with export button - OUTSIDE MapContainer */}
       {companyCount && (
