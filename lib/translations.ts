@@ -26,6 +26,7 @@ export const translations = {
         "Supabase",
         "PostgreSQL",
         "Mistral AI",
+        "Gemini",
         "Framer Motion",
         "Node.js",
         "React",
@@ -38,6 +39,7 @@ export const translations = {
         "Playwright",
         "Angular",
         "Edge Functions",
+        "AES-256-GCM",
       ],
     },
     // Featured Projects
@@ -52,7 +54,7 @@ export const translations = {
           title: "Refundely",
           description:
             "AI-powered invoice management and SEPA payment platform for the Dutch rental industry. Uses Mistral AI with intelligent model fallback: starts with a small model, validates quality, and escalates to larger models only when needed. Serverless edge functions handle OCR and data extraction.",
-          techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "Tailwind CSS"],
+          techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
           slug: "adhoc-selectietool",
@@ -112,6 +114,7 @@ export const translations = {
         "Supabase",
         "PostgreSQL",
         "Mistral AI",
+        "Gemini",
         "Framer Motion",
         "Node.js",
         "React",
@@ -124,6 +127,7 @@ export const translations = {
         "Playwright",
         "Angular",
         "Edge Functions",
+        "AES-256-GCM",
       ],
     },
     // Featured Projects
@@ -138,7 +142,7 @@ export const translations = {
           title: "Refundely",
           description:
             "AI-aangedreven factuurbeheer en SEPA-betalingsplatform voor de Nederlandse verhuursector. Gebruikt Mistral AI met slimme model-fallback: start goedkoop, valideert kwaliteit, en escaleert alleen wanneer nodig. Serverless edge functions voor OCR en data-extractie.",
-          techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "Tailwind CSS"],
+          techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
           slug: "adhoc-selectietool",

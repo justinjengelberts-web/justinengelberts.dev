@@ -6,30 +6,23 @@ import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 
 const USFlag = () => (
-  <svg viewBox="0 0 512 512" className="w-5 h-5 rounded-sm">
-    <rect width="512" height="512" fill="#fff"/>
-    <g fill="#bf0a30">
-      {[0, 2, 4, 6, 8, 10, 12].map(i => (
-        <rect key={i} y={i * 39.4} width="512" height="39.4"/>
-      ))}
-    </g>
-    <rect width="204.8" height="275.7" fill="#002868"/>
-    {/* Simplified stars pattern */}
-    <g fill="#fff">
-      {[0,1,2,3,4,5,6,7,8].map(row => (
-        [0,1,2,3,4,5].slice(0, row % 2 === 0 ? 6 : 5).map(col => (
-          <circle key={`${row}-${col}`} cx={17 + col * 34 + (row % 2 === 0 ? 0 : 17)} cy={15 + row * 30} r="8"/>
-        ))
-      ))}
-    </g>
+  <svg viewBox="0 0 24 18" className="w-5 h-4 rounded-[3px] overflow-hidden">
+    <rect width="24" height="18" fill="#B22234"/>
+    <rect y="1.38" width="24" height="1.38" fill="#fff"/>
+    <rect y="4.15" width="24" height="1.38" fill="#fff"/>
+    <rect y="6.92" width="24" height="1.38" fill="#fff"/>
+    <rect y="9.69" width="24" height="1.38" fill="#fff"/>
+    <rect y="12.46" width="24" height="1.38" fill="#fff"/>
+    <rect y="15.23" width="24" height="1.38" fill="#fff"/>
+    <rect width="9.6" height="9.69" fill="#3C3B6E"/>
   </svg>
 );
 
 const NLFlag = () => (
-  <svg viewBox="0 0 512 512" className="w-5 h-5 rounded-sm">
-    <rect width="512" height="170.7" fill="#AE1C28"/>
-    <rect y="170.7" width="512" height="170.7" fill="#fff"/>
-    <rect y="341.3" width="512" height="170.7" fill="#21468B"/>
+  <svg viewBox="0 0 24 18" className="w-5 h-4 rounded-[3px] overflow-hidden">
+    <rect width="24" height="6" fill="#AE1C28"/>
+    <rect y="6" width="24" height="6" fill="#fff"/>
+    <rect y="12" width="24" height="6" fill="#21468B"/>
   </svg>
 );
 
@@ -75,7 +68,7 @@ export function Navbar() {
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/5 transition-colors"
+              className="flex items-center justify-center w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all"
               aria-label="Toggle language"
             >
               {language === "en" ? <USFlag /> : <NLFlag />}
@@ -94,7 +87,7 @@ export function Navbar() {
             {/* Mobile Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center justify-center w-10 h-10"
+              className="flex items-center justify-center w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all"
               aria-label="Toggle language"
             >
               {language === "en" ? <USFlag /> : <NLFlag />}

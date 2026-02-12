@@ -22,6 +22,7 @@ const techColors: Record<string, string> = {
   "MapLibre": "bg-sky-500/20 text-sky-300 border-sky-500/30",
   "HTML": "bg-orange-500/20 text-orange-300 border-orange-500/30",
   "LESS": "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
+  "AES-256-GCM": "bg-rose-500/20 text-rose-300 border-rose-500/30",
 };
 
 const getColorForTech = (tech: string) => {
@@ -113,6 +114,17 @@ export function FeaturedProjects() {
                         className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
                       >
                         Refundely.com
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    {project.slug === "adhoc-selectietool" && (
+                      <a
+                        href="https://www.adhocdata.be/selecties-2026-justin"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors"
+                      >
+                        AdHocData.be
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     )}
