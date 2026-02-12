@@ -31,7 +31,7 @@ export function BelgiumMapPreview() {
           1.2M+ BE bedrijven
         </div>
         <div className="px-2 py-0.5 bg-blue-500/90 backdrop-blur-sm rounded text-[9px] text-white font-medium shadow-sm">
-          43 arrondissementen
+          Legacy Refactor
         </div>
         <div className="px-2 py-0.5 bg-emerald-500/90 backdrop-blur-sm rounded text-[9px] text-white font-medium shadow-sm">
           GeoJSON polygons
