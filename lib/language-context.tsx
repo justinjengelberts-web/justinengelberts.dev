@@ -18,6 +18,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem("language") as Language | null;
     if (saved && (saved === "en" || saved === "nl")) {
       setLanguageState(saved);
+    } else {
+      // Detect browser language - Dutch users get Dutch, everyone else gets English
+      const browserLang = navigator.language.slice(0, 2);
+      setLanguageState(browserLang === "nl" ? "nl" : "en");
     }
   }, []);
 
