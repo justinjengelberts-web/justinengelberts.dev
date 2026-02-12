@@ -133,7 +133,7 @@ Best regards,
             </div>
 
             {/* Copyright */}
-            <div className="text-zinc-500 text-sm">
+            <div className="text-zinc-400 text-sm">
               {new Date().getFullYear()} Justin Engelberts
             </div>
           </div>
