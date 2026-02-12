@@ -54,9 +54,8 @@ export function RefundelyPreview() {
       <div className="relative z-10 flex flex-row items-center justify-center gap-6 md:gap-12 w-full md:w-auto px-4 md:px-0">
         {/* Brand */}
         <div className="text-center">
-          <div className="text-2xl md:text-4xl font-black tracking-tight">
-            <span className="text-slate-900">Re</span>
-            <span className="text-emerald-600">fundely</span>
+          <div className="text-2xl md:text-4xl font-bold tracking-tight text-slate-900">
+            Re<span className="font-extrabold text-emerald-600">fundely</span>
           </div>
           <p className="text-xs md:text-sm text-slate-500 mt-1 md:mt-2 font-medium">
             AI Invoice Processing

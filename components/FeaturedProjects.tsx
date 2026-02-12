@@ -70,9 +70,8 @@ export function FeaturedProjects() {
                   <Link href={`/projects/${project.slug}`}>
                     {project.slug === "refundely" ? (
                       <span className="inline-block bg-white px-3 py-1.5 rounded-lg mb-3 hover:bg-gray-100 transition-colors cursor-pointer">
-                        <span className="text-xl font-black tracking-tight">
-                          <span className="text-slate-900">Re</span>
-                          <span className="text-emerald-600">fundely</span>
+                        <span className="text-xl font-bold tracking-tight text-slate-900">
+                          Re<span className="font-extrabold text-emerald-600">fundely</span>
                         </span>
                       </span>
                     ) : (
