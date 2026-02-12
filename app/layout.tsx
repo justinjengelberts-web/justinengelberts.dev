@@ -16,11 +16,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Justin Engelberts",
-  description: "Full-stack engineer building high-end SaaS solutions with AI-native workflows",
+  description: "Full-stack product engineer building high-end SaaS solutions with AI-native workflows",
   metadataBase: new URL("https://justinengelberts.dev"),
   openGraph: {
     title: "Justin Engelberts",
-    description: "Full-stack engineer building high-end SaaS solutions with AI-native workflows",
+    description: "Full-stack product engineer building high-end SaaS solutions with AI-native workflows",
     url: "https://justinengelberts.dev",
     siteName: "Justin Engelberts",
     locale: "en_US",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Justin Engelberts",
-    description: "Full-stack engineer building high-end SaaS solutions with AI-native workflows",
+    description: "Full-stack product engineer building high-end SaaS solutions with AI-native workflows",
   },
 };
 

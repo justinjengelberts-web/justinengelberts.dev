@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Justin Engelberts - Full-stack Engineer";
+export const alt = "Justin Engelberts - Full-stack Product Engineer";
 export const size = {
   width: 1200,
   height: 630,
@@ -71,7 +71,7 @@ export default async function Image() {
               color: "#a1a1aa",
             }}
           >
-            <span>Full-stack Engineer</span>
+            <span>Full-stack Product Engineer</span>
             <span style={{ color: "#52525b" }}>·</span>
             <span>AI-native</span>
             <span style={{ color: "#52525b" }}>·</span>
