@@ -45,3 +45,8 @@ next-env.d.ts
 Screenshot/
 .claude/
 .playwright-mcp/
+
+# reference projects and implementation docs
+Implementation/
+invoice-bloom-ai/
+nul
