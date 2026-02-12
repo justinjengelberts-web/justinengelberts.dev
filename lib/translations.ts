@@ -3,8 +3,8 @@ export const translations = {
     // Hero
     hero: {
       headline: "I build things that are",
-      words: ["scalable", "intelligent", "intuitive", "AI-powered", "high-performance"],
-      mobileWords: ["scalable", "intelligent", "intuitive", "AI-powered"],
+      words: ["scalable", "intelligent", "intuitive", "AI-powered", "different", "faster"],
+      mobileWords: ["scalable", "intelligent", "intuitive", "different", "faster"],
       wordsSuffix: "",
       description:
         "Stop building at yesterday's speed. I combine full-stack engineering with AI-native workflows to ship high-end SaaS solutions and complex data tools faster than ever.",
@@ -93,8 +93,8 @@ export const translations = {
     // Hero
     hero: {
       headline: "Ik bouw",
-      words: ["schaalbaar", "intelligent", "intuïtief", "AI-powered", "anders"],
-      mobileWords: ["schaalbaar", "intelligent", "intuïtief", "anders"],
+      words: ["schaalbaar", "intelligent", "intuïtief", "AI-powered", "anders", "sneller"],
+      mobileWords: ["schaalbaar", "intelligent", "intuïtief", "anders", "sneller"],
       wordsSuffix: "",
       description:
         "Stop met bouwen op het tempo van gisteren. Ik combineer full-stack engineering met AI-native workflows om high-end SaaS-oplossingen en complexe datatools sneller dan ooit te leveren.",
