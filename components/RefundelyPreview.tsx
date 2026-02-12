@@ -34,7 +34,7 @@ export function RefundelyPreview() {
   const isComplete = activeStep >= steps.length;
 
   return (
-    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-emerald-50/40 flex items-start md:items-center justify-start md:justify-center pt-8 md:pt-0">
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-emerald-50/40 flex items-start md:items-center justify-center pt-8 md:pt-0">
       {/* Keyframes for animations */}
       <style>{`
         @keyframes spin {
@@ -51,7 +51,7 @@ export function RefundelyPreview() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-200/30 rounded-full blur-3xl" />
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-row items-center gap-4 md:gap-12 px-3 md:px-0">
+      <div className="relative z-10 flex flex-row items-center justify-between md:justify-center gap-6 md:gap-12 w-full md:w-auto px-4 md:px-0">
         {/* Brand */}
         <div className="text-left md:text-center">
           <div className="text-2xl md:text-4xl font-black tracking-tight">
