@@ -30,8 +30,11 @@ export const translations = {
         "Node.js",
         "React",
         "Vercel",
-        "PostGIS",
-        "Claude AI",
+        "Cloudflare",
+        "Claude Code",
+        "LESS",
+        "Turf.js",
+        "Leaflet",
       ],
     },
     // Featured Projects
@@ -42,18 +45,18 @@ export const translations = {
       viewCaseStudy: "View Case Study",
       items: [
         {
-          slug: "b2b-saas-platform",
-          title: "B2B SaaS Platform",
+          slug: "refundely",
+          title: "Refundely",
           description:
-            "AI-powered analytics dashboard built with serverless architecture. Integrates Mistral AI for intelligent data processing and Supabase for real-time database operations.",
-          techStack: ["Next.js", "TypeScript", "Supabase", "Mistral AI", "Tailwind"],
+            "AI-powered invoice management and SEPA payment platform for the Dutch rental industry. Uses Mistral AI with intelligent model fallback: starts with a small model, validates quality, and escalates to larger models only when needed. Serverless edge functions handle OCR and data extraction.",
+          techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "Tailwind CSS"],
         },
         {
           slug: "adhoc-selectietool",
-          title: "Ad Hoc Data Selectietool",
+          title: "Ad Hoc Data Leadlist Selector",
           description:
             "Refactored and modernized the selection tool for Ad Hoc Data, a leading B2B data provider in the Netherlands and Belgium with 1.2M+ Belgian companies in their database. Added geographic search using GeoJSON polygons, enabling users to find companies within provinces, arrondissements, or postal code areas.",
-          techStack: ["JavaScript", "Angular", "GeoJSON", "LESS", "Legacy Integration"],
+          techStack: ["JavaScript", "Angular", "GeoJSON", "Turf.js", "MapLibre", "HTML", "LESS"],
         },
       ],
     },
@@ -110,8 +113,11 @@ export const translations = {
         "Node.js",
         "React",
         "Vercel",
-        "PostGIS",
-        "Claude AI",
+        "Cloudflare",
+        "Claude Code",
+        "LESS",
+        "Turf.js",
+        "Leaflet",
       ],
     },
     // Featured Projects
@@ -122,18 +128,18 @@ export const translations = {
       viewCaseStudy: "Bekijk Case Study",
       items: [
         {
-          slug: "b2b-saas-platform",
-          title: "B2B SaaS Platform",
+          slug: "refundely",
+          title: "Refundely",
           description:
-            "AI-aangedreven analytics dashboard gebouwd met serverless architectuur. Integreert Mistral AI voor intelligente dataverwerking en Supabase voor real-time database operaties.",
-          techStack: ["Next.js", "TypeScript", "Supabase", "Mistral AI", "Tailwind"],
+            "AI-aangedreven factuurbeheer en SEPA-betalingsplatform voor de Nederlandse verhuursector. Gebruikt Mistral AI met slimme model-fallback: start goedkoop, valideert kwaliteit, en escaleert alleen wanneer nodig. Serverless edge functions voor OCR en data-extractie.",
+          techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "Tailwind CSS"],
         },
         {
           slug: "adhoc-selectietool",
-          title: "Ad Hoc Data Selectietool",
+          title: "Ad Hoc Data Leadlist Selector",
           description:
             "De selectietool van Ad Hoc Data gerefactored en gemoderniseerd. Ad Hoc Data is een toonaangevende B2B dataleverancier in Nederland en België met 1,2M+ Belgische bedrijven in hun database. Geografisch zoeken toegevoegd met GeoJSON polygons voor het vinden van bedrijven binnen provincies, arrondissementen of postcodegebieden.",
-          techStack: ["JavaScript", "Angular", "GeoJSON", "LESS", "Legacy Integration"],
+          techStack: ["JavaScript", "Angular", "GeoJSON", "Turf.js", "MapLibre", "HTML", "LESS"],
         },
       ],
     },

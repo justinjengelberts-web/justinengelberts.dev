@@ -7,6 +7,25 @@ import * as turf from "@turf/turf";
 import type { FeatureCollection, Feature, Polygon, MultiPolygon } from "geojson";
 import type { Layer, PathOptions } from "leaflet";
 
+// Skeleton placeholder component
+function MapSkeleton() {
+  return (
+    <div className="absolute inset-0 z-[500] bg-slate-100 animate-pulse flex items-center justify-center">
+      <div className="text-center">
+        {/* Belgium shape silhouette */}
+        <svg
+          viewBox="0 0 100 80"
+          className="w-32 h-24 mx-auto mb-3 text-slate-300"
+          fill="currentColor"
+        >
+          <path d="M20,10 Q25,5 35,8 L50,5 Q65,3 75,10 L85,15 Q90,20 88,30 L90,45 Q88,55 80,60 L70,65 Q60,70 50,68 L35,72 Q25,70 18,60 L12,45 Q10,30 15,20 Z" />
+        </svg>
+        <div className="text-sm text-slate-400 font-medium">Loading map...</div>
+      </div>
+    </div>
+  );
+}
+
 // Color palette for arrondissements
 const ARRONDISSEMENT_COLORS = [
   "#22c55e", // green
@@ -75,48 +94,32 @@ function MapClickHandler({
 
 export default function BelgiumMapLeaflet() {
   const [allArrondissements, setAllArrondissements] = useState<FeatureCollection | null>(null);
-  const [belgiumBorder, setBelgiumBorder] = useState<Feature | null>(null);
+  const [belgiumFill, setBelgiumFill] = useState<Feature | null>(null);
+  const [belgiumOutline, setBelgiumOutline] = useState<Feature | null>(null);
   const [selectedArrondissements, setSelectedArrondissements] = useState<FeatureCollection | null>(null);
   const [clickPoint, setClickPoint] = useState<{ lat: number; lng: number } | null>(null);
   const [companyCount, setCompanyCount] = useState<number | null>(null);
   const [showExportDialog, setShowExportDialog] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Load GeoJSON on mount
+  // Load GeoJSON on mount - using pre-computed files for performance
   useEffect(() => {
-    fetch("/belgium-arrondissements.geojson")
-      .then((res) => res.json())
-      .then((data: FeatureCollection) => {
-        setAllArrondissements(data);
-
-        // Create Belgium outer border by combining all arrondissements
-        try {
-          // Union all polygons to get outer border
-          let combined: Feature<Polygon | MultiPolygon> | null = null;
-
-          for (const feature of data.features) {
-            if (feature.geometry.type === "Polygon" || feature.geometry.type === "MultiPolygon") {
-              if (combined === null) {
-                combined = feature as Feature<Polygon | MultiPolygon>;
-              } else {
-                try {
-                  combined = turf.union(
-                    turf.featureCollection([combined, feature as Feature<Polygon | MultiPolygon>])
-                  ) as Feature<Polygon | MultiPolygon>;
-                } catch (e) {
-                  // Skip problematic polygons
-                }
-              }
-            }
-          }
-
-          if (combined) {
-            setBelgiumBorder(combined);
-          }
-        } catch (err) {
-          console.error("Failed to create Belgium border:", err);
-        }
+    // Load all GeoJSON files in parallel for faster loading
+    Promise.all([
+      fetch("/belgium-arrondissements.geojson").then((res) => res.json()),
+      fetch("/belgium-outline.geojson").then((res) => res.json()),
+      fetch("/belgium-fill.geojson").then((res) => res.json()),
+    ])
+      .then(([arrondissements, outline, fill]) => {
+        setAllArrondissements(arrondissements);
+        setBelgiumOutline(outline);
+        setBelgiumFill(fill);
+        setIsLoading(false);
       })
-      .catch((err) => console.error("Failed to load GeoJSON:", err));
+      .catch((err) => {
+        console.error("Failed to load GeoJSON:", err);
+        setIsLoading(false);
+      });
   }, []);
 
   // Handle map click - find arrondissements within radius
@@ -164,19 +167,12 @@ export default function BelgiumMapLeaflet() {
     [allArrondissements]
   );
 
-  // Auto-click after a delay for demo purposes
-  useEffect(() => {
-    if (allArrondissements && !clickPoint) {
-      const timer = setTimeout(() => {
-        // Click on Brussels area
-        handleMapClick(50.85, 4.35);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [allArrondissements, clickPoint, handleMapClick]);
 
   return (
     <div className="relative w-full h-full">
+      {/* Show skeleton while loading */}
+      {isLoading && <MapSkeleton />}
+
       <style jsx global>{`
         .arrondissement-tooltip {
           background: rgba(0, 0, 0, 0.8) !important;
@@ -204,13 +200,24 @@ export default function BelgiumMapLeaflet() {
         attribution='&copy; OpenStreetMap'
       />
 
-      {/* Belgium outer border */}
-      {belgiumBorder && (
+      {/* Belgium fill overlay - no stroke to avoid internal lines */}
+      {belgiumFill && (
         <GeoJSON
-          data={belgiumBorder}
+          data={belgiumFill}
           style={{
             fillColor: "#0ea5e9",
-            fillOpacity: 0.05,
+            fillOpacity: 0.08,
+            weight: 0,
+          }}
+        />
+      )}
+
+      {/* Belgium outer border - only the exterior ring, no internal lines */}
+      {belgiumOutline && (
+        <GeoJSON
+          data={belgiumOutline}
+          style={{
+            fill: false,
             color: "#0ea5e9",
             weight: 2.5,
             opacity: 0.9,

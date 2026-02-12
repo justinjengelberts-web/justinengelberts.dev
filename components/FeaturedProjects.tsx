@@ -1,10 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 import { BelgiumMapPreview } from "./BelgiumMapPreview";
+import { RefundelyPreview } from "./RefundelyPreview";
+
+const techColors: Record<string, string> = {
+  "React": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+  "TypeScript": "bg-blue-500/20 text-blue-300 border-blue-500/30",
+  "Supabase": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+  "PostgreSQL": "bg-blue-600/20 text-blue-300 border-blue-600/30",
+  "Mistral AI": "bg-purple-500/20 text-purple-300 border-purple-500/30",
+  "Edge Functions": "bg-orange-500/20 text-orange-300 border-orange-500/30",
+  "Tailwind CSS": "bg-sky-500/20 text-sky-300 border-sky-500/30",
+  "JavaScript": "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
+  "Angular": "bg-red-500/20 text-red-300 border-red-500/30",
+  "GeoJSON": "bg-green-500/20 text-green-300 border-green-500/30",
+  "Turf.js": "bg-teal-500/20 text-teal-300 border-teal-500/30",
+  "MapLibre": "bg-sky-500/20 text-sky-300 border-sky-500/30",
+  "HTML": "bg-orange-500/20 text-orange-300 border-orange-500/30",
+  "LESS": "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
+};
+
+const getColorForTech = (tech: string) => {
+  return techColors[tech] || "bg-white/10 text-zinc-300 border-white/10";
+};
 
 export function FeaturedProjects() {
   const { t } = useLanguage();
@@ -38,22 +60,10 @@ export function FeaturedProjects() {
             >
               <div className="group relative h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300">
                 {/* Project Image/Visual */}
-                <Link href={`/projects/${project.slug}`} className="block">
-                  <div className="aspect-video bg-gradient-to-br from-zinc-800 to-zinc-900 relative overflow-hidden cursor-pointer">
-                    {index === 1 ? (
-                      <BelgiumMapPreview />
-                    ) : (
-                      <>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-3/4 h-3/4 rounded-lg bg-zinc-800/50 border border-white/10 flex items-center justify-center">
-                            <span className="text-zinc-500 text-sm">Preview</span>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </Link>
+                <div className="aspect-video bg-gradient-to-br from-zinc-800 to-zinc-900 relative overflow-hidden">
+                  {index === 0 && <RefundelyPreview />}
+                  {index === 1 && <BelgiumMapPreview />}
+                </div>
 
                 {/* Content */}
                 <div className="p-6">
@@ -71,7 +81,7 @@ export function FeaturedProjects() {
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-xs font-medium text-zinc-300 bg-white/5 border border-white/10 rounded-full"
+                        className={`px-3 py-1 text-xs font-medium rounded-full border ${getColorForTech(tech)}`}
                       >
                         {tech}
                       </span>
@@ -79,13 +89,26 @@ export function FeaturedProjects() {
                   </div>
 
                   {/* CTA */}
-                  <a
-                    href={`/projects/${project.slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-zinc-300 transition-colors group/link"
-                  >
-                    {t.projects.viewCaseStudy}
-                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={`/projects/${project.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-zinc-300 transition-colors group/link"
+                    >
+                      {t.projects.viewCaseStudy}
+                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                    </a>
+                    {project.slug === "refundely" && (
+                      <a
+                        href="https://refundely.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
+                      >
+                        Refundely.com
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>

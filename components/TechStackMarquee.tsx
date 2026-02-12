@@ -16,13 +16,13 @@ export function TechStackMarquee() {
   const [isHovering, setIsHovering] = useState(false);
   const mouseVelocity = useRef(0);
   const lastMouseX = useRef(0);
-  const contentWidth = useRef(0);
+  const singleSetWidth = useRef(0);
 
   // Measure content width on mount
   useEffect(() => {
     if (marqueeRef.current) {
-      // Width of one set of items (half the total since we duplicate)
-      contentWidth.current = marqueeRef.current.scrollWidth / 2;
+      // Width of one set of items (we have 4 copies, so divide by 4)
+      singleSetWidth.current = marqueeRef.current.scrollWidth / 4;
     }
   }, [technologies]);
 
@@ -37,7 +37,7 @@ export function TechStackMarquee() {
 
   // Animation loop
   useAnimationFrame(() => {
-    if (contentWidth.current === 0) return;
+    if (singleSetWidth.current === 0) return;
 
     let speed: number;
 
@@ -61,15 +61,18 @@ export function TechStackMarquee() {
     // Update position
     let newX = x.get() + speed;
 
-    // Seamless loop: wrap around when we've scrolled one full content width
-    if (newX <= -contentWidth.current) {
-      newX += contentWidth.current;
+    // Seamless loop: wrap around when we've scrolled one full set width
+    if (newX <= -singleSetWidth.current) {
+      newX += singleSetWidth.current;
     } else if (newX >= 0) {
-      newX -= contentWidth.current;
+      newX -= singleSetWidth.current;
     }
 
     x.set(newX);
   });
+
+  // Create 4 copies for seamless infinite scroll
+  const repeatedTechnologies = [...technologies, ...technologies, ...technologies, ...technologies];
 
   return (
     <section className="py-12 bg-black border-y border-white/5 overflow-hidden">
@@ -90,16 +93,15 @@ export function TechStackMarquee() {
         {/* Marquee */}
         <motion.div
           ref={marqueeRef}
-          className="flex gap-8 whitespace-nowrap"
+          className="flex whitespace-nowrap"
           style={{ x }}
         >
-          {/* Double the items for seamless loop */}
-          {[...technologies, ...technologies].map((tech, index) => (
+          {repeatedTechnologies.map((tech, index) => (
             <div
               key={`${tech}-${index}`}
-              className="flex items-center gap-3 px-6 py-3"
+              className="flex items-center gap-3 px-6 py-3 flex-shrink-0"
             >
-              <div className="w-2 h-2 rounded-full bg-zinc-600" />
+              <div className="w-2 h-2 rounded-full bg-zinc-600 flex-shrink-0" />
               <span className="text-zinc-400 text-lg font-medium">{tech}</span>
             </div>
           ))}
