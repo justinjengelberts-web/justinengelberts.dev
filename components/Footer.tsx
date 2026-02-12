@@ -5,7 +5,32 @@ import { Github, Mail, Linkedin, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 
 export function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  // Build mailto link with pre-filled subject and body based on language
+  const emailSubject = language === "nl"
+    ? "Project Samenwerking"
+    : "Project Collaboration";
+
+  const emailBody = language === "nl"
+    ? `Hoi Justin,
+
+Ik heb je portfolio bekeken en ben geïnteresseerd in een samenwerking.
+
+[Beschrijf hier kort je project of idee]
+
+Groeten,
+[Je naam]`
+    : `Hi Justin,
+
+I came across your portfolio and I'm interested in working together.
+
+[Briefly describe your project or idea here]
+
+Best regards,
+[Your name]`;
+
+  const mailtoLink = `mailto:Justin Engelberts <me@justinengelberts.dev>?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
   return (
     <footer id="contact" className="py-24 px-6 bg-black border-t border-white/10">
@@ -34,7 +59,7 @@ export function Footer() {
           className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
         >
           <a
-            href="mailto:Justin Engelberts <me@justinengelberts.dev>"
+            href={mailtoLink}
             className="flex items-center gap-3 px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-zinc-200 transition-colors"
           >
             <Mail className="w-5 h-5" />
@@ -81,7 +106,7 @@ export function Footer() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:Justin Engelberts <me@justinengelberts.dev>"
+                href={mailtoLink}
                 className="p-2 text-zinc-400 hover:text-white transition-colors"
                 aria-label="Email"
               >
