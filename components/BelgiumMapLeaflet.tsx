@@ -204,6 +204,12 @@ export default function BelgiumMapLeaflet() {
         className="w-full h-full"
         zoomControl={false}
         attributionControl={false}
+        dragging={false}
+        touchZoom={false}
+        doubleClickZoom={false}
+        scrollWheelZoom={false}
+        boxZoom={false}
+        keyboard={false}
       >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
