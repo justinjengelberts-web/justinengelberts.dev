@@ -34,7 +34,7 @@ export function RefundelyPreview() {
   const isComplete = activeStep >= steps.length;
 
   return (
-    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-emerald-50/40 flex items-start md:items-center justify-center pt-6 md:pt-0">
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-emerald-50/40 flex items-start md:items-center justify-center pt-4 md:pt-0">
       {/* Keyframes for animations */}
       <style>{`
         @keyframes spin {
@@ -51,22 +51,22 @@ export function RefundelyPreview() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-200/30 rounded-full blur-3xl" />
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-col md:flex-row items-center gap-4 md:gap-12">
+      <div className="relative z-10 flex flex-col md:flex-row items-center gap-2 md:gap-12">
         {/* Brand */}
         <div className="text-center">
-          <div className="text-4xl font-black tracking-tight">
+          <div className="text-2xl md:text-4xl font-black tracking-tight">
             <span className="text-slate-900">Re</span>
             <span className="text-emerald-600">fundely</span>
           </div>
-          <p className="text-sm text-slate-500 mt-2 font-medium">
+          <p className="text-xs md:text-sm text-slate-500 mt-1 md:mt-2 font-medium">
             AI Invoice Processing
           </p>
         </div>
 
 
         {/* Steps */}
-        <div className="bg-white rounded-xl shadow-lg border border-slate-100 p-4">
-          <div className="space-y-2">
+        <div className="bg-white rounded-lg md:rounded-xl shadow-lg border border-slate-100 p-1.5 md:p-4">
+          <div className="space-y-0.5 md:space-y-2">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isActive = index <= activeStep;
@@ -74,13 +74,13 @@ export function RefundelyPreview() {
               const isAIStep = step.isAI;
 
               return (
-                <div key={index} className="flex items-center gap-3">
+                <div key={index} className="flex items-center gap-1.5 md:gap-3">
                   {/* Icon */}
                   {isAIStep ? (
                     // Special AI step with gradient ring and sparkles
                     <div
                       className={`
-                        relative w-8 h-8 flex items-center justify-center
+                        relative w-5 h-5 md:w-8 md:h-8 flex items-center justify-center
                         transition-all duration-500 ease-out
                         ${isCurrent ? "scale-110" : "scale-100"}
                       `}
@@ -141,7 +141,7 @@ export function RefundelyPreview() {
                     // Regular step icon
                     <div
                       className={`
-                        w-8 h-8 rounded-full flex items-center justify-center
+                        w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center
                         transition-all duration-500 ease-out
                         ${isActive
                           ? "bg-emerald-500 shadow-md shadow-emerald-500/30"
@@ -151,7 +151,7 @@ export function RefundelyPreview() {
                       `}
                     >
                       <Icon
-                        className={`w-4 h-4 transition-colors duration-500 ${
+                        className={`w-2.5 h-2.5 md:w-4 md:h-4 transition-colors duration-500 ${
                           isActive ? "text-white" : "text-slate-400"
                         }`}
                       />
@@ -161,7 +161,7 @@ export function RefundelyPreview() {
                   {/* Label */}
                   <span
                     className={`
-                      text-xs font-semibold transition-colors duration-500
+                      text-[9px] md:text-xs font-semibold transition-colors duration-500
                       ${isActive ? "text-slate-900" : "text-slate-400"}
                     `}
                   >
@@ -178,9 +178,9 @@ export function RefundelyPreview() {
       {/* Completion badge */}
       <div
         className={`
-          absolute bottom-4 right-4 z-20 bg-emerald-600 text-white
-          px-3 py-1.5 rounded-lg shadow-xl
-          flex items-center gap-2
+          absolute bottom-2 right-2 md:bottom-4 md:right-4 z-20 bg-emerald-600 text-white
+          px-2 py-1 md:px-3 md:py-1.5 rounded-lg shadow-xl
+          flex items-center gap-1 md:gap-2
           transition-all duration-500 ease-out
           ${isComplete
             ? "opacity-100 translate-y-0 scale-100"
@@ -188,18 +188,18 @@ export function RefundelyPreview() {
           }
         `}
       >
-        <ShieldCheck className="w-4 h-4" />
-        <span className="text-[10px] font-bold leading-tight">GDPR Compliant<br />& IBANs Encrypted</span>
+        <ShieldCheck className="w-3 h-3 md:w-4 md:h-4" />
+        <span className="text-[8px] md:text-[10px] font-bold leading-tight">GDPR Compliant<br />& IBANs Encrypted</span>
       </div>
 
       {/* Top badge */}
-      <div className="absolute top-4 left-4 z-20 bg-emerald-600 text-white px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
-        <Sparkles className="w-3 h-3" />
-        <span className="text-xs font-semibold">AI-Powered</span>
+      <div className="absolute top-2 left-2 md:top-4 md:left-4 z-20 bg-emerald-600 text-white px-2 py-1 md:px-3 md:py-1.5 rounded-full flex items-center gap-1 md:gap-1.5 shadow-lg">
+        <Sparkles className="w-2.5 h-2.5 md:w-3 md:h-3" />
+        <span className="text-[10px] md:text-xs font-semibold">AI-Powered</span>
       </div>
 
-      {/* Tech badges */}
-      <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-1.5">
+      {/* Tech badges - hidden on mobile */}
+      <div className="hidden md:flex absolute bottom-4 left-4 z-20 flex-col gap-1.5">
         <span className="bg-slate-900 text-white px-2.5 py-1 rounded-md text-[10px] font-semibold">
           React + TypeScript
         </span>
