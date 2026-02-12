@@ -36,6 +36,8 @@ export const translations = {
         "Turf.js",
         "Leaflet",
         "Playwright",
+        "Angular",
+        "Edge Functions",
       ],
     },
     // Featured Projects
@@ -120,6 +122,8 @@ export const translations = {
         "Turf.js",
         "Leaflet",
         "Playwright",
+        "Angular",
+        "Edge Functions",
       ],
     },
     // Featured Projects
