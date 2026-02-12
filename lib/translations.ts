@@ -35,6 +35,7 @@ export const translations = {
         "LESS",
         "Turf.js",
         "Leaflet",
+        "Playwright",
       ],
     },
     // Featured Projects
@@ -118,6 +119,7 @@ export const translations = {
         "LESS",
         "Turf.js",
         "Leaflet",
+        "Playwright",
       ],
     },
     // Featured Projects
