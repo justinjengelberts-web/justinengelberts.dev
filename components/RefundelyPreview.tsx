@@ -55,7 +55,7 @@ export function RefundelyPreview() {
         {/* Brand */}
         <div className="text-center">
           <div className="text-2xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Re<span className="font-extrabold text-emerald-600">fundely</span>
+            Re<span className="text-emerald-600">fundely</span>
           </div>
           <p className="text-xs md:text-sm text-slate-500 mt-1 md:mt-2 font-medium">
             AI Invoice Processing

@@ -71,7 +71,7 @@ export function FeaturedProjects() {
                     {project.slug === "refundely" ? (
                       <span className="inline-block bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl mb-3 border border-white/50 shadow-lg shadow-emerald-500/10 hover:bg-white hover:shadow-emerald-500/20 transition-all duration-300 cursor-pointer">
                         <span className="text-xl font-bold tracking-tight text-slate-900">
-                          Re<span className="font-extrabold text-emerald-600">fundely</span>
+                          Re<span className="text-emerald-600">fundely</span>
                         </span>
                       </span>
                     ) : (
