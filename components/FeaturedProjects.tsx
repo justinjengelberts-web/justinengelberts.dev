@@ -98,7 +98,7 @@ export function FeaturedProjects() {
                   </div>
 
                   {/* CTA */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                     <a
                       href={`/projects/${project.slug}`}
                       className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-zinc-300 transition-colors group/link"
@@ -117,7 +117,7 @@ export function FeaturedProjects() {
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     )}
-                                      </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
