@@ -82,9 +82,9 @@ export const translations = {
     },
     // Footer
     footer: {
-      title: "Let's Build Something Together",
+      title: "Let's Talk About Your Next Project",
       subtitle:
-        "Looking for an AI-native developer who ships fast and builds to last? Let's talk about your next project.",
+        "Looking for an AI-native developer who ships fast and builds to last?",
       getInTouch: "Get in Touch",
       viewGitHub: "View GitHub",
     },
@@ -172,9 +172,9 @@ export const translations = {
     },
     // Footer
     footer: {
-      title: "Laten We Samen Iets Bouwen",
+      title: "Laten We Praten Over Je Volgende Project",
       subtitle:
-        "Op zoek naar een AI-native developer die snel levert en bouwt voor de lange termijn? Laten we praten over je volgende project.",
+        "Op zoek naar een AI-native developer die snel levert en bouwt voor de lange termijn?",
       getInTouch: "Neem Contact Op",
       viewGitHub: "Bekijk GitHub",
     },
