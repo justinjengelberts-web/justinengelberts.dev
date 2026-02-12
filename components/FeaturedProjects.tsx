@@ -69,7 +69,14 @@ export function FeaturedProjects() {
                 <div className="p-6">
                   <Link href={`/projects/${project.slug}`}>
                     <h3 className="text-xl font-semibold text-white mb-3 hover:text-zinc-300 transition-colors cursor-pointer">
-                      {project.title}
+                      {project.slug === "refundely" ? (
+                        <span className="font-black tracking-tight">
+                          <span className="text-white">Re</span>
+                          <span className="text-emerald-500">fundely</span>
+                        </span>
+                      ) : (
+                        project.title
+                      )}
                     </h3>
                   </Link>
                   <p className="text-zinc-400 text-sm leading-relaxed mb-4">
