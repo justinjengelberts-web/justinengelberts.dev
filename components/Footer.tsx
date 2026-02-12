@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Github, Mail, Linkedin, ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/lib/language-context";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer id="contact" className="py-24 px-6 bg-black border-t border-white/10">
       <div className="container mx-auto max-w-6xl">
@@ -15,11 +18,10 @@ export function Footer() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
-            Let&apos;s Build Something Together
+            {t.footer.title}
           </h2>
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-            Looking for an AI-native developer who ships fast and builds to last?
-            Let&apos;s talk about your next project.
+            {t.footer.subtitle}
           </p>
         </motion.div>
 
@@ -36,7 +38,7 @@ export function Footer() {
             className="flex items-center gap-3 px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-zinc-200 transition-colors"
           >
             <Mail className="w-5 h-5" />
-            Get in Touch
+            {t.footer.getInTouch}
           </a>
           <a
             href="https://github.com/justinengelberts"
@@ -45,7 +47,7 @@ export function Footer() {
             className="flex items-center gap-3 px-6 py-3 border border-white/20 text-white font-medium rounded-full hover:bg-white/5 transition-colors"
           >
             <Github className="w-5 h-5" />
-            View GitHub
+            {t.footer.viewGitHub}
             <ArrowUpRight className="w-4 h-4" />
           </a>
         </motion.div>

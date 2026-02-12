@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Terminal, Sparkles, Zap } from "lucide-react";
+import { useLanguage } from "@/lib/language-context";
 
 const codeSnippet = `// AI-assisted geospatial query optimization
 async function findLocationsInPolygon(
@@ -31,6 +32,8 @@ async function findLocationsInPolygon(
 }`;
 
 export function AIWorkflow() {
+  const { t } = useLanguage();
+
   return (
     <section id="about" className="py-24 px-6 bg-zinc-950">
       <div className="container mx-auto max-w-6xl">
@@ -44,18 +47,15 @@ export function AIWorkflow() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-sm font-medium text-zinc-300 bg-white/5 border border-white/10 rounded-full">
               <Sparkles className="w-4 h-4" />
-              AI-Native Development
+              {t.workflow.badge}
             </div>
 
             <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-              Building at 3x speed with AI-powered workflows
+              {t.workflow.title}
             </h2>
 
             <p className="text-zinc-400 text-lg leading-relaxed mb-6">
-              I leverage Claude Code directly in my terminal to accelerate
-              development without sacrificing code quality. This AI-native
-              approach lets me tackle complex problems faster while maintaining
-              full control over architecture decisions.
+              {t.workflow.description}
             </p>
 
             <div className="space-y-4">
@@ -65,11 +65,10 @@ export function AIWorkflow() {
                 </div>
                 <div>
                   <h3 className="text-white font-medium mb-1">
-                    Terminal-First Workflow
+                    {t.workflow.terminalTitle}
                   </h3>
                   <p className="text-zinc-400 text-sm">
-                    Claude Code integrated directly into my development
-                    environment for seamless AI assistance.
+                    {t.workflow.terminalDescription}
                   </p>
                 </div>
               </div>
@@ -80,11 +79,10 @@ export function AIWorkflow() {
                 </div>
                 <div>
                   <h3 className="text-white font-medium mb-1">
-                    Rapid Iteration
+                    {t.workflow.rapidTitle}
                   </h3>
                   <p className="text-zinc-400 text-sm">
-                    From concept to production-ready code in hours, not days.
-                    Complex features shipped faster.
+                    {t.workflow.rapidDescription}
                   </p>
                 </div>
               </div>
