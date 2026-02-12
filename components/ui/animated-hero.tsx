@@ -75,13 +75,13 @@ function Hero() {
               href="#projects"
               className="px-6 py-3 rounded-full border border-zinc-700 text-white font-medium hover:bg-zinc-900 transition-colors"
             >
-              {t.hero.viewWork}
+              {isMobile ? t.hero.viewWorkMobile : t.hero.viewWork}
             </a>
             <a
               href="#contact"
               className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors font-medium"
             >
-              {t.hero.letsTalk} <MoveRight className="w-4 h-4" />
+              {isMobile ? t.hero.letsTalkMobile : t.hero.letsTalk} <MoveRight className="w-4 h-4" />
             </a>
           </div>
         </div>

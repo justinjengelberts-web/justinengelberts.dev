@@ -9,7 +9,9 @@ export const translations = {
       description:
         "Stop building at yesterday's speed. I combine full-stack engineering with AI-native workflows to ship high-end SaaS solutions and complex data tools faster than ever.",
       viewWork: "View my work",
+      viewWorkMobile: "View my work",
       letsTalk: "Let's talk",
+      letsTalkMobile: "Let's talk",
     },
     // Navbar
     nav: {
@@ -97,7 +99,9 @@ export const translations = {
       description:
         "Stop met bouwen op het tempo van gisteren. Ik combineer full-stack engineering met AI-native workflows om high-end SaaS-oplossingen en complexe datatools sneller dan ooit te leveren.",
       viewWork: "Bekijk mijn werk",
+      viewWorkMobile: "Projecten",
       letsTalk: "Neem contact op",
+      letsTalkMobile: "Contact",
     },
     // Navbar
     nav: {
@@ -194,7 +198,9 @@ export interface Translations {
     wordsSuffix: string;
     description: string;
     viewWork: string;
+    viewWorkMobile: string;
     letsTalk: string;
+    letsTalkMobile: string;
   };
   nav: {
     projects: string;
