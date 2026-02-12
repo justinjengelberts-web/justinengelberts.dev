@@ -34,7 +34,7 @@ export function Footer() {
           className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
         >
           <a
-            href="mailto:hello@justinengelberts.dev"
+            href="mailto:me@justinengelberts.dev"
             className="flex items-center gap-3 px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-zinc-200 transition-colors"
           >
             <Mail className="w-5 h-5" />
@@ -81,7 +81,7 @@ export function Footer() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:hello@justinengelberts.dev"
+                href="mailto:me@justinengelberts.dev"
                 className="p-2 text-zinc-400 hover:text-white transition-colors"
                 aria-label="Email"
               >
