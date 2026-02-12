@@ -117,18 +117,7 @@ export function FeaturedProjects() {
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     )}
-                    {project.slug === "adhoc-selectietool" && (
-                      <a
-                        href="https://www.adhocdata.be/selecties-2026-justin"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors"
-                      >
-                        AdHocData.be
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    )}
-                  </div>
+                                      </div>
                 </div>
               </div>
             </motion.div>

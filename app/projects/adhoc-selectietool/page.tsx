@@ -145,7 +145,18 @@ export default function AdHocSelectietoolPage() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.title}</h1>
-            <p className="text-xl text-zinc-400 mb-8">{t.subtitle}</p>
+            <p className="text-xl text-zinc-400 mb-6">{t.subtitle}</p>
+
+            {/* CTA */}
+            <a
+              href="https://www.adhocdata.be/selecties-2026-justin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 mb-8 text-sm font-semibold bg-sky-500 hover:bg-sky-600 text-white rounded-full transition-colors"
+            >
+              {language === 'nl' ? 'Bekijk AdHocData.be' : 'Visit AdHocData.be'}
+              <ExternalLink className="w-4 h-4" />
+            </a>
 
             {/* Tech Stack Pills */}
             <div className="flex flex-wrap gap-2 mb-8">
