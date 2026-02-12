@@ -28,7 +28,7 @@ export function BelgiumMapPreview() {
       {/* Stats badges - left side */}
       <div className="absolute bottom-3 left-3 z-[1000] flex flex-col gap-1 items-start">
         <div className="px-2 py-0.5 bg-amber-500/90 backdrop-blur-sm rounded text-[9px] text-white font-medium shadow-sm">
-          1.2M+ bedrijven
+          1.2M+ BE bedrijven
         </div>
         <div className="px-2 py-0.5 bg-blue-500/90 backdrop-blur-sm rounded text-[9px] text-white font-medium shadow-sm">
           43 arrondissementen

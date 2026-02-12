@@ -37,7 +37,7 @@ const content = {
     techStack: "Technology Stack",
     results: "Results",
     resultsPoints: [
-      "Users can now filter 1.2M+ companies by geographic region with a single click",
+      "Users can now filter 1.2M+ Belgian companies by geographic region with a single click",
       "43 arrondissements, 10 provinces, and 1,000+ postal codes available for selection",
       "Zero changes required to existing API endpoints - full backward compatibility",
       "Seamless integration with legacy Angular 1.x codebase",
@@ -51,7 +51,7 @@ const content = {
       { icon: Layers, title: "Multi-level Selection", description: "Combine selections across provinces, arrondissements, and postal codes" }
     ],
     stats: [
-      { value: "1.2M+", label: "Companies" },
+      { value: "1.2M+", label: "BE Companies" },
       { value: "100%", label: "API Compatible" },
       { value: "0", label: "Backend Changes" },
       { value: "4.7/5", label: "Trustpilot" }
@@ -87,7 +87,7 @@ const content = {
     techStack: "Technologie Stack",
     results: "Resultaten",
     resultsPoints: [
-      "Gebruikers kunnen nu 1,2M+ bedrijven filteren op geografische regio met één klik",
+      "Gebruikers kunnen nu 1,2M+ Belgische bedrijven filteren op geografische regio met één klik",
       "43 arrondissementen, 10 provincies en 1.000+ postcodes beschikbaar voor selectie",
       "Geen wijzigingen nodig aan bestaande API endpoints - volledige backward compatibility",
       "Naadloze integratie met legacy Angular 1.x codebase",
@@ -101,7 +101,7 @@ const content = {
       { icon: Layers, title: "Multi-level Selectie", description: "Combineer selecties over provincies, arrondissementen en postcodes" }
     ],
     stats: [
-      { value: "1.2M+", label: "Bedrijven" },
+      { value: "1.2M+", label: "BE Bedrijven" },
       { value: "100%", label: "API Compatibel" },
       { value: "0", label: "Backend Wijzigingen" },
       { value: "4.7/5", label: "Trustpilot" }
