@@ -12,11 +12,13 @@ export function TechStackMarquee() {
   const marqueeRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
 
-  // Track mouse state
+  // Track mouse/touch state
   const [isHovering, setIsHovering] = useState(false);
-  const mouseVelocity = useRef(0);
-  const lastMouseX = useRef(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const velocity = useRef(0);
+  const lastX = useRef(0);
   const singleSetWidth = useRef(0);
+  const momentumDecay = useRef(0.95);
 
   // Measure content width on mount
   useEffect(() => {
@@ -29,30 +31,69 @@ export function TechStackMarquee() {
   // Handle mouse move to calculate velocity
   const handleMouseMove = (e: React.MouseEvent) => {
     const currentX = e.clientX;
-    const velocity = currentX - lastMouseX.current;
-    // Smooth the velocity a bit
-    mouseVelocity.current = mouseVelocity.current * 0.7 + velocity * 0.3;
-    lastMouseX.current = currentX;
+    const delta = currentX - lastX.current;
+    velocity.current = velocity.current * 0.7 + delta * 0.3;
+    lastX.current = currentX;
+  };
+
+  // Touch handlers for mobile swipe/throw
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    lastX.current = e.touches[0].clientX;
+    velocity.current = 0;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const delta = currentX - lastX.current;
+
+    // Direct drag: move marquee with finger
+    let newX = x.get() + delta;
+
+    // Seamless loop
+    if (newX <= -singleSetWidth.current) {
+      newX += singleSetWidth.current;
+    } else if (newX >= 0) {
+      newX -= singleSetWidth.current;
+    }
+    x.set(newX);
+
+    // Track velocity for momentum
+    velocity.current = velocity.current * 0.5 + delta * 0.5;
+    lastX.current = currentX;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    // Velocity is preserved for momentum effect
   };
 
   // Animation loop
   useAnimationFrame(() => {
     if (singleSetWidth.current === 0) return;
 
+    // Skip animation during touch drag - touch move handles position directly
+    if (isDragging) return;
+
     let speed: number;
 
-    if (isHovering) {
+    // Check if we have momentum from a swipe
+    if (Math.abs(velocity.current) > 0.5) {
+      // Apply momentum
+      speed = velocity.current;
+      // Decay the velocity
+      velocity.current *= momentumDecay.current;
+    } else if (isHovering) {
       // "Push" logic: mouse right (positive velocity) → text goes left (negative x)
-      // Multiply by -1 for push effect, scale for sensitivity
-      speed = -mouseVelocity.current * 0.5;
+      speed = -velocity.current * 0.5;
 
       // Add small base drift when hovering but not moving mouse
-      if (Math.abs(mouseVelocity.current) < 0.5) {
-        speed = -0.5; // Slow default drift left
+      if (Math.abs(velocity.current) < 0.5) {
+        speed = -0.5;
       }
 
-      // Decay velocity when not actively moving
-      mouseVelocity.current *= 0.95;
+      velocity.current *= 0.95;
     } else {
       // Default: slow drift to the left
       speed = -1;
@@ -78,13 +119,16 @@ export function TechStackMarquee() {
     <section className="py-12 bg-black border-y border-white/5 overflow-hidden">
       <div
         ref={containerRef}
-        className="relative"
+        className="relative touch-pan-y"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => {
           setIsHovering(false);
-          mouseVelocity.current = 0;
+          velocity.current = 0;
         }}
         onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Gradient Masks */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
