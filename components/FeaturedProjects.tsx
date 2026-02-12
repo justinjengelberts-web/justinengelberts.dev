@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 import { BelgiumMapPreview } from "./BelgiumMapPreview";
@@ -104,7 +104,7 @@ export function FeaturedProjects() {
                       className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-zinc-300 transition-colors group/link"
                     >
                       {t.projects.viewCaseStudy}
-                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                      <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                     </a>
                     {project.slug === "refundely" && (
                       <a
