@@ -165,7 +165,54 @@ export const translations = {
       viewGitHub: "Bekijk GitHub",
     },
   },
-} as const;
+};
 
 export type Language = keyof typeof translations;
-export type Translations = typeof translations.en;
+
+export interface ProjectItem {
+  slug: string;
+  title: string;
+  description: string;
+  techStack: string[];
+}
+
+export interface Translations {
+  hero: {
+    headline: string;
+    words: string[];
+    mobileWords: string[];
+    wordsSuffix: string;
+    description: string;
+    viewWork: string;
+    letsTalk: string;
+  };
+  nav: {
+    projects: string;
+    about: string;
+    getInTouch: string;
+  };
+  techStack: {
+    technologies: string[];
+  };
+  projects: {
+    title: string;
+    subtitle: string;
+    viewCaseStudy: string;
+    items: ProjectItem[];
+  };
+  workflow: {
+    badge: string;
+    title: string;
+    description: string;
+    terminalTitle: string;
+    terminalDescription: string;
+    rapidTitle: string;
+    rapidDescription: string;
+  };
+  footer: {
+    title: string;
+    subtitle: string;
+    getInTouch: string;
+    viewGitHub: string;
+  };
+}

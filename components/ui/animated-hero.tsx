@@ -58,11 +58,11 @@ function Hero() {
                   </motion.span>
                 </AnimatePresence>
               </span>
-              {t.hero.wordsSuffix && (
+              {t.hero.wordsSuffix ? (
                 <span className="block font-semibold bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
-                  {t.hero.wordsSuffix.trim()}
+                  {t.hero.wordsSuffix}
                 </span>
-              )}
+              ) : null}
             </h1>
 
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-zinc-400 max-w-2xl text-center">
