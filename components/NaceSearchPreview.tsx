@@ -447,9 +447,39 @@ export function NaceSearchPreview() {
   };
 
   return (
-    <div className="relative w-full h-full bg-white overflow-hidden font-sans flex rounded-lg shadow-lg border border-gray-200">
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+    <div className="relative w-full h-full bg-[#f0f2f5] overflow-hidden font-sans p-3 md:p-4">
+      <div className="flex gap-3 md:gap-4 h-full">
+        {/* Left Sidebar - Filter Categories */}
+        <div className="hidden md:flex w-44 flex-col bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="px-3 py-2 border-b border-gray-100">
+            <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+              <svg className="w-4 h-4 text-[#1e3a8a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              </svg>
+              Filters
+            </div>
+          </div>
+          <div className="flex-1 py-1">
+            <div className="px-3 py-1.5 text-[10px] text-gray-400 uppercase tracking-wider">Basis</div>
+            <button className="w-full px-3 py-2 text-left text-sm bg-blue-50 text-[#1e3a8a] font-medium border-l-2 border-[#1e3a8a] flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+              Branche (NACE)
+            </button>
+            {['Organisatiegrootte', 'Rechtsvorm', 'Locatie', 'Geografisch'].map((item) => (
+              <button key={item} className="w-full px-3 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-w-0 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
           <div className="flex items-center gap-2">
@@ -551,11 +581,11 @@ export function NaceSearchPreview() {
             </div>
           )}
         </div>
-      </div>
+        </div>
 
-      {/* Right Sidebar - Company Count (like Ad Hoc Data) */}
-      <div className="w-48 md:w-56 border-l border-gray-200 bg-gray-50 flex flex-col">
-        {/* Count Display */}
+        {/* Right Sidebar - Company Count (like Ad Hoc Data) */}
+        <div className="w-44 md:w-52 flex-shrink-0 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col overflow-hidden">
+          {/* Count Display */}
         <div className="p-4 border-b border-gray-200 text-center">
           <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Aantal bedrijven</div>
           <div className="text-3xl font-bold text-[#1e3a8a]">
@@ -644,6 +674,7 @@ export function NaceSearchPreview() {
           </button>
         </div>
       </div>
+      </div>
 
       {/* CTA Overlay */}
       {showCTA && (
@@ -684,7 +715,7 @@ export function NaceSearchPreview() {
       )}
 
       {/* Demo Badge */}
-      <div className="absolute top-3 right-14 md:right-60 z-5">
+      <div className="absolute top-6 right-6 md:right-8 z-5">
         <div className="px-2 py-1 bg-orange-500 text-white rounded text-[10px] font-bold shadow">
           DEMO
         </div>
