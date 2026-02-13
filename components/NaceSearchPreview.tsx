@@ -53,16 +53,24 @@ interface NaceNode {
   expanded?: boolean;
 }
 
-// Mock NACE tree data
+// Mock NACE tree data matching Ad Hoc Data structure
 const NACE_TREE: NaceNode[] = [
   {
     code: "A",
-    label: "Landbouw, bosbouw en visserij",
+    label: "Landbouw, Bosbouw En Visserij",
     count: 45230,
     children: [
-      { code: "01", label: "Teelt van gewassen, veeteelt", count: 32100 },
-      { code: "02", label: "Bosbouw en houtoogst", count: 8450 },
-      { code: "03", label: "Visserij en aquacultuur", count: 4680 },
+      { code: "01", label: "Teelt Van Gewassen, Veeteelt", count: 32100 },
+      { code: "02", label: "Bosbouw En Houtoogst", count: 8450 },
+      { code: "03", label: "Visserij En Aquacultuur", count: 4680 },
+    ]
+  },
+  {
+    code: "B",
+    label: "Winning Van Delfstoffen",
+    count: 1230,
+    children: [
+      { code: "08", label: "Overige Winning Van Delfstoffen", count: 1230 },
     ]
   },
   {
@@ -72,14 +80,24 @@ const NACE_TREE: NaceNode[] = [
     children: [
       {
         code: "10",
-        label: "Vervaardiging van voedingsmiddelen",
+        label: "Vervaardiging Van Voedingsmiddelen",
         count: 12340,
         children: [
-          { code: "10.11", label: "Verwerking en conservering van vlees", count: 2340 },
-          { code: "10.71", label: "Vervaardiging van brood en vers banketbakkerswerk", count: 4560 },
+          { code: "10.11", label: "Verwerking En Conservering Van Vlees", count: 2340 },
+          { code: "10.71", label: "Vervaardiging Van Brood En Vers Banketbakkerswerk", count: 4560 },
         ]
       },
     ]
+  },
+  {
+    code: "D",
+    label: "Productie En Distributie Van Elektriciteit, Gas, Stoom En Gekoelde Lucht",
+    count: 3450,
+  },
+  {
+    code: "E",
+    label: "Distributie Van Water; Afval- En Afvalwaterbeheer En Sanering",
+    count: 4560,
   },
   {
     code: "F",
@@ -88,28 +106,28 @@ const NACE_TREE: NaceNode[] = [
     children: [
       {
         code: "41",
-        label: "Bouw van gebouwen",
+        label: "Bouw Van Gebouwen",
         count: 45600,
         children: [
-          { code: "41.10", label: "Ontwikkeling van bouwprojecten", count: 12300 },
-          { code: "41.20", label: "Burgerlijke en utiliteitsbouw", count: 33300 },
+          { code: "41.10", label: "Ontwikkeling Van Bouwprojecten", count: 12300 },
+          { code: "41.20", label: "Burgerlijke En Utiliteitsbouw", count: 33300 },
         ]
       },
       {
         code: "43",
-        label: "Gespecialiseerde bouwwerkzaamheden",
+        label: "Gespecialiseerde Bouwwerkzaamheden",
         count: 78900,
         children: [
-          { code: "43.21", label: "Elektrotechnische installatiewerken", count: 23400 },
-          { code: "43.22", label: "Loodgieterswerk, installatie verwarming", count: 18700 },
-          { code: "43.34", label: "Schilderen en glaszetten", count: 15600 },
+          { code: "43.21", label: "Elektrotechnische Installatiewerken", count: 23400 },
+          { code: "43.22", label: "Loodgieterswerk, Installatie Verwarming", count: 18700 },
+          { code: "43.34", label: "Schilderen En Glaszetten", count: 15600 },
         ]
       },
     ]
   },
   {
     code: "G",
-    label: "Groot- en detailhandel",
+    label: "Groot- En Detailhandel",
     count: 234560,
     children: [
       {
@@ -117,9 +135,9 @@ const NACE_TREE: NaceNode[] = [
         label: "Detailhandel",
         count: 156000,
         children: [
-          { code: "47.11", label: "Supermarkten en dergelijke winkels", count: 8900 },
-          { code: "47.22", label: "Winkels in vlees en vleeswaren", count: 3200 },
-          { code: "47.24", label: "Winkels in brood en banketbakkerswerk", count: 5600 },
+          { code: "47.11", label: "Supermarkten En Dergelijke Winkels", count: 8900 },
+          { code: "47.22", label: "Winkels In Vlees En Vleeswaren", count: 3200 },
+          { code: "47.24", label: "Winkels In Brood En Banketbakkerswerk", count: 5600 },
           { code: "47.73", label: "Apotheken", count: 4500 },
         ]
       },
@@ -127,57 +145,57 @@ const NACE_TREE: NaceNode[] = [
   },
   {
     code: "H",
-    label: "Vervoer en opslag",
+    label: "Vervoer En Opslag",
     count: 67890,
     children: [
       {
         code: "49",
-        label: "Vervoer te land",
+        label: "Vervoer Te Land",
         count: 45600,
         children: [
-          { code: "49.32", label: "Vervoer per taxi", count: 8900 },
-          { code: "49.41", label: "Goederenvervoer over de weg", count: 28700 },
+          { code: "49.32", label: "Vervoer Per Taxi", count: 8900 },
+          { code: "49.41", label: "Goederenvervoer Over De Weg", count: 28700 },
         ]
       },
     ]
   },
   {
     code: "I",
-    label: "Verschaffen van accommodatie en maaltijden",
+    label: "Verschaffen Van Accommodatie En Maaltijden",
     count: 78650,
     children: [
       {
         code: "55",
-        label: "Verschaffen van accommodatie",
+        label: "Verschaffen Van Accommodatie",
         count: 12340,
         children: [
-          { code: "55.10", label: "Hotels en dergelijke accommodatie", count: 8900 },
+          { code: "55.10", label: "Hotels En Dergelijke Accommodatie", count: 8900 },
           { code: "55.20", label: "Vakantieverblijven", count: 3440 },
         ]
       },
       {
         code: "56",
-        label: "Eet- en drinkgelegenheden",
+        label: "Eet- En Drinkgelegenheden",
         count: 66310,
         children: [
-          { code: "56.10", label: "Restaurants en mobiele eetgelegenheden", count: 34500 },
+          { code: "56.10", label: "Restaurants En Mobiele Eetgelegenheden", count: 34500 },
           { code: "56.21", label: "Catering", count: 7800 },
-          { code: "56.30", label: "Cafés en bars", count: 24010 },
+          { code: "56.30", label: "Cafés En Bars", count: 24010 },
         ]
       },
     ]
   },
   {
     code: "J",
-    label: "Informatie en communicatie",
+    label: "Informatie En Communicatie",
     count: 45670,
     children: [
       {
         code: "62",
-        label: "Computerprogrammering en consultancy",
+        label: "Computerprogrammering En Consultancy",
         count: 34500,
         children: [
-          { code: "62.01", label: "Ontwikkelen en produceren van software", count: 28900 },
+          { code: "62.01", label: "Ontwikkelen En Produceren Van Software", count: 28900 },
           { code: "62.02", label: "Computeradviesbureaus", count: 5600 },
         ]
       },
@@ -185,28 +203,28 @@ const NACE_TREE: NaceNode[] = [
   },
   {
     code: "M",
-    label: "Vrije beroepen en wetenschappelijke activiteiten",
+    label: "Vrije Beroepen En Wetenschappelijke Activiteiten",
     count: 123450,
     children: [
       {
         code: "69",
-        label: "Rechtskundige en boekhoudkundige dienstverlening",
+        label: "Rechtskundige En Boekhoudkundige Dienstverlening",
         count: 45600,
         children: [
-          { code: "69.10", label: "Rechtskundige dienstverlening", count: 23400 },
-          { code: "69.20", label: "Accountants en belastingadviseurs", count: 22200 },
+          { code: "69.10", label: "Rechtskundige Dienstverlening", count: 23400 },
+          { code: "69.20", label: "Accountants En Belastingadviseurs", count: 22200 },
         ]
       },
     ]
   },
   {
     code: "Q",
-    label: "Menselijke gezondheidszorg en maatschappelijke dienstverlening",
+    label: "Menselijke Gezondheidszorg En Maatschappelijke Dienstverlening",
     count: 167890,
     children: [
       {
         code: "86",
-        label: "Menselijke gezondheidszorg",
+        label: "Menselijke Gezondheidszorg",
         count: 89000,
         children: [
           { code: "86.10", label: "Ziekenhuizen", count: 12300 },
@@ -218,16 +236,16 @@ const NACE_TREE: NaceNode[] = [
   },
   {
     code: "S",
-    label: "Overige diensten",
+    label: "Overige Diensten",
     count: 89450,
     children: [
       {
         code: "96",
-        label: "Overige persoonlijke diensten",
+        label: "Overige Persoonlijke Diensten",
         count: 56700,
         children: [
-          { code: "96.02", label: "Haar- en schoonheidsverzorging", count: 34500 },
-          { code: "96.04", label: "Sauna's, zonnebanken, fitnesscentra", count: 12300 },
+          { code: "96.02", label: "Haar- En Schoonheidsverzorging", count: 34500 },
+          { code: "96.04", label: "Sauna's, Zonnebanken, Fitnesscentra", count: 12300 },
         ]
       },
     ]
@@ -258,7 +276,7 @@ function isThematicMatch(node: NaceNode, thematicCodes: string[]): boolean {
 export function NaceSearchPreview() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
-  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(['I', '56']));
+  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [showCTA, setShowCTA] = useState(false);
 
   const thematicCodes = useMemo(() => getThematicCodes(searchTerm), [searchTerm]);
@@ -273,7 +291,7 @@ export function NaceSearchPreview() {
     const filterTree = (nodes: NaceNode[]): NaceNode[] => {
       return nodes.map(node => {
         const children = node.children ? filterTree(node.children) : undefined;
-        const childrenMatch = children && children.some(c => !c.hidden);
+        const childrenMatch = children && children.some(c => !(c as NaceNode & { hidden?: boolean }).hidden);
         const selfMatches = nodeMatchesSearch(node, searchTerm, thematicCodes);
 
         return {
@@ -283,7 +301,7 @@ export function NaceSearchPreview() {
           expanded: selfMatches || childrenMatch,
           thematicMatch: isThematicMatch(node, thematicCodes),
         };
-      }).filter(n => !n.hidden);
+      }).filter(n => !(n as NaceNode & { hidden?: boolean }).hidden);
     };
 
     return filterTree(NACE_TREE);
@@ -299,6 +317,24 @@ export function NaceSearchPreview() {
       }
       return next;
     });
+  };
+
+  const expandAll = () => {
+    const allCodes = new Set<string>();
+    const collectCodes = (nodes: NaceNode[]) => {
+      for (const node of nodes) {
+        if (node.children) {
+          allCodes.add(node.code);
+          collectCodes(node.children);
+        }
+      }
+    };
+    collectCodes(NACE_TREE);
+    setExpandedNodes(allCodes);
+  };
+
+  const collapseAll = () => {
+    setExpandedNodes(new Set());
   };
 
   const toggleSelect = (code: string) => {
@@ -332,7 +368,11 @@ export function NaceSearchPreview() {
     return total;
   }, [selectedCodes]);
 
-  const renderNode = (node: NaceNode & { hidden?: boolean; thematicMatch?: boolean }, level: number = 0) => {
+  // Base company count (1.2M as shown on Ad Hoc Data)
+  const baseCount = 1200950;
+  const displayCount = selectedCodes.size > 0 ? totalSelected : baseCount;
+
+  const renderNode = (node: NaceNode & { hidden?: boolean; thematicMatch?: boolean; expanded?: boolean }, level: number = 0) => {
     if (node.hidden) return null;
 
     const isExpanded = expandedNodes.has(node.code) || node.expanded;
@@ -343,64 +383,63 @@ export function NaceSearchPreview() {
     return (
       <div key={node.code}>
         <div
-          className={`flex items-center gap-1.5 py-1 px-1.5 rounded transition-colors ${
-            isThematic ? 'bg-amber-500/10' : ''
-          } ${isSelected ? 'bg-blue-500/10' : ''} hover:bg-white/5`}
-          style={{ paddingLeft: `${level * 16 + 4}px` }}
+          className={`flex items-center gap-2 py-2 px-3 border-b border-gray-100 transition-colors hover:bg-gray-50 ${
+            isThematic ? 'bg-orange-50' : ''
+          } ${isSelected ? 'bg-blue-50' : ''}`}
+          style={{ paddingLeft: `${level * 20 + 12}px` }}
         >
-          {/* Expand/Collapse */}
+          {/* Expand/Collapse Arrow */}
           {hasChildren ? (
             <button
               onClick={() => toggleExpand(node.code)}
-              className="w-4 h-4 flex items-center justify-center text-zinc-500 hover:text-zinc-300"
+              className="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-gray-600"
             >
               <svg
-                className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           ) : (
-            <div className="w-4" />
+            <div className="w-5" />
           )}
 
-          {/* Checkbox */}
+          {/* Checkbox (circle style like Ad Hoc Data) */}
           <button
             onClick={() => toggleSelect(node.code)}
-            className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
               isSelected
-                ? 'bg-blue-500 border-blue-500'
-                : 'border-zinc-500 hover:border-zinc-400'
+                ? 'bg-[#1e3a8a] border-[#1e3a8a]'
+                : 'border-gray-300 hover:border-gray-400 bg-white'
             }`}
           >
             {isSelected && (
-              <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             )}
           </button>
 
-          {/* Code */}
-          <span className={`text-[11px] font-mono font-semibold ${isThematic ? 'text-amber-400' : 'text-blue-400'}`}>
+          {/* Code Badge */}
+          <span className={`px-2 py-0.5 text-xs font-bold rounded ${
+            isThematic
+              ? 'bg-orange-100 text-orange-700'
+              : 'bg-[#1e3a8a] text-white'
+          }`}>
             {node.code}
           </span>
 
           {/* Label */}
-          <span className="text-[11px] text-zinc-300 flex-1 truncate">
-            {node.label}
-          </span>
-
-          {/* Count */}
-          <span className="text-[10px] text-zinc-500">
-            ({node.count.toLocaleString('nl-BE')})
+          <span className={`text-sm flex-1 ${isThematic ? 'text-orange-700 font-medium' : 'text-gray-700'}`}>
+            {node.code} - {node.label}
           </span>
         </div>
 
         {/* Children */}
         {hasChildren && isExpanded && (
           <div>
-            {node.children!.map(child => renderNode(child as NaceNode & { hidden?: boolean; thematicMatch?: boolean }, level + 1))}
+            {node.children!.map(child => renderNode(child as NaceNode & { hidden?: boolean; thematicMatch?: boolean; expanded?: boolean }, level + 1))}
           </div>
         )}
       </div>
@@ -408,35 +447,53 @@ export function NaceSearchPreview() {
   };
 
   return (
-    <div className="relative w-full h-full bg-[#0f172a] overflow-hidden font-sans flex">
-      {/* Main Content */}
+    <div className="relative w-full h-full bg-white overflow-hidden font-sans flex rounded-lg shadow-lg border border-gray-200">
+      {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 bg-white/5">
-          <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-          </svg>
-          <span className="text-xs font-semibold text-white">Branche (NACE-BEL 2025)</span>
-          <span className="ml-auto text-[10px] text-zinc-500">Demo</span>
+        <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-[#1e3a8a] rounded flex items-center justify-center">
+              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+            </div>
+            <span className="text-base font-semibold text-gray-800">Branche (NACE-BEL 2025)</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm">
+            <button className="text-[#1e3a8a] hover:underline font-medium">Alles</button>
+            <span className="text-gray-300">|</span>
+            <button
+              onClick={() => setSelectedCodes(new Set())}
+              className="text-[#1e3a8a] hover:underline font-medium"
+            >
+              Wissen
+            </button>
+          </div>
+        </div>
+
+        {/* Description */}
+        <div className="px-4 py-2 text-sm text-gray-500 border-b border-gray-100">
+          Selecteer de branche(s) waarop u wilt filteren. U kunt meerdere branches selecteren.
         </div>
 
         {/* Search Input */}
-        <div className="p-3 border-b border-white/10">
+        <div className="px-4 py-3 border-b border-gray-200">
           <div className="relative">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Zoek op code, naam of thema (bijv. horeca, bakker, advocaat)..."
-              className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-lg text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50"
+              placeholder="Zoek op code, omschrijving of thema (bijv. horeca, advocaat)..."
+              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a]"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -447,91 +504,166 @@ export function NaceSearchPreview() {
 
           {/* Thematic Match Indicator */}
           {hasThematicMatch && (
-            <div className="mt-2 flex items-center gap-1.5 px-2.5 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-md">
-              <svg className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+            <div className="mt-2 flex items-center gap-2 px-3 py-2 bg-orange-50 border border-orange-200 rounded-lg">
+              <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
               </svg>
-              <span className="text-[10px] text-amber-300">
-                Thematisch zoeken actief: <strong className="text-amber-200">"{searchTerm}"</strong>
-                <span className="text-amber-400/70 ml-1">→ {thematicCodes.join(', ')}</span>
+              <span className="text-sm text-orange-700">
+                Thematisch zoeken: <strong>"{searchTerm}"</strong>
+                <span className="text-orange-500 ml-1">→ {thematicCodes.join(', ')}</span>
               </span>
             </div>
           )}
         </div>
 
+        {/* Expand/Collapse Buttons */}
+        <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-100 bg-gray-50">
+          <button
+            onClick={expandAll}
+            className="flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-200 rounded transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+            Uitklappen
+          </button>
+          <button
+            onClick={collapseAll}
+            className="flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-200 rounded transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25" />
+            </svg>
+            Inklappen
+          </button>
+        </div>
+
         {/* Tree Content */}
-        <div className="flex-1 overflow-y-auto p-2 text-sm">
+        <div className="flex-1 overflow-y-auto">
           {processedTree.length > 0 ? (
-            processedTree.map(node => renderNode(node as NaceNode & { hidden?: boolean; thematicMatch?: boolean }))
+            processedTree.map(node => renderNode(node as NaceNode & { hidden?: boolean; thematicMatch?: boolean; expanded?: boolean }))
           ) : (
-            <div className="flex flex-col items-center justify-center h-full text-zinc-500">
-              <svg className="w-8 h-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="flex flex-col items-center justify-center h-full text-gray-400 py-8">
+              <svg className="w-12 h-12 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <span className="text-xs">Geen resultaten gevonden</span>
+              <span className="text-sm">Geen resultaten gevonden</span>
             </div>
           )}
         </div>
       </div>
 
-      {/* Right Panel - Selection Summary */}
-      <div className="w-32 md:w-40 border-l border-white/10 bg-white/5 flex flex-col">
-        <div className="p-2 border-b border-white/10">
-          <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Selectie</div>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-2 space-y-1">
-          {selectedCodes.size === 0 ? (
-            <div className="text-[10px] text-zinc-600 italic">Geen selectie</div>
-          ) : (
-            Array.from(selectedCodes).map(code => (
-              <div
-                key={code}
-                className="flex items-center gap-1 px-2 py-1 bg-blue-500/20 rounded text-[10px] text-blue-300"
-              >
-                <span className="font-mono">{code}</span>
-                <button
-                  onClick={() => toggleSelect(code)}
-                  className="ml-auto text-blue-400 hover:text-blue-200"
-                >
-                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* Results Count */}
-        <div className="p-3 border-t border-white/10 bg-white/5">
-          <div className="text-[10px] text-zinc-500 mb-1">Resultaat</div>
-          <div className="text-xl font-bold text-blue-400">
-            {totalSelected.toLocaleString('nl-BE')}
+      {/* Right Sidebar - Company Count (like Ad Hoc Data) */}
+      <div className="w-48 md:w-56 border-l border-gray-200 bg-gray-50 flex flex-col">
+        {/* Count Display */}
+        <div className="p-4 border-b border-gray-200 text-center">
+          <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Aantal bedrijven</div>
+          <div className="text-3xl font-bold text-[#1e3a8a]">
+            {displayCount.toLocaleString('nl-BE')}
           </div>
-          <div className="text-[10px] text-zinc-500">bedrijven</div>
+          <div className="text-xs text-green-600 font-medium uppercase">
+            bedrijven gevonden
+          </div>
+          <div className="text-[10px] text-gray-400 mt-1">op basis van uw filters</div>
+        </div>
+
+        {/* Selection Info */}
+        {selectedCodes.size > 0 && (
+          <div className="p-3 border-b border-gray-200">
+            <div className="text-xs text-gray-500 mb-2">Geselecteerde codes:</div>
+            <div className="flex flex-wrap gap-1">
+              {Array.from(selectedCodes).map(code => (
+                <span
+                  key={code}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#1e3a8a] text-white rounded text-xs"
+                >
+                  {code}
+                  <button
+                    onClick={() => toggleSelect(code)}
+                    className="hover:text-gray-200"
+                  >
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tips Section */}
+        <div className="flex-1 p-4">
+          <div className="flex items-start gap-2 mb-3">
+            <svg className="w-8 h-8 text-[#1e3a8a] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            <div>
+              <h4 className="text-sm font-semibold text-gray-800">Klaar om te filteren?</h4>
+              <p className="text-xs text-gray-500 mt-0.5">Stel uw ideale doelgroep samen door branches te selecteren.</p>
+            </div>
+          </div>
+          <div className="text-xs text-gray-500 mb-2 font-medium">Snelstart tips:</div>
+          <ul className="text-xs text-gray-500 space-y-1">
+            <li className="flex items-start gap-1">
+              <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Zoek op thema (horeca, bakker)
+            </li>
+            <li className="flex items-start gap-1">
+              <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Selecteer meerdere codes
+            </li>
+            <li className="flex items-start gap-1">
+              <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Check de teller live rechts
+            </li>
+          </ul>
+        </div>
+
+        {/* Export Button */}
+        <div className="p-3 border-t border-gray-200">
+          <button
+            onClick={() => setShowCTA(true)}
+            disabled={selectedCodes.size === 0}
+            className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              selectedCodes.size > 0
+                ? 'bg-[#1e3a8a] text-white hover:bg-[#1e3a8a]/90'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            Selectie Exporteren
+          </button>
         </div>
       </div>
 
       {/* CTA Overlay */}
       {showCTA && (
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-10">
-          <div className="bg-slate-800 rounded-xl p-6 mx-4 max-w-sm text-center border border-white/10 shadow-2xl">
-            <div className="w-12 h-12 mx-auto mb-4 bg-blue-500/20 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-10">
+          <div className="bg-white rounded-xl p-6 mx-4 max-w-sm text-center shadow-2xl">
+            <div className="w-14 h-14 mx-auto mb-4 bg-[#1e3a8a]/10 rounded-full flex items-center justify-center">
+              <svg className="w-7 h-7 text-[#1e3a8a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
               {totalSelected.toLocaleString('nl-BE')} bedrijven geselecteerd
             </h3>
-            <p className="text-sm text-zinc-400 mb-5">
+            <p className="text-sm text-gray-500 mb-5">
               Dit is een demo. Wil je deze bedrijven exporteren naar CSV of Excel? Probeer de echte selectietool op Ad Hoc Data.
             </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setShowCTA(false)}
-                className="flex-1 px-4 py-2 text-sm font-medium text-zinc-400 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+                className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
               >
                 Verder testen
               </button>
@@ -539,7 +671,7 @@ export function NaceSearchPreview() {
                 href="https://www.adhocdata.be/selecties-2026-justin"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-1"
+                className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 rounded-lg transition-colors flex items-center justify-center gap-1"
               >
                 Probeer het zelf
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -551,19 +683,10 @@ export function NaceSearchPreview() {
         </div>
       )}
 
-      {/* Feature Labels */}
-      <div className="absolute top-2 left-2 z-5">
-        <div className="px-2 py-1 bg-blue-600 text-white rounded-full text-[10px] font-semibold shadow-lg flex items-center gap-1">
-          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-          </svg>
-          Thematisch Zoeken
-        </div>
-      </div>
-
-      <div className="absolute top-2 right-2 z-5">
-        <div className="px-2 py-1 bg-slate-700 text-white rounded text-[10px] font-bold shadow-lg">
-          NACE 2025
+      {/* Demo Badge */}
+      <div className="absolute top-3 right-14 md:right-60 z-5">
+        <div className="px-2 py-1 bg-orange-500 text-white rounded text-[10px] font-bold shadow">
+          DEMO
         </div>
       </div>
     </div>
