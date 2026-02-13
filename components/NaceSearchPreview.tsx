@@ -715,11 +715,6 @@ export function NaceSearchPreview() {
       )}
 
       {/* Demo Badge */}
-      <div className="absolute top-6 right-6 md:right-8 z-5">
-        <div className="px-2 py-1 bg-orange-500 text-white rounded text-[10px] font-bold shadow">
-          DEMO
-        </div>
-      </div>
     </div>
   );
 }
