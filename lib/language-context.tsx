@@ -11,27 +11,31 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Default language must match server render to avoid hydration mismatch
-const DEFAULT_LANGUAGE: Language = "en";
+// Cookie helper to set language preference
+function setLanguageCookie(lang: Language) {
+  document.cookie = `language=${lang};path=/;max-age=${60 * 60 * 24 * 365};SameSite=Lax`;
+}
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(DEFAULT_LANGUAGE);
-  const [isHydrated, setIsHydrated] = useState(false);
+interface LanguageProviderProps {
+  children: ReactNode;
+  initialLanguage?: Language;
+}
 
-  // After hydration, load saved language preference
+export function LanguageProvider({ children, initialLanguage = "en" }: LanguageProviderProps) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
+
+  // On first visit (no cookie), detect browser language and set cookie
   useEffect(() => {
-    const saved = localStorage.getItem("language") as Language | null;
-    if (saved === "en" || saved === "nl") {
-      setLanguageState(saved);
-    } else if (navigator.language.startsWith("nl")) {
+    const cookieMatch = document.cookie.match(/language=(en|nl)/);
+    if (!cookieMatch && navigator.language.startsWith("nl")) {
       setLanguageState("nl");
+      setLanguageCookie("nl");
     }
-    setIsHydrated(true);
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("language", lang);
+    setLanguageCookie(lang);
   };
 
   const t = translations[language];

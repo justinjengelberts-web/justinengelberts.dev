@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { LanguageProvider } from "@/lib/language-context";
+import type { Language } from "@/lib/translations";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,17 +38,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const languageCookie = cookieStore.get("language")?.value;
+  const initialLanguage: Language = languageCookie === "nl" ? "nl" : "en";
+
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang={initialLanguage} className="overflow-x-hidden">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        <LanguageProvider>
+        <LanguageProvider initialLanguage={initialLanguage}>
           <Navbar />
           {children}
         </LanguageProvider>
