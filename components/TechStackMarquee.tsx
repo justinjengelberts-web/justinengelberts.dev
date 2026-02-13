@@ -4,6 +4,30 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 
+// Brand colors for each technology
+const techColors: Record<string, string> = {
+  "Next.js": "bg-white",
+  "TypeScript": "bg-[#3178C6]",
+  "Tailwind CSS": "bg-[#38BDF8]",
+  "Supabase": "bg-[#3ECF8E]",
+  "PostgreSQL": "bg-[#336791]",
+  "Mistral AI": "bg-[#FF7000]",
+  "Gemini": "bg-[#8E75B2]",
+  "Framer Motion": "bg-[#FF0080]",
+  "Node.js": "bg-[#339933]",
+  "React": "bg-[#61DAFB]",
+  "Vercel": "bg-white",
+  "Cloudflare": "bg-[#F38020]",
+  "Claude Code": "bg-[#D97757]",
+  "LESS": "bg-[#1D365D]",
+  "Turf.js": "bg-[#3FB27F]",
+  "Leaflet": "bg-[#199900]",
+  "Playwright": "bg-[#2EAD33]",
+  "Angular": "bg-[#DD0031]",
+  "Edge Functions": "bg-[#F59E0B]",
+  "AES-256-GCM": "bg-[#10B981]",
+};
+
 export function TechStackMarquee() {
   const { t } = useLanguage();
   const technologies = t.techStack.technologies;
@@ -145,7 +169,7 @@ export function TechStackMarquee() {
               key={`${tech}-${index}`}
               className="flex items-center gap-3 px-6 py-3 flex-shrink-0"
             >
-              <div className="w-2 h-2 rounded-full bg-zinc-600 flex-shrink-0" />
+              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${techColors[tech] || "bg-zinc-600"}`} />
               <span className="text-zinc-400 text-lg font-medium">{tech}</span>
             </div>
           ))}

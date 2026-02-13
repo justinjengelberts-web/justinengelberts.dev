@@ -19,10 +19,11 @@ export function BelgiumMapPreview() {
       <MapWithNoSSR />
 
       {/* UI Overlay - Tool label */}
-      <div className="absolute top-3 left-3 z-[1000]">
-        <div className="px-2 py-1 bg-black/70 backdrop-blur-sm rounded text-[10px] text-white font-medium">
-          Geografisch Zoeken
-        </div>
+      <div className="absolute top-2 left-2 md:top-3 md:left-3 z-[1000] bg-indigo-600 text-white px-2 py-1 md:px-3 md:py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
+        <svg className="w-2.5 h-2.5 md:w-3 md:h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <span className="text-[10px] md:text-xs font-semibold">Geografisch Zoeken</span>
       </div>
 
       {/* Stats badges - left side */}
