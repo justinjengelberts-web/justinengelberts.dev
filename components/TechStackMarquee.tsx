@@ -34,9 +34,7 @@ export function TechStackMarquee() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const marqueeRef2 = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
-  const x2 = useMotionValue(0);
 
   // Track mouse/touch state
   const [isHovering, setIsHovering] = useState(false);
@@ -44,7 +42,6 @@ export function TechStackMarquee() {
   const velocity = useRef(0);
   const lastX = useRef(0);
   const singleSetWidth = useRef(0);
-  const singleSetWidth2 = useRef(0);
   const momentumDecay = useRef(0.95);
 
   // Measure content width on mount
@@ -53,12 +50,7 @@ export function TechStackMarquee() {
       // Width of one set of items (we have 4 copies, so divide by 4)
       singleSetWidth.current = marqueeRef.current.scrollWidth / 4;
     }
-    if (marqueeRef2.current) {
-      singleSetWidth2.current = marqueeRef2.current.scrollWidth / 4;
-      // Start second row offset
-      x2.set(-singleSetWidth2.current / 2);
-    }
-  }, [technologies, x2]);
+  }, [technologies]);
 
   // Handle mouse move to calculate velocity
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -82,25 +74,14 @@ export function TechStackMarquee() {
 
     // Direct drag: move marquee with finger
     let newX = x.get() + delta;
-    let newX2 = x2.get() - delta; // Opposite direction for row 2
 
-    // Seamless loop for row 1
+    // Seamless loop
     if (newX <= -singleSetWidth.current) {
       newX += singleSetWidth.current;
     } else if (newX >= 0) {
       newX -= singleSetWidth.current;
     }
     x.set(newX);
-
-    // Seamless loop for row 2
-    if (singleSetWidth2.current > 0) {
-      if (newX2 <= -singleSetWidth2.current) {
-        newX2 += singleSetWidth2.current;
-      } else if (newX2 >= 0) {
-        newX2 -= singleSetWidth2.current;
-      }
-      x2.set(newX2);
-    }
 
     // Track velocity for momentum
     velocity.current = velocity.current * 0.5 + delta * 0.5;
@@ -142,7 +123,7 @@ export function TechStackMarquee() {
       speed = -1;
     }
 
-    // Update position for row 1
+    // Update position
     let newX = x.get() + speed;
 
     // Seamless loop: wrap around when we've scrolled one full set width
@@ -153,32 +134,16 @@ export function TechStackMarquee() {
     }
 
     x.set(newX);
-
-    // Update position for row 2 (opposite direction)
-    if (singleSetWidth2.current > 0) {
-      let newX2 = x2.get() - speed * 0.8; // Slightly slower, opposite direction
-
-      if (newX2 <= -singleSetWidth2.current) {
-        newX2 += singleSetWidth2.current;
-      } else if (newX2 >= 0) {
-        newX2 -= singleSetWidth2.current;
-      }
-
-      x2.set(newX2);
-    }
   });
 
   // Create 4 copies for seamless infinite scroll
   const repeatedTechnologies = [...technologies, ...technologies, ...technologies, ...technologies];
-  // Second row uses reversed order for variety (deterministic, no hydration issues)
-  const reversedTechnologies = [...technologies].reverse();
-  const repeatedTechnologies2 = [...reversedTechnologies, ...reversedTechnologies, ...reversedTechnologies, ...reversedTechnologies];
 
   return (
-    <section className="py-8 md:py-12 bg-black border-y border-white/5 overflow-hidden">
+    <section className="py-12 bg-black border-y border-white/5 overflow-hidden">
       <div
         ref={containerRef}
-        className="relative touch-pan-y space-y-3"
+        className="relative touch-pan-y"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => {
           setIsHovering(false);
@@ -190,10 +155,10 @@ export function TechStackMarquee() {
         onTouchEnd={handleTouchEnd}
       >
         {/* Gradient Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
-        {/* Marquee Row 1 - Left */}
+        {/* Marquee */}
         <motion.div
           ref={marqueeRef}
           className="flex whitespace-nowrap"
@@ -202,27 +167,10 @@ export function TechStackMarquee() {
           {repeatedTechnologies.map((tech, index) => (
             <div
               key={`${tech}-${index}`}
-              className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 flex-shrink-0"
+              className="flex items-center gap-3 px-6 py-3 flex-shrink-0"
             >
               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${techColors[tech] || "bg-zinc-600"}`} />
-              <span className="text-zinc-400 text-base md:text-lg font-medium">{tech}</span>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Marquee Row 2 - Right (opposite direction) */}
-        <motion.div
-          ref={marqueeRef2}
-          className="flex whitespace-nowrap"
-          style={{ x: x2 }}
-        >
-          {repeatedTechnologies2.map((tech, index) => (
-            <div
-              key={`row2-${tech}-${index}`}
-              className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 flex-shrink-0"
-            >
-              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${techColors[tech] || "bg-zinc-600"}`} />
-              <span className="text-zinc-500 text-base md:text-lg font-medium">{tech}</span>
+              <span className="text-zinc-400 text-lg font-medium">{tech}</span>
             </div>
           ))}
         </motion.div>
