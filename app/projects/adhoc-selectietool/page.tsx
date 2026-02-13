@@ -486,8 +486,54 @@ export default function AdHocSelectietoolPage() {
         </div>
       </section>
 
-      {/* Code Refactoring */}
+      {/* Thematic Search */}
       <section className="py-16 px-6 bg-white/5">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-2xl font-semibold mb-2">{t.thematicSearch.title}</h2>
+            <p className="text-zinc-400 mb-6">{t.thematicSearch.subtitle}</p>
+
+            {/* Description */}
+            <div className="mb-6">
+              <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+                {t.thematicSearch.description}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {t.thematicSearch.examples.map((example, index) => (
+                  <div key={index} className="flex items-center gap-2 text-sm bg-white/5 px-3 py-2 rounded-lg">
+                    <code className="px-2 py-1 bg-amber-500/20 text-amber-300 rounded text-xs font-mono">
+                      {example.split(' → ')[0]}
+                    </code>
+                    <span className="text-zinc-500">→</span>
+                    <code className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs font-mono">
+                      {example.split(' → ')[1]}
+                    </code>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Preview - Full Width */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="rounded-2xl overflow-hidden border border-white/10 aspect-video"
+            >
+              <NaceSearchPreview />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Code Refactoring */}
+      <section className="py-16 px-6">
         <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -546,52 +592,6 @@ export default function AdHocSelectietoolPage() {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Thematic Search */}
-      <section className="py-16 px-6">
-        <div className="container mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-2xl font-semibold mb-2">{t.thematicSearch.title}</h2>
-            <p className="text-zinc-400 mb-6">{t.thematicSearch.subtitle}</p>
-
-            {/* Description */}
-            <div className="mb-6">
-              <p className="text-zinc-400 text-sm leading-relaxed mb-4">
-                {t.thematicSearch.description}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {t.thematicSearch.examples.map((example, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm bg-white/5 px-3 py-2 rounded-lg">
-                    <code className="px-2 py-1 bg-amber-500/20 text-amber-300 rounded text-xs font-mono">
-                      {example.split(' → ')[0]}
-                    </code>
-                    <span className="text-zinc-500">→</span>
-                    <code className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs font-mono">
-                      {example.split(' → ')[1]}
-                    </code>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Preview - Full Width */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="rounded-2xl overflow-hidden border border-white/10 aspect-video"
-            >
-              <NaceSearchPreview />
-            </motion.div>
           </motion.div>
         </div>
       </section>
