@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import * as turf from "@turf/turf";
 import type { FeatureCollection, Feature, Polygon, MultiPolygon } from "geojson";
 import type { Layer, PathOptions } from "leaflet";
+import type { ViewMode } from "./BelgiumMapPreview";
 
 // Skeleton placeholder component
 function MapSkeleton() {
@@ -26,8 +27,8 @@ function MapSkeleton() {
   );
 }
 
-// Color palette for arrondissements
-const ARRONDISSEMENT_COLORS = [
+// Color palette for regions (arrondissements and provinces)
+const REGION_COLORS = [
   "#22c55e", // green
   "#3b82f6", // blue
   "#f59e0b", // amber
@@ -92,15 +93,23 @@ function MapClickHandler({
   return null;
 }
 
-export default function BelgiumMapLeaflet() {
+interface BelgiumMapLeafletProps {
+  viewMode?: ViewMode;
+}
+
+export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: BelgiumMapLeafletProps) {
   const [allArrondissements, setAllArrondissements] = useState<FeatureCollection | null>(null);
+  const [allProvinces, setAllProvinces] = useState<FeatureCollection | null>(null);
   const [belgiumFill, setBelgiumFill] = useState<Feature | null>(null);
   const [belgiumOutline, setBelgiumOutline] = useState<Feature | null>(null);
-  const [selectedArrondissements, setSelectedArrondissements] = useState<FeatureCollection | null>(null);
+  const [selectedRegions, setSelectedRegions] = useState<FeatureCollection | null>(null);
   const [clickPoint, setClickPoint] = useState<{ lat: number; lng: number } | null>(null);
   const [companyCount, setCompanyCount] = useState<number | null>(null);
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Get current regions based on view mode
+  const currentRegions = viewMode === "provinces" ? allProvinces : allArrondissements;
 
   // Detect mobile for initial zoom level - more zoomed out on mobile to show all of Belgium
   const [initialZoom, setInitialZoom] = useState<number | null>(null);
@@ -116,11 +125,13 @@ export default function BelgiumMapLeaflet() {
     // Load all GeoJSON files in parallel for faster loading
     Promise.all([
       fetch("/belgium-arrondissements.geojson").then((res) => res.json()),
+      fetch("/belgium-provinces.geojson").then((res) => res.json()),
       fetch("/belgium-outline.geojson").then((res) => res.json()),
       fetch("/belgium-fill.geojson").then((res) => res.json()),
     ])
-      .then(([arrondissements, outline, fill]) => {
+      .then(([arrondissements, provinces, outline, fill]) => {
         setAllArrondissements(arrondissements);
+        setAllProvinces(provinces);
         setBelgiumOutline(outline);
         setBelgiumFill(fill);
         setIsLoading(false);
@@ -131,10 +142,17 @@ export default function BelgiumMapLeaflet() {
       });
   }, []);
 
-  // Handle map click - find arrondissements within radius
+  // Reset selection when view mode changes
+  useEffect(() => {
+    setSelectedRegions(null);
+    setClickPoint(null);
+    setCompanyCount(null);
+  }, [viewMode]);
+
+  // Handle map click - find regions within radius
   const handleMapClick = useCallback(
     (lat: number, lng: number) => {
-      if (!allArrondissements) return;
+      if (!currentRegions) return;
 
       setClickPoint({ lat, lng });
 
@@ -142,10 +160,10 @@ export default function BelgiumMapLeaflet() {
       const centerPoint = turf.point([lng, lat]);
       const searchCircle = turf.circle(centerPoint, SEARCH_RADIUS_KM, { units: "kilometers" });
 
-      // Find all arrondissements that intersect with the search circle
+      // Find all regions that intersect with the search circle
       const intersecting: Feature[] = [];
 
-      for (const feature of allArrondissements.features) {
+      for (const feature of currentRegions.features) {
         try {
           if (turf.booleanIntersects(searchCircle, feature)) {
             intersecting.push(feature);
@@ -156,7 +174,7 @@ export default function BelgiumMapLeaflet() {
       }
 
       if (intersecting.length > 0) {
-        setSelectedArrondissements({
+        setSelectedRegions({
           type: "FeatureCollection",
           features: intersecting,
         });
@@ -165,15 +183,17 @@ export default function BelgiumMapLeaflet() {
         for (const feature of intersecting) {
           const centroid = turf.centroid(feature);
           const [cLng, cLat] = centroid.geometry.coordinates;
-          totalCompanies += getCompanyDensity(cLat, cLng);
+          // Provinces are larger, so multiply density for more realistic numbers
+          const density = getCompanyDensity(cLat, cLng);
+          totalCompanies += viewMode === "provinces" ? density * 3 : density;
         }
         setCompanyCount(totalCompanies);
       } else {
-        setSelectedArrondissements(null);
+        setSelectedRegions(null);
         setCompanyCount(null);
       }
     },
-    [allArrondissements]
+    [currentRegions, viewMode]
   );
 
 
@@ -241,14 +261,14 @@ export default function BelgiumMapLeaflet() {
         />
       )}
 
-      {/* Selected arrondissements with individual colors and tooltips */}
-      {selectedArrondissements && (
+      {/* Selected regions with individual colors and tooltips */}
+      {selectedRegions && (
         <GeoJSON
-          key={`selected-${clickPoint?.lat}-${clickPoint?.lng}`}
-          data={selectedArrondissements}
+          key={`selected-${viewMode}-${clickPoint?.lat}-${clickPoint?.lng}`}
+          data={selectedRegions}
           style={(feature) => {
-            const index = selectedArrondissements.features.indexOf(feature as Feature);
-            const color = ARRONDISSEMENT_COLORS[index % ARRONDISSEMENT_COLORS.length];
+            const index = selectedRegions.features.indexOf(feature as Feature);
+            const color = REGION_COLORS[index % REGION_COLORS.length];
             return {
               fillColor: color,
               fillOpacity: 0.45,
@@ -261,7 +281,8 @@ export default function BelgiumMapLeaflet() {
             const name = feature.properties?.name_nl ||
                         feature.properties?.name_fr ||
                         feature.properties?.name ||
-                        "Arrondissement";
+                        feature.properties?.NAME_1 ||
+                        (viewMode === "provinces" ? "Provincie" : "Arrondissement");
             layer.bindTooltip(name, {
               permanent: false,
               direction: "center",
