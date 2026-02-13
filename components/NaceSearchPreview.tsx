@@ -467,7 +467,7 @@ export function NaceSearchPreview() {
               </svg>
               Branche (NACE)
             </button>
-            {['Organisatiegrootte', 'Rechtsvorm', 'Locatie', 'Geografisch'].map((item) => (
+            {['Organisatiegrootte', 'Rechtsvorm', 'Locatie'].map((item) => (
               <button key={item} className="w-full px-3 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 flex items-center gap-2">
                 <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -517,7 +517,7 @@ export function NaceSearchPreview() {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Zoek op code, omschrijving of thema (bijv. horeca, advocaat)..."
+              placeholder="Zoek op code of thema (bijv. horeca)"
               className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a]"
             />
             {searchTerm && (
