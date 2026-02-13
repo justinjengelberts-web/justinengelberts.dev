@@ -460,8 +460,8 @@ export function NaceSearchPreview() {
   };
 
   return (
-    <div className="relative w-full h-full bg-[#f0f2f5] overflow-hidden font-sans p-3 md:p-4">
-      <div className="flex gap-3 md:gap-4 h-full">
+    <div className="relative w-full h-full bg-[#f0f2f5] overflow-hidden font-sans p-2 md:p-4">
+      <div className="flex flex-col md:flex-row gap-2 md:gap-4 h-full">
         {/* Left Sidebar - Filter Categories */}
         <div className="hidden md:flex w-44 flex-col bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
           <div className="px-3 py-2 border-b border-gray-100">
@@ -594,10 +594,29 @@ export function NaceSearchPreview() {
             </div>
           )}
         </div>
+
+        {/* Mobile Count Bar - Only visible on mobile */}
+        <div className="md:hidden flex items-center justify-between px-3 py-2 bg-white border-t border-gray-200">
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold text-[#1e3a8a]">{displayCount.toLocaleString('nl-BE')}</span>
+            <span className="text-xs text-gray-500">bedrijven</span>
+          </div>
+          <button
+            onClick={() => setShowCTA(true)}
+            disabled={selectedCodes.size === 0}
+            className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+              selectedCodes.size > 0
+                ? 'bg-[#1e3a8a] text-white'
+                : 'bg-gray-200 text-gray-400'
+            }`}
+          >
+            Exporteren
+          </button>
+        </div>
         </div>
 
-        {/* Right Sidebar - Company Count (like Ad Hoc Data) */}
-        <div className="w-44 md:w-52 flex-shrink-0 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col overflow-hidden">
+        {/* Right Sidebar - Company Count (like Ad Hoc Data) - Hidden on mobile */}
+        <div className="hidden md:flex w-52 flex-shrink-0 bg-white rounded-lg shadow-sm border border-gray-200 flex-col overflow-hidden">
           {/* Count Display */}
         <div className="p-4 border-b border-gray-200 text-center">
           <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Aantal bedrijven</div>

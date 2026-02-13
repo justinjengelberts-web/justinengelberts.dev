@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { translations, Language, Translations } from "./translations";
 
 interface LanguageContextType {
@@ -11,16 +11,23 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Get initial language without flash - runs once on client
-function getInitialLanguage(): Language {
-  if (typeof window === "undefined") return "en";
-  const saved = localStorage.getItem("language") as Language | null;
-  if (saved === "en" || saved === "nl") return saved;
-  return navigator.language.startsWith("nl") ? "nl" : "en";
-}
+// Default language must match server render to avoid hydration mismatch
+const DEFAULT_LANGUAGE: Language = "en";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+  const [language, setLanguageState] = useState<Language>(DEFAULT_LANGUAGE);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // After hydration, load saved language preference
+  useEffect(() => {
+    const saved = localStorage.getItem("language") as Language | null;
+    if (saved === "en" || saved === "nl") {
+      setLanguageState(saved);
+    } else if (navigator.language.startsWith("nl")) {
+      setLanguageState("nl");
+    }
+    setIsHydrated(true);
+  }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

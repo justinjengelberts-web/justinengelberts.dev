@@ -524,7 +524,7 @@ export default function AdHocSelectietoolPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="rounded-2xl overflow-hidden border border-white/10 aspect-video"
+              className="rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] md:aspect-video"
             >
               <NaceSearchPreview />
             </motion.div>
