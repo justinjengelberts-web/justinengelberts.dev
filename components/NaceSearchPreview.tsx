@@ -559,8 +559,8 @@ export function NaceSearchPreview() {
           )}
         </div>
 
-        {/* Expand/Collapse Buttons */}
-        <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-100 bg-gray-50">
+        {/* Expand/Collapse Buttons - hidden on mobile */}
+        <div className="hidden md:flex items-center gap-2 px-4 py-2 border-b border-gray-100 bg-gray-50">
           <button
             onClick={expandAll}
             className="flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-200 rounded transition-colors"
