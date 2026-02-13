@@ -254,7 +254,23 @@ const NACE_TREE: NaceNode[] = [
 
 function getThematicCodes(searchTerm: string): string[] {
   const term = searchTerm.toLowerCase().trim();
-  return INDUSTRY_MAPPING[term] || [];
+  if (term.length < 2) return [];
+
+  // First check exact match
+  if (INDUSTRY_MAPPING[term]) {
+    return INDUSTRY_MAPPING[term];
+  }
+
+  // Then check partial matches (term is start of a key)
+  const codes: string[] = [];
+  for (const [key, values] of Object.entries(INDUSTRY_MAPPING)) {
+    if (key.startsWith(term)) {
+      codes.push(...values);
+    }
+  }
+
+  // Remove duplicates
+  return [...new Set(codes)];
 }
 
 function nodeMatchesSearch(node: NaceNode, searchTerm: string, thematicCodes: string[]): boolean {
