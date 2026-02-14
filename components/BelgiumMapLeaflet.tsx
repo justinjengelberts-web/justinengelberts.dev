@@ -41,42 +41,44 @@ const REGION_COLORS = [
   "#84cc16", // lime
 ];
 
-// Radius in kilometers
-const SEARCH_RADIUS_KM = 25;
+// Default radius in kilometers
+const DEFAULT_RADIUS_KM = 25;
+const MIN_RADIUS_KM = 5;
+const MAX_RADIUS_KM = 100;
 
-// Company density per region - calibrated for ~1.2M total across 43 arrondissements
-// Average ~28k per arrondissement, but heavily skewed to urban areas
-const getCompanyDensity = (lat: number, lng: number): number => {
-  // Brussels region - highest density (capital)
+// Company density per km² - calibrated for ~1.2M total across Belgium (~30,500 km²)
+// Average ~39/km², but heavily skewed to urban areas
+const getCompanyDensityPerKm2 = (lat: number, lng: number): number => {
+  // Brussels region - highest density (capital) ~1000/km²
   if (lat > 50.8 && lat < 50.9 && lng > 4.3 && lng < 4.45) {
-    return Math.floor(Math.random() * 20000) + 160000; // 160k-180k
+    return 900 + Math.floor(Math.random() * 200);
   }
-  // Antwerp city area - very high density
+  // Antwerp city area - very high density ~150/km²
   if (lat > 51.1 && lat < 51.3 && lng > 4.3 && lng < 4.5) {
-    return Math.floor(Math.random() * 20000) + 95000; // 95k-115k
+    return 120 + Math.floor(Math.random() * 60);
   }
-  // Ghent area
+  // Ghent area ~100/km²
   if (lat > 50.9 && lat < 51.1 && lng > 3.6 && lng < 3.85) {
-    return Math.floor(Math.random() * 15000) + 50000; // 50k-65k
+    return 80 + Math.floor(Math.random() * 40);
   }
-  // Other Flemish urban arrondissements (Leuven, Mechelen, etc.)
+  // Other Flemish urban areas (Leuven, Mechelen, etc.) ~70/km²
   if (lat > 50.8 && lng > 3.5 && lng < 5.5) {
-    return Math.floor(Math.random() * 15000) + 30000; // 30k-45k
+    return 55 + Math.floor(Math.random() * 30);
   }
-  // Flanders general - medium-high density
+  // Flanders general - medium-high density ~50/km²
   if (lat > 50.7) {
-    return Math.floor(Math.random() * 10000) + 22000; // 22k-32k
+    return 40 + Math.floor(Math.random() * 20);
   }
-  // Wallonia major cities (Liège, Charleroi, Namur area)
+  // Wallonia major cities (Liège, Charleroi, Namur area) ~45/km²
   if (lat > 50.3 && lat < 50.7 && lng > 4.3 && lng < 5.8) {
-    return Math.floor(Math.random() * 12000) + 25000; // 25k-37k
+    return 35 + Math.floor(Math.random() * 20);
   }
-  // Wallonia medium - medium density
+  // Wallonia medium - medium density ~20/km²
   if (lat > 50.0 && lat < 50.7) {
-    return Math.floor(Math.random() * 8000) + 12000; // 12k-20k
+    return 15 + Math.floor(Math.random() * 10);
   }
-  // Wallonia south (Luxembourg province, Ardennes) - lowest density
-  return Math.floor(Math.random() * 5000) + 6000; // 6k-11k
+  // Wallonia south (Luxembourg province, Ardennes) - lowest density ~8/km²
+  return 6 + Math.floor(Math.random() * 4);
 };
 
 // Component to handle map clicks
@@ -95,11 +97,20 @@ function MapClickHandler({
 
 interface BelgiumMapLeafletProps {
   viewMode?: ViewMode;
+  searchRadius: number;
+  onSearchRadiusChange: (radius: number) => void;
+  onSelectionChange: (hasSelection: boolean) => void;
 }
 
-export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: BelgiumMapLeafletProps) {
+export default function BelgiumMapLeaflet({
+  viewMode = "arrondissements",
+  searchRadius,
+  onSearchRadiusChange,
+  onSelectionChange,
+}: BelgiumMapLeafletProps) {
   const [allArrondissements, setAllArrondissements] = useState<FeatureCollection | null>(null);
   const [allProvinces, setAllProvinces] = useState<FeatureCollection | null>(null);
+  const [allPostcodes, setAllPostcodes] = useState<FeatureCollection | null>(null);
   const [belgiumFill, setBelgiumFill] = useState<Feature | null>(null);
   const [belgiumOutline, setBelgiumOutline] = useState<Feature | null>(null);
   const [selectedRegions, setSelectedRegions] = useState<FeatureCollection | null>(null);
@@ -109,37 +120,59 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
   const [isLoading, setIsLoading] = useState(true);
 
   // Get current regions based on view mode
-  const currentRegions = viewMode === "provinces" ? allProvinces : allArrondissements;
+  const currentRegions = viewMode === "provinces"
+    ? allProvinces
+    : viewMode === "postcodes"
+      ? allPostcodes
+      : allArrondissements;
 
   // Detect mobile for initial zoom level - more zoomed out on mobile to show all of Belgium
   const [initialZoom, setInitialZoom] = useState<number | null>(null);
+  const [isMapReady, setIsMapReady] = useState(false);
 
+  // Initialize map after a small delay to ensure DOM is ready
   useEffect(() => {
-    // Set zoom based on screen width - lower zoom on mobile to show full Belgium
     const isMobile = window.innerWidth < 768;
     setInitialZoom(isMobile ? 6.3 : 7);
+
+    // Delay map render to avoid Strict Mode race conditions
+    const timer = setTimeout(() => {
+      setIsMapReady(true);
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Load GeoJSON on mount - using pre-computed files for performance
   useEffect(() => {
+    const abortController = new AbortController();
+
     // Load all GeoJSON files in parallel for faster loading
     Promise.all([
-      fetch("/belgium-arrondissements.geojson").then((res) => res.json()),
-      fetch("/belgium-provinces.geojson").then((res) => res.json()),
-      fetch("/belgium-outline.geojson").then((res) => res.json()),
-      fetch("/belgium-fill.geojson").then((res) => res.json()),
+      fetch("/belgium-arrondissements.geojson", { signal: abortController.signal }).then((res) => res.json()),
+      fetch("/belgium-provinces.geojson", { signal: abortController.signal }).then((res) => res.json()),
+      fetch("/belgium-postcodes.geojson", { signal: abortController.signal }).then((res) => res.json()),
+      fetch("/belgium-outline.geojson", { signal: abortController.signal }).then((res) => res.json()),
+      fetch("/belgium-fill.geojson", { signal: abortController.signal }).then((res) => res.json()),
     ])
-      .then(([arrondissements, provinces, outline, fill]) => {
-        setAllArrondissements(arrondissements);
-        setAllProvinces(provinces);
-        setBelgiumOutline(outline);
-        setBelgiumFill(fill);
-        setIsLoading(false);
+      .then(([arrondissements, provinces, postcodes, outline, fill]) => {
+        if (!abortController.signal.aborted) {
+          setAllArrondissements(arrondissements);
+          setAllProvinces(provinces);
+          setAllPostcodes(postcodes);
+          setBelgiumOutline(outline);
+          setBelgiumFill(fill);
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
-        console.error("Failed to load GeoJSON:", err);
-        setIsLoading(false);
+        if (err.name !== 'AbortError') {
+          console.error("Failed to load GeoJSON:", err);
+          setIsLoading(false);
+        }
       });
+
+    return () => abortController.abort();
   }, []);
 
   // Reset selection when view mode changes
@@ -147,7 +180,53 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
     setSelectedRegions(null);
     setClickPoint(null);
     setCompanyCount(null);
-  }, [viewMode]);
+    onSelectionChange(false);
+  }, [viewMode, onSelectionChange]);
+
+  // Notify parent when selection changes
+  useEffect(() => {
+    onSelectionChange(clickPoint !== null);
+  }, [clickPoint, onSelectionChange]);
+
+  // Recalculate selection when radius changes
+  useEffect(() => {
+    if (!clickPoint || !currentRegions) return;
+
+    const centerPoint = turf.point([clickPoint.lng, clickPoint.lat]);
+    const searchCircle = turf.circle(centerPoint, searchRadius, { units: "kilometers" });
+
+    const intersecting: Feature[] = [];
+    for (const feature of currentRegions.features) {
+      try {
+        if (turf.booleanIntersects(searchCircle, feature)) {
+          intersecting.push(feature);
+        }
+      } catch (e) {
+        // Skip problematic features
+      }
+    }
+
+    if (intersecting.length > 0) {
+      setSelectedRegions({
+        type: "FeatureCollection",
+        features: intersecting,
+      });
+      let totalCompanies = 0;
+      for (const feature of intersecting) {
+        const centroid = turf.centroid(feature);
+        const [cLng, cLat] = centroid.geometry.coordinates;
+        // Calculate area in km² and multiply by density per km²
+        const areaM2 = turf.area(feature);
+        const areaKm2 = areaM2 / 1_000_000;
+        const densityPerKm2 = getCompanyDensityPerKm2(cLat, cLng);
+        totalCompanies += Math.floor(areaKm2 * densityPerKm2);
+      }
+      setCompanyCount(totalCompanies);
+    } else {
+      setSelectedRegions(null);
+      setCompanyCount(null);
+    }
+  }, [searchRadius, clickPoint, currentRegions, viewMode]);
 
   // Handle map click - find regions within radius
   const handleMapClick = useCallback(
@@ -158,7 +237,7 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
 
       // Create a circle polygon for intersection testing
       const centerPoint = turf.point([lng, lat]);
-      const searchCircle = turf.circle(centerPoint, SEARCH_RADIUS_KM, { units: "kilometers" });
+      const searchCircle = turf.circle(centerPoint, searchRadius, { units: "kilometers" });
 
       // Find all regions that intersect with the search circle
       const intersecting: Feature[] = [];
@@ -178,14 +257,16 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
           type: "FeatureCollection",
           features: intersecting,
         });
-        // Calculate company count based on location density
+        // Calculate company count based on area and location density
         let totalCompanies = 0;
         for (const feature of intersecting) {
           const centroid = turf.centroid(feature);
           const [cLng, cLat] = centroid.geometry.coordinates;
-          // Provinces are larger, so multiply density for more realistic numbers
-          const density = getCompanyDensity(cLat, cLng);
-          totalCompanies += viewMode === "provinces" ? density * 3 : density;
+          // Calculate area in km² and multiply by density per km²
+          const areaM2 = turf.area(feature);
+          const areaKm2 = areaM2 / 1_000_000;
+          const densityPerKm2 = getCompanyDensityPerKm2(cLat, cLng);
+          totalCompanies += Math.floor(areaKm2 * densityPerKm2);
         }
         setCompanyCount(totalCompanies);
       } else {
@@ -193,7 +274,7 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
         setCompanyCount(null);
       }
     },
-    [currentRegions, viewMode]
+    [currentRegions, viewMode, searchRadius]
   );
 
 
@@ -217,7 +298,7 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
           border-top-color: rgba(0, 0, 0, 0.8) !important;
         }
       `}</style>
-      {initialZoom && (
+      {isMapReady && initialZoom && (
       <MapContainer
         center={[50.5, 4.5]}
         zoom={initialZoom}
@@ -264,7 +345,7 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
       {/* Selected regions with individual colors and tooltips */}
       {selectedRegions && (
         <GeoJSON
-          key={`selected-${viewMode}-${clickPoint?.lat}-${clickPoint?.lng}`}
+          key={`selected-${viewMode}-${clickPoint?.lat}-${clickPoint?.lng}-${searchRadius}-${selectedRegions.features.length}`}
           data={selectedRegions}
           style={(feature) => {
             const index = selectedRegions.features.indexOf(feature as Feature);
@@ -278,11 +359,12 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
             };
           }}
           onEachFeature={(feature, layer) => {
-            const name = feature.properties?.name_nl ||
+            const name = feature.properties?.postcode ||
+                        feature.properties?.name_nl ||
                         feature.properties?.name_fr ||
                         feature.properties?.name ||
                         feature.properties?.NAME_1 ||
-                        (viewMode === "provinces" ? "Provincie" : "Arrondissement");
+                        (viewMode === "provinces" ? "Provincie" : viewMode === "postcodes" ? "Postcode" : "Arrondissement");
             layer.bindTooltip(name, {
               permanent: false,
               direction: "center",
@@ -292,17 +374,17 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
         />
       )}
 
-      {/* Search radius circle */}
+      {/* Search radius circle - no fill, just border outline on top of polygons */}
       {clickPoint && (
         <Circle
           center={[clickPoint.lat, clickPoint.lng]}
-          radius={SEARCH_RADIUS_KM * 1000} // Convert to meters
+          radius={searchRadius * 1000} // Convert to meters
           pathOptions={{
-            color: "#f97316",
-            weight: 2,
-            fillColor: "#f97316",
-            fillOpacity: 0.1,
-            dashArray: "5, 5",
+            color: "#2563eb",
+            weight: 3,
+            fillOpacity: 0,
+            dashArray: "10, 6",
+            opacity: 1,
           }}
         />
       )}
@@ -359,6 +441,24 @@ export default function BelgiumMapLeaflet({ viewMode = "arrondissements" }: Belg
                 Naar Ad Hoc Data
               </a>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Radius slider - bottom center (desktop only) */}
+      {clickPoint && (
+        <div className="hidden md:block absolute bottom-3 left-1/2 -translate-x-1/2 z-[1000] bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] text-white/70">Radius</span>
+            <input
+              type="range"
+              min={MIN_RADIUS_KM}
+              max={MAX_RADIUS_KM}
+              value={searchRadius}
+              onChange={(e) => onSearchRadiusChange(Number(e.target.value))}
+              className="w-32 h-1.5 bg-white/30 rounded-lg appearance-none cursor-pointer accent-blue-500"
+            />
+            <span className="text-[10px] font-semibold text-white min-w-[40px]">{searchRadius} km</span>
           </div>
         </div>
       )}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { LanguageProvider } from "@/lib/language-context";
@@ -44,8 +44,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
+  const headerStore = await headers();
   const languageCookie = cookieStore.get("language")?.value;
-  const initialLanguage: Language = languageCookie === "nl" ? "nl" : "en";
+
+  // Determine language: cookie first, then Accept-Language header, default to en
+  let initialLanguage: Language = "en";
+  if (languageCookie === "nl" || languageCookie === "en") {
+    initialLanguage = languageCookie;
+  } else {
+    const acceptLanguage = headerStore.get("accept-language") || "";
+    if (acceptLanguage.toLowerCase().includes("nl")) {
+      initialLanguage = "nl";
+    }
+  }
 
   return (
     <html lang={initialLanguage} className="overflow-x-hidden">

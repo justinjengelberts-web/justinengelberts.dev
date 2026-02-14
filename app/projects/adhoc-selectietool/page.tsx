@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink, MapPin, Database, Code2, Layers } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 import { BelgiumMapPreview } from "@/components/BelgiumMapPreview";
 import { NaceSearchPreview } from "@/components/NaceSearchPreview";
+import { ImageCompareSlider } from "@/components/ImageCompareSlider";
 
 const content = {
   en: {
@@ -38,44 +39,39 @@ const content = {
     techStack: "Technology Stack",
     results: "Results",
     resultsPoints: [
-      "Users can now filter 1.2M+ Belgian companies by geographic region with a single click",
-      "43 arrondissements, 10 provinces, and 1,000+ postal codes available for selection",
-      "Zero changes required to existing API endpoints - full backward compatibility",
-      "Seamless integration with legacy Angular 1.x codebase",
-      "Monthly data updates continue to work without modification"
+      "Geographic search: filter 1.2M+ companies across 43 arrondissements, 10 provinces, and 1,000+ postal codes",
+      "Thematic search: 400+ search terms to find companies by industry without knowing NACE codes",
+      "Code refactored from 0 to 33 organized modules with 0 TODOs remaining",
+      "Design system: 352 → 5,848 lines of CSS with 40+ design tokens and 100% scoped styles",
+      "Full backward compatibility - zero changes to existing API endpoints"
     ],
     thematicSearch: {
       title: "Thematic Search",
       subtitle: "Search by industry theme instead of NACE codes",
-      description: "Users no longer need to know exact NACE codes. Simply type 'horeca', 'bakker', or 'advocaat' and the system automatically maps these terms to the correct NACE codes. Supports 200+ search terms in both Dutch and French, including singular and plural forms.",
+      description: "Users no longer need to know exact NACE codes. Simply type 'horeca', 'bakker', or 'advocaat' and the system automatically maps these terms to the correct NACE codes. Supports 400+ search terms in both Dutch and French, including singular and plural forms.",
       examples: ["horeca → I, 55, 56", "bakker → 10.71, 47.24", "advocaat → 69.10"]
     },
-    keyFeatures: "Key Features",
-    features: [
-      { icon: MapPin, title: "Geographic Search", description: "Find companies within any Belgian province, arrondissement, or postal code area" },
-      { icon: Database, title: "Data Compatibility", description: "Works with existing data exports and API structure" },
-      { icon: Code2, title: "Legacy Integration", description: "Built to work with Angular 1.x and vanilla JavaScript" },
-      { icon: Layers, title: "Multi-level Selection", description: "Combine selections across provinces, arrondissements, and postal codes" }
-    ],
     stats: [
-      { value: "200+", label: "Thematic Search", subtext: "New Feature" },
-      { value: "54", label: "Geographic Search", subtext: "New Feature" },
-      { value: "100%", label: "Backward Compatible" },
-      { value: "Full", label: "UI/UX Redesign" }
+      { value: "400+", label: "Search Terms", subtext: "Thematic Search", before: "0" },
+      { value: "1,053", label: "Regions", subtext: "Geographic Search", before: "0" },
+      { value: "33", label: "Modules", subtext: "Code Architecture", before: "0" },
+      { value: "0", label: "TODOs", subtext: "Production Ready", before: "9" },
+      { value: "40+", label: "Design Tokens", subtext: "Design System", before: "17" },
+      { value: "100%", label: "Scoped CSS", subtext: "Zero Conflicts", before: "0%" }
     ],
     codeRefactor: {
       title: "Code Refactoring",
       subtitle: "From spaghetti to structured: a complete architectural overhaul",
       metrics: [
-        { value: "4,726", label: "Lines Legacy", color: "text-red-400" },
-        { value: "5,678", label: "Lines New", color: "text-emerald-400" },
-        { value: "~20%", label: "More Features", color: "text-blue-400" },
-        { value: "100%", label: "Restructured", color: "text-purple-400" }
+        { label: "Controller", before: "4,726", after: "5,678", reason: "Around same size, now in 33 modules" },
+        { label: "CSS / LESS", before: "352", after: "5,848", reason: "Full design system with 40+ tokens" },
+        { label: "HTML", before: "1,055", after: "2,323", reason: "Semantic structure & accessibility" }
       ],
       comparisons: [
         {
           title: "Error Handling",
           problem: "Haiku poems as error messages",
+          solution: "Try/catch with meaningful logging",
           legacy: `const explanations = {
   noField: \`
     expectation void
@@ -105,6 +101,7 @@ const content = {
         {
           title: "Code Structure",
           problem: "No sections, mixed concerns, jQuery in Angular",
+          solution: "Clear sections with config objects",
           legacy: `Object.assign(window, {
   vars, vm: this,
   $http, $params, $webhooks, $scope, $filter,
@@ -140,6 +137,7 @@ var LOOKUP_IDS = {
         {
           title: "Initialization Flow",
           problem: "Nested setTimeout callbacks with magic delays",
+          solution: "Clean promise chain with named functions",
           legacy: `Promise.allSettled(FilterField.lookupRequestList)
 .then((values) => {
   setTimeout( () => {
@@ -165,7 +163,51 @@ function restoreFilterState() {
   var state = JSON.parse(stored);
   // Clean restore logic
 }`
+        },
+        {
+          title: "CSS Design System",
+          problem: "Hardcoded values, no scoping, Bootstrap overrides",
+          solution: "40+ design tokens, fully scoped styles",
+          legacy: `#pills-tab:before {
+  border-left: 1px solid var(--bs-secondary);
+  border-top-right-radius: 0.375rem;
+}
+
+ul.fancytree-container ul {
+  padding: 0 !important;
+  padding-left: 1em !important;
+}`,
+          fixed: `// Design Tokens
+@ahd-primary:       #2563eb;
+@ahd-border-radius: 10px;
+@ahd-shadow-md:     0 4px 6px rgba(0,0,0,0.05);
+
+// All styles scoped
+.ahd-selectietool-modern {
+  background: @ahd-bg-main;
+  border-radius: @ahd-border-radius;
+  box-shadow: @ahd-shadow-md;
+}`
         }
+      ]
+    },
+    uiRedesign: {
+      title: "UI/UX Redesign",
+      subtitle: "From minimal Bootstrap to a complete custom design system",
+      beforeLabel: "Before",
+      afterLabel: "After",
+      dragHint: "Drag to compare",
+      metrics: [
+        { icon: "palette", before: "0", value: "22", label: "Colors", description: "Complete palette", color: "text-purple-400" },
+        { icon: "tokens", before: "0", value: "40+", label: "Design Tokens", description: "Consistent styling", color: "text-blue-400" },
+        { icon: "shadows", before: "0", value: "3", label: "Shadow Levels", description: "Depth hierarchy", color: "text-amber-400" },
+        { icon: "scoped", before: "0%", value: "100%", label: "Scoped CSS", description: "Zero conflicts", color: "text-emerald-400" }
+      ],
+      highlights: [
+        { title: "Color System", description: "22 color tokens: primary, secondary, accent, backgrounds, text, and status colors" },
+        { title: "Spacing Scale", description: "5 spacing tokens (xs to xl) for consistent margins and padding" },
+        { title: "Shadow Hierarchy", description: "3 shadow levels (sm, md, lg) for visual depth without harshness" },
+        { title: "Scoped Styles", description: "All CSS scoped under .ahd-selectietool-modern - zero conflicts with existing styles" }
       ]
     }
   },
@@ -199,44 +241,39 @@ function restoreFilterState() {
     techStack: "Technologie Stack",
     results: "Resultaten",
     resultsPoints: [
-      "Gebruikers kunnen nu 1,2M+ Belgische bedrijven filteren op geografische regio met één klik",
-      "43 arrondissementen, 10 provincies en 1.000+ postcodes beschikbaar voor selectie",
-      "Geen wijzigingen nodig aan bestaande API endpoints - volledige backward compatibility",
-      "Naadloze integratie met legacy Angular 1.x codebase",
-      "Maandelijkse data-updates blijven werken zonder aanpassingen"
+      "Geografisch zoeken: filter 1,2M+ bedrijven over 43 arrondissementen, 10 provincies en 1.000+ postcodes",
+      "Thematisch zoeken: 400+ zoektermen om bedrijven te vinden op industrie zonder NACE-codes te kennen",
+      "Code gerefactored van 0 naar 33 georganiseerde modules met 0 TODOs",
+      "Design system: 352 → 5.848 regels CSS met 40+ design tokens en 100% gescoped",
+      "Volledige backward compatibility - geen wijzigingen aan bestaande API endpoints"
     ],
     thematicSearch: {
       title: "Thematisch Zoeken",
       subtitle: "Zoek op branche-thema in plaats van NACE-codes",
-      description: "Gebruikers hoeven geen exacte NACE-codes meer te kennen. Typ simpelweg 'horeca', 'bakker' of 'advocaat' en het systeem mapt deze termen automatisch naar de juiste NACE-codes. Ondersteunt 200+ zoektermen in zowel Nederlands als Frans, inclusief enkelvoud en meervoud.",
+      description: "Gebruikers hoeven geen exacte NACE-codes meer te kennen. Typ simpelweg 'horeca', 'bakker' of 'advocaat' en het systeem mapt deze termen automatisch naar de juiste NACE-codes. Ondersteunt 400+ zoektermen in zowel Nederlands als Frans, inclusief enkelvoud en meervoud.",
       examples: ["horeca → I, 55, 56", "bakker → 10.71, 47.24", "advocaat → 69.10"]
     },
-    keyFeatures: "Belangrijkste Features",
-    features: [
-      { icon: MapPin, title: "Geografisch Zoeken", description: "Vind bedrijven binnen elke Belgische provincie, arrondissement of postcodegebied" },
-      { icon: Database, title: "Data Compatibiliteit", description: "Werkt met bestaande data exports en API structuur" },
-      { icon: Code2, title: "Legacy Integratie", description: "Gebouwd om te werken met Angular 1.x en vanilla JavaScript" },
-      { icon: Layers, title: "Multi-level Selectie", description: "Combineer selecties over provincies, arrondissementen en postcodes" }
-    ],
     stats: [
-      { value: "200+", label: "Thematisch Zoeken", subtext: "Nieuwe Feature" },
-      { value: "54", label: "Geografisch Zoeken", subtext: "Nieuwe Feature" },
-      { value: "100%", label: "Backward Compatible" },
-      { value: "Volledig", label: "UI/UX Redesign" }
+      { value: "400+", label: "Zoektermen", subtext: "Thematisch Zoeken", before: "0" },
+      { value: "1.053", label: "Regio's", subtext: "Geografisch Zoeken", before: "0" },
+      { value: "33", label: "Modules", subtext: "Code Architectuur", before: "0" },
+      { value: "0", label: "TODOs", subtext: "Production Ready", before: "9" },
+      { value: "40+", label: "Design Tokens", subtext: "Design System", before: "17" },
+      { value: "100%", label: "Scoped CSS", subtext: "Geen Conflicten", before: "0%" }
     ],
     codeRefactor: {
       title: "Code Refactoring",
       subtitle: "Van spaghetti naar gestructureerd: een complete architectuur-overhaul",
       metrics: [
-        { value: "4.726", label: "Regels Legacy", color: "text-red-400" },
-        { value: "5.678", label: "Regels Nieuw", color: "text-emerald-400" },
-        { value: "~20%", label: "Meer Features", color: "text-blue-400" },
-        { value: "100%", label: "Herstructureerd", color: "text-purple-400" }
+        { label: "Controller", before: "4.726", after: "5.678", reason: "Ongeveer zelfde grootte, nu in 33 modules" },
+        { label: "CSS / LESS", before: "352", after: "5.848", reason: "Volledig design system met 40+ tokens" },
+        { label: "HTML", before: "1.055", after: "2.323", reason: "Semantische structuur & toegankelijkheid" }
       ],
       comparisons: [
         {
           title: "Error Handling",
           problem: "Haiku gedichten als error messages",
+          solution: "Try/catch met duidelijke logging",
           legacy: `const explanations = {
   noField: \`
     expectation void
@@ -266,6 +303,7 @@ function restoreFilterState() {
         {
           title: "Code Structuur",
           problem: "Geen secties, mixed concerns, jQuery in Angular",
+          solution: "Duidelijke secties met config objecten",
           legacy: `Object.assign(window, {
   vars, vm: this,
   $http, $params, $webhooks, $scope, $filter,
@@ -301,6 +339,7 @@ var LOOKUP_IDS = {
         {
           title: "Initialisatie Flow",
           problem: "Geneste setTimeout callbacks met magic delays",
+          solution: "Schone promise chain met named functions",
           legacy: `Promise.allSettled(FilterField.lookupRequestList)
 .then((values) => {
   setTimeout( () => {
@@ -326,7 +365,51 @@ function restoreFilterState() {
   var state = JSON.parse(stored);
   // Clean restore logic
 }`
+        },
+        {
+          title: "CSS Design System",
+          problem: "Hardcoded waarden, geen scoping, Bootstrap overrides",
+          solution: "40+ design tokens, volledig gescoped",
+          legacy: `#pills-tab:before {
+  border-left: 1px solid var(--bs-secondary);
+  border-top-right-radius: 0.375rem;
+}
+
+ul.fancytree-container ul {
+  padding: 0 !important;
+  padding-left: 1em !important;
+}`,
+          fixed: `// Design Tokens
+@ahd-primary:       #2563eb;
+@ahd-border-radius: 10px;
+@ahd-shadow-md:     0 4px 6px rgba(0,0,0,0.05);
+
+// Alle styles gescoped
+.ahd-selectietool-modern {
+  background: @ahd-bg-main;
+  border-radius: @ahd-border-radius;
+  box-shadow: @ahd-shadow-md;
+}`
         }
+      ]
+    },
+    uiRedesign: {
+      title: "UI/UX Redesign",
+      subtitle: "Van minimale Bootstrap naar een compleet custom design system",
+      beforeLabel: "Voor",
+      afterLabel: "Na",
+      dragHint: "Sleep om te vergelijken",
+      metrics: [
+        { icon: "palette", before: "0", value: "22", label: "Kleuren", description: "Complete palette", color: "text-purple-400" },
+        { icon: "tokens", before: "0", value: "40+", label: "Design Tokens", description: "Consistente styling", color: "text-blue-400" },
+        { icon: "shadows", before: "0", value: "3", label: "Shadow Levels", description: "Diepte hiërarchie", color: "text-amber-400" },
+        { icon: "scoped", before: "0%", value: "100%", label: "Scoped CSS", description: "Zero conflicten", color: "text-emerald-400" }
+      ],
+      highlights: [
+        { title: "Kleuren Systeem", description: "22 kleur tokens: primary, secondary, accent, achtergronden, tekst en status kleuren" },
+        { title: "Spacing Schaal", description: "5 spacing tokens (xs tot xl) voor consistente margins en padding" },
+        { title: "Shadow Hiërarchie", description: "3 shadow levels (sm, md, lg) voor visuele diepte zonder hardheid" },
+        { title: "Gescoped Styles", description: "Alle CSS gescoped onder .ahd-selectietool-modern - zero conflicten met bestaande styles" }
       ]
     }
   }
@@ -399,7 +482,7 @@ export default function AdHocSelectietoolPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="rounded-2xl overflow-hidden border border-white/10 aspect-video"
+            className="rounded-2xl overflow-hidden border border-white/10 aspect-[4/3] md:aspect-video"
           >
             <BelgiumMapPreview />
           </motion.div>
@@ -409,7 +492,7 @@ export default function AdHocSelectietoolPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8"
           >
             {t.stats.map((stat, index) => (
               <div
@@ -419,7 +502,12 @@ export default function AdHocSelectietoolPage() {
                 {'subtext' in stat && (
                   <div className="text-[9px] text-emerald-400 font-semibold uppercase tracking-wider mb-1">{stat.subtext}</div>
                 )}
-                <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  {'before' in stat && (
+                    <span className="text-lg md:text-xl font-bold text-red-400/70 line-through">{stat.before}</span>
+                  )}
+                  <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
+                </div>
                 <div className="text-xs text-zinc-400">{stat.label}</div>
               </div>
             ))}
@@ -532,8 +620,76 @@ export default function AdHocSelectietoolPage() {
         </div>
       </section>
 
+      {/* UI/UX Redesign */}
+      {t.uiRedesign && (
+        <section className="py-16 px-6">
+          <div className="container mx-auto max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-2xl font-semibold mb-2">{t.uiRedesign.title}</h2>
+              <p className="text-zinc-400 mb-8">{t.uiRedesign.subtitle}</p>
+
+              {/* Before/After Comparison Slider */}
+              <div className="mb-10">
+                <ImageCompareSlider
+                  beforeImage="/projects/adhoc/Before.jpg"
+                  afterImage="/projects/adhoc/After.jpg"
+                  beforeLabel={t.uiRedesign.beforeLabel}
+                  afterLabel={t.uiRedesign.afterLabel}
+                  beforeAlt="Legacy Bootstrap UI"
+                  afterAlt="Modern custom design system"
+                  dragHint={t.uiRedesign.dragHint}
+                />
+              </div>
+
+              {/* Maintainability Metrics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                {t.uiRedesign.metrics.map((metric, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="p-4 bg-black/50 border border-white/10 rounded-xl text-center"
+                  >
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <span className="text-lg font-bold text-red-400/70 line-through">{metric.before}</span>
+                      <span className={`text-2xl font-bold ${metric.color}`}>{metric.value}</span>
+                    </div>
+                    <div className="text-xs text-zinc-400 mb-1">{metric.label}</div>
+                    <div className="text-[10px] text-zinc-500">{metric.description}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Design Highlights */}
+              <div className="grid md:grid-cols-2 gap-4">
+                {t.uiRedesign.highlights.map((highlight, index) => (
+                  <motion.div
+                    key={highlight.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="p-4 bg-white/5 border border-white/10 rounded-xl"
+                  >
+                    <h3 className="text-sm font-semibold text-white mb-1">{highlight.title}</h3>
+                    <p className="text-xs text-zinc-400">{highlight.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Code Refactoring */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6 bg-white/5">
         <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -544,12 +700,18 @@ export default function AdHocSelectietoolPage() {
             <h2 className="text-2xl font-semibold mb-2">{t.codeRefactor.title}</h2>
             <p className="text-zinc-400 mb-8">{t.codeRefactor.subtitle}</p>
 
-            {/* Metrics */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            {/* Metrics - Before/After per file */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
               {t.codeRefactor.metrics.map((metric, index) => (
                 <div key={index} className="p-4 bg-black/50 border border-white/10 rounded-xl text-center">
-                  <div className={`text-2xl font-bold mb-1 ${metric.color}`}>{metric.value}</div>
-                  <div className="text-xs text-zinc-500">{metric.label}</div>
+                  <div className="text-xs text-zinc-500 mb-2">{metric.label}</div>
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="text-lg font-bold text-red-400/70 line-through">{metric.before}</span>
+                    <span className="text-zinc-500">→</span>
+                    <span className="text-xl font-bold text-emerald-400">{metric.after}</span>
+                  </div>
+                  <div className="text-[10px] text-zinc-600">lines</div>
+                  <div className="text-[10px] text-emerald-400/80 mt-2">✓ {metric.reason}</div>
                 </div>
               ))}
             </div>
@@ -567,7 +729,10 @@ export default function AdHocSelectietoolPage() {
                 >
                   <div className="p-4 bg-white/5 border-b border-white/10">
                     <h3 className="font-semibold text-white">{comparison.title}</h3>
-                    <p className="text-sm text-red-400 mt-1">⚠️ {comparison.problem}</p>
+                    <div className="grid md:grid-cols-2 gap-2 md:gap-4 mt-2">
+                      <p className="text-sm text-red-400">⚠️ {comparison.problem}</p>
+                      <p className="text-sm text-emerald-400">✓ {comparison.solution}</p>
+                    </div>
                   </div>
                   <div className="grid md:grid-cols-2">
                     {/* Legacy Code */}
@@ -596,35 +761,6 @@ export default function AdHocSelectietoolPage() {
         </div>
       </section>
 
-      {/* Key Features */}
-      <section className="py-16 px-6 bg-white/5">
-        <div className="container mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-2xl font-semibold mb-8">{t.keyFeatures}</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {t.features.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="p-6 bg-black/50 border border-white/10 rounded-xl"
-                >
-                  <feature.icon className="w-8 h-8 text-blue-400 mb-4" />
-                  <h3 className="text-lg font-medium mb-2">{feature.title}</h3>
-                  <p className="text-zinc-400 text-sm">{feature.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Results */}
       <section className="py-16 px-6">

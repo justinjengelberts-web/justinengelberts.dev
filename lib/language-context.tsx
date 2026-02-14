@@ -24,14 +24,13 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children, initialLanguage = "en" }: LanguageProviderProps) {
   const [language, setLanguageState] = useState<Language>(initialLanguage);
 
-  // On first visit (no cookie), detect browser language and set cookie
+  // On first visit (no cookie), persist the server-detected language to cookie
   useEffect(() => {
     const cookieMatch = document.cookie.match(/language=(en|nl)/);
-    if (!cookieMatch && navigator.language.startsWith("nl")) {
-      setLanguageState("nl");
-      setLanguageCookie("nl");
+    if (!cookieMatch) {
+      setLanguageCookie(initialLanguage);
     }
-  }, []);
+  }, [initialLanguage]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
