@@ -163,8 +163,8 @@ export function ImageCompareSlider({
         {afterLabel}
       </div>
 
-      {/* Hint Text */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full text-white/60 text-xs pointer-events-none">
+      {/* Hint Text - z-0 to stay behind slider */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full text-white/60 text-xs pointer-events-none z-0">
         {dragHint}
       </div>
     </motion.div>
