@@ -47,6 +47,12 @@ Screenshot/
 .claude/
 .playwright-mcp/
 
+# strategy (private)
+.strategy/
+
+# mock invoices for demos
+.mock-invoices/
+
 # reference projects and implementation docs
 Implementation/
 invoice-bloom-ai/

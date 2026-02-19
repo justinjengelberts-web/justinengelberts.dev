@@ -14,26 +14,26 @@ const content = {
     title: "Ad Hoc Data Selectietool",
     subtitle: "Geographic Search Enhancement for Legacy B2B Data Platform",
     overview: "Overview",
-    overviewText: "Ad Hoc Data is a leading B2B data provider in the Netherlands and Belgium, established since 2005. With over 1.2 million Belgian companies in their database and a Trustpilot score of 4.7/5, they provide businesses with comprehensive company data for marketing and sales. Their selection tool allows users to filter and export company data based on industry, location, company type, and employee count. I was tasked with adding geographic search capabilities to their existing platform.",
+    overviewText: "Complete UI/UX redesign and refactor of a B2B selection tool for 1.2M+ Belgian companies. The original spaghetti code was hard to maintain - now split into 33 modules. During the project, I discovered that the existing dataset and API endpoints also enabled geographic and thematic search - two features I added as extras.",
     challenge: "The Challenge",
-    challengeText: "The existing codebase was built with legacy technologies (Angular 1.x, LESS, vanilla JavaScript) and had strict API compatibility requirements. Any new features needed to integrate seamlessly without breaking existing functionality or requiring changes to the backend API structure.",
+    challengeText: "Modernizing a legacy stack (Angular 1.x, LESS, vanilla JS) with unstructured code into a maintainable system, without changing existing functionality or API structure.",
     solution: "The Solution",
     solutionPoints: [
       {
-        title: "GeoJSON Polygon Integration",
-        description: "Implemented geographic boundaries for all Belgian provinces, arrondissements, and postal code areas using GeoJSON polygons. This enables precise geographic filtering of company data."
+        title: "Code Refactor",
+        description: "Spaghetti code split into 33 organized modules with clear sections and config objects."
       },
       {
-        title: "Coordinate Extraction from Exports",
-        description: "Analyzed the existing data export structure to extract company coordinates, enabling geographic point-in-polygon calculations without backend modifications."
+        title: "Design System",
+        description: "From 352 to 5,848 lines of CSS with 40+ design tokens, fully scoped to avoid conflicts."
       },
       {
-        title: "Legacy-Compatible Architecture",
-        description: "Built the feature using vanilla JavaScript and Angular 1.x patterns to ensure seamless integration with the existing codebase. All API payloads remain unchanged."
+        title: "Geo Search",
+        description: "GeoJSON polygons for 1,053 Belgian regions with an interactive Leaflet map interface for visual multi-selection - discovered from existing coordinates in exports."
       },
       {
-        title: "Interactive Map Interface",
-        description: "Created an intuitive map interface allowing users to select regions visually, with support for multi-selection across different geographic levels."
+        title: "Thematic Search",
+        description: "400+ search terms that automatically map to NACE codes - built on existing API endpoints."
       }
     ],
     techStack: "Technology Stack",
@@ -216,26 +216,26 @@ ul.fancytree-container ul {
     title: "Ad Hoc Data Selectietool",
     subtitle: "Geografische Zoekfunctie voor Legacy B2B Data Platform",
     overview: "Overzicht",
-    overviewText: "Ad Hoc Data is een toonaangevende B2B dataleverancier in Nederland en België, opgericht in 2005. Met meer dan 1,2 miljoen Belgische bedrijven in hun database en een Trustpilot-score van 4,7/5, bieden zij bedrijven uitgebreide bedrijfsdata voor marketing en sales. Hun selectietool stelt gebruikers in staat om bedrijfsdata te filteren en exporteren op basis van branche, locatie, bedrijfstype en aantal medewerkers. Ik kreeg de opdracht om geografische zoekmogelijkheden toe te voegen aan hun bestaande platform.",
+    overviewText: "Complete UI/UX redesign en refactor van een B2B selectietool voor 1,2M+ Belgische bedrijven. De originele spaghetti-code was lastig te onderhouden - nu opgesplitst in 33 modules. Tijdens het project ontdekte ik dat de bestaande dataset en API endpoints ook geografisch en thematisch zoeken mogelijk maakten - twee features die ik als extra heb toegevoegd.",
     challenge: "De Uitdaging",
-    challengeText: "De bestaande codebase was gebouwd met legacy technologieën (Angular 1.x, LESS, vanilla JavaScript) en had strikte API-compatibiliteitseisen. Nieuwe features moesten naadloos integreren zonder bestaande functionaliteit te breken of wijzigingen aan de backend API-structuur te vereisen.",
+    challengeText: "Legacy stack (Angular 1.x, LESS, vanilla JS) met ongestructureerde code moderniseren naar een onderhoudbaar systeem, zonder de bestaande functionaliteit of API-structuur te wijzigen.",
     solution: "De Oplossing",
     solutionPoints: [
       {
-        title: "GeoJSON Polygon Integratie",
-        description: "Geografische grenzen geïmplementeerd voor alle Belgische provincies, arrondissementen en postcodegebieden met GeoJSON polygons. Dit maakt precieze geografische filtering van bedrijfsdata mogelijk."
+        title: "Code Refactor",
+        description: "Spaghetti-code opgesplitst in 33 georganiseerde modules met duidelijke secties en config objecten."
       },
       {
-        title: "Coördinaten Extractie uit Exports",
-        description: "De bestaande data export structuur geanalyseerd om bedrijfscoördinaten te extraheren, waardoor geografische point-in-polygon berekeningen mogelijk zijn zonder backend wijzigingen."
+        title: "Design System",
+        description: "Van 352 naar 5.848 regels CSS met 40+ design tokens, volledig gescoped om conflicten te vermijden."
       },
       {
-        title: "Legacy-Compatibele Architectuur",
-        description: "De feature gebouwd met vanilla JavaScript en Angular 1.x patronen voor naadloze integratie met de bestaande codebase. Alle API payloads blijven ongewijzigd."
+        title: "Geo Zoeken",
+        description: "GeoJSON polygons voor 1.053 Belgische regio's met een interactieve Leaflet kaartinterface voor visuele multi-selectie - ontdekt vanuit bestaande coördinaten in exports."
       },
       {
-        title: "Interactieve Kaart Interface",
-        description: "Een intuïtieve kaartinterface gemaakt waarmee gebruikers visueel regio's kunnen selecteren, met ondersteuning voor multi-selectie over verschillende geografische niveaus."
+        title: "Thematisch Zoeken",
+        description: "400+ zoektermen die automatisch mappen naar NACE-codes - gebouwd op bestaande API endpoints."
       }
     ],
     techStack: "Technologie Stack",

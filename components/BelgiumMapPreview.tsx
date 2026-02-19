@@ -75,7 +75,7 @@ export function BelgiumMapPreview() {
           <svg className="w-2.5 h-2.5 md:w-3 md:h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <span className="text-[10px] md:text-xs font-semibold">Geografisch Zoeken</span>
+          <span className="text-[10px] md:text-xs font-semibold">Geo Zoeken</span>
         </div>
 
         {/* Stats badges - left side */}
