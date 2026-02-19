@@ -321,6 +321,7 @@ export default function BelgiumMapLeaflet({
       {belgiumFill && (
         <GeoJSON
           data={belgiumFill}
+          interactive={false}
           style={{
             fillColor: "#0ea5e9",
             fillOpacity: 0.08,
@@ -333,6 +334,7 @@ export default function BelgiumMapLeaflet({
       {belgiumOutline && (
         <GeoJSON
           data={belgiumOutline}
+          interactive={false}
           style={{
             fill: false,
             color: "#0ea5e9",
