@@ -54,6 +54,13 @@ export const translations = {
           techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
+          slug: "crewvee-crm",
+          title: "CrewVee CRM",
+          description:
+            "Full-stack B2B CRM with agentic AI built for internal sales operations. Autonomous AI sales agents (multi-LLM: Claude, GPT-4o, Gemini) handle lead qualification 24/7, backed by RAG-powered knowledge bases and real-time conversation intelligence. Integrates with HubSpot, Pipedrive, and Salesforce via OAuth. Deployed on Supabase Edge Functions for near-zero latency.",
+          techStack: ["React", "TypeScript", "Supabase", "Claude AI", "OpenAI", "Edge Functions", "React Query"],
+        },
+        {
           slug: "adhoc-selectietool",
           title: "Ad Hoc Data Leadlist Selector",
           description:
@@ -71,6 +78,9 @@ export const translations = {
       terminalTitle: "Terminal-First Workflow",
       terminalDescription:
         "Claude Code integrated directly into my development environment for seamless AI assistance.",
+      agentsTitle: "AI Agents & Automation",
+      agentsDescription:
+        "AI agents and pg_cron jobs handle the repetitive work automatically — from lead qualification in CrewVee CRM to nightly data pipelines running in the background.",
       rapidTitle: "Rapid Iteration",
       rapidDescription:
         "From concept to production-ready code in hours, not days. Complex features shipped faster.",
@@ -139,6 +149,13 @@ export const translations = {
           techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
+          slug: "crewvee-crm",
+          title: "CrewVee CRM",
+          description:
+            "Full-stack B2B CRM met agentic AI voor interne salesoperaties. Autonome AI-salesagenten (multi-LLM: Claude, GPT-4o, Gemini) kwalificeren leads 24/7, ondersteund door RAG-powered kennisbanken en real-time conversatie-intelligentie. Integreert met HubSpot, Pipedrive en Salesforce via OAuth. Gebouwd op Supabase Edge Functions.",
+          techStack: ["React", "TypeScript", "Supabase", "Claude AI", "OpenAI", "Edge Functions", "React Query"],
+        },
+        {
           slug: "adhoc-selectietool",
           title: "Ad Hoc Data Leadlist Selector",
           description:
@@ -156,6 +173,9 @@ export const translations = {
       terminalTitle: "Terminal-First Workflow",
       terminalDescription:
         "Claude Code direct geïntegreerd in mijn ontwikkelomgeving voor naadloze AI-assistentie.",
+      agentsTitle: "AI Agents & Automatisering",
+      agentsDescription:
+        "AI agents en pg_cron jobs nemen het repetitieve werk over — van leadkwalificatie in CrewVee CRM tot nachtelijke data pipelines die automatisch op de achtergrond draaien.",
       rapidTitle: "Snelle Iteratie",
       rapidDescription:
         "Van concept naar productie-klare code in uren, niet dagen. Complexe features sneller geleverd.",
@@ -212,6 +232,8 @@ export interface Translations {
     description: string;
     terminalTitle: string;
     terminalDescription: string;
+    agentsTitle: string;
+    agentsDescription: string;
     rapidTitle: string;
     rapidDescription: string;
   };

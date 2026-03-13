@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal, Sparkles, Zap } from "lucide-react";
+import { Bot, Sparkles, Terminal, Zap } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 
 const codeSnippet = `// Secure AI invoice processing pipeline
@@ -81,6 +81,20 @@ export function AIWorkflow() {
                   </h3>
                   <p className="text-zinc-400 text-sm">
                     {t.workflow.terminalDescription}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="p-2 bg-white/5 rounded-lg">
+                  <Bot className="w-5 h-5 text-zinc-300" />
+                </div>
+                <div>
+                  <h3 className="text-white font-medium mb-1">
+                    {t.workflow.agentsTitle}
+                  </h3>
+                  <p className="text-zinc-400 text-sm">
+                    {t.workflow.agentsDescription}
                   </p>
                 </div>
               </div>
