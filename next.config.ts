@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         source: '/demo/:slug*',
         destination: 'https://crm.crewvee.com/demo/:slug*',
       },
+      {
+        source: '/assets/:path*',
+        destination: 'https://crm.crewvee.com/assets/:path*',
+      },
     ]
   },
 };
