@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["framer-motion", "lucide-react"],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/demo/:slug*',
+        destination: 'https://crm.crewvee.com/demo/:slug*',
+      },
+    ]
+  },
 };
 
 export default nextConfig;
