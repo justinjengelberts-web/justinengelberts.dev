@@ -73,6 +73,7 @@ export default async function RootLayout({
           src="https://tryjxzfkufcybljpnlsz.supabase.co/storage/v1/object/public/widget/agent-widget.js"
           data-widget-id="5bb625fd959542b387da06b4ab4b1a74"
           data-theme="dark"
+          data-auto-open="15"
           data-api-url="https://tryjxzfkufcybljpnlsz.supabase.co"
           data-api-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRyeWp4emZrdWZjeWJsanBubHN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2NTM2OTksImV4cCI6MjA4ODIyOTY5OX0.fqkuyU0sjsUaQXam-oPk514kBhC0ZNT0lkZ9Be68fzo"
           defer
