@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
-import { ShaderBackground } from "@/components/ShaderBackground";
+import { CometBackground } from "@/components/CometBackground";
 import { useLanguage } from "@/lib/language-context";
 
 function useIsMobile() {
@@ -36,7 +36,7 @@ function Hero() {
 
   return (
     <div className="relative w-full bg-black min-h-screen flex items-center justify-center overflow-hidden">
-      <ShaderBackground />
+      <CometBackground />
       <div className="relative z-10 container mx-auto px-6">
         <div className="flex flex-col items-center gap-8">
           <div className="flex flex-col items-center gap-6">
