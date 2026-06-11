@@ -638,6 +638,8 @@ export default function AdHocSelectietoolPage() {
                 <ImageCompareSlider
                   beforeImage="/projects/adhoc/Before.jpg"
                   afterImage="/projects/adhoc/After.jpg"
+                  width={1769}
+                  height={903}
                   beforeLabel={t.uiRedesign.beforeLabel}
                   afterLabel={t.uiRedesign.afterLabel}
                   beforeAlt="Legacy Bootstrap UI"

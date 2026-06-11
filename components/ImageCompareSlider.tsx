@@ -2,10 +2,14 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface ImageCompareSliderProps {
   beforeImage: string;
   afterImage: string;
+  /** Intrinsic dimensions of the AFTER image — it sets the container height. */
+  width: number;
+  height: number;
   beforeLabel?: string;
   afterLabel?: string;
   beforeAlt?: string;
@@ -16,6 +20,8 @@ interface ImageCompareSliderProps {
 export function ImageCompareSlider({
   beforeImage,
   afterImage,
+  width,
+  height,
   beforeLabel = "Before",
   afterLabel = "After",
   beforeAlt = "Before image",
@@ -86,9 +92,12 @@ export function ImageCompareSlider({
       transition={{ duration: 0.6 }}
     >
       {/* After Image (Background - full width, sets container height) */}
-      <img
+      <Image
         src={afterImage}
         alt={afterAlt}
+        width={width}
+        height={height}
+        sizes="(max-width: 896px) 100vw, 896px"
         className="w-full h-auto block"
         draggable={false}
       />
@@ -98,10 +107,12 @@ export function ImageCompareSlider({
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <img
+        <Image
           src={beforeImage}
           alt={beforeAlt}
-          className="w-full h-full object-contain"
+          fill
+          sizes="(max-width: 896px) 100vw, 896px"
+          className="object-contain"
           draggable={false}
         />
       </div>
