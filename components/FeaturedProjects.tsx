@@ -27,6 +27,9 @@ const ContentToolPreview = dynamic(() =>
 const AdhocWebsitePreview = dynamic(() =>
   import("./AdhocWebsitePreview").then((m) => ({ default: m.AdhocWebsitePreview }))
 );
+const LeadHubPreview = dynamic(() =>
+  import("./LeadHubPreview").then((m) => ({ default: m.LeadHubPreview }))
+);
 
 const previews: Record<string, ComponentType> = {
   refundely: RefundelyPreview,
@@ -35,6 +38,7 @@ const previews: Record<string, ComponentType> = {
   "webmodern-platform": WebModernPreview,
   contenttool: ContentToolPreview,
   "adhoc-website": AdhocWebsitePreview,
+  leadhub: LeadHubPreview,
 };
 
 const techColors: Record<string, string> = {

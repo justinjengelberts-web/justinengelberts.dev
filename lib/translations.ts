@@ -88,6 +88,13 @@ export const translations = {
             "Full rewrite of Ad Hoc Data's marketing site from legacy AngularJS to Angular 21 with server-side rendering: 137 components, 50+ routes, dual-language NL/EN with hreflang, JSON-LD structured data, live search across the SBI-2025 industry taxonomy, and Playwright testing across 10 viewports.",
           techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "MapLibre", "Playwright"],
         },
+        {
+          slug: "leadhub",
+          title: "LeadHub",
+          description:
+            "My personal AI command center: an agent platform running 48+ Supabase Edge Functions with multi-provider AI (Gemini, Claude, Mistral, OpenAI), RAG knowledge bases on pgvector, a HubSpot OAuth2 app, and an analytics cockpit. Its public face is the Justin AI chat widget — running live on this site right now.",
+          techStack: ["React", "TypeScript", "Supabase", "Edge Functions", "pgvector", "Stripe", "HubSpot"],
+        },
       ],
     },
     // AI Workflow
@@ -203,6 +210,13 @@ export const translations = {
           description:
             "Volledige rewrite van de marketingsite van Ad Hoc Data van legacy AngularJS naar Angular 21 met server-side rendering: 137 componenten, 50+ routes, tweetalig NL/EN met hreflang, JSON-LD structured data, live search door de SBI-2025 bedrijfstakkenstructuur en Playwright-tests op 10 viewports.",
           techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "MapLibre", "Playwright"],
+        },
+        {
+          slug: "leadhub",
+          title: "LeadHub",
+          description:
+            "Mijn persoonlijke AI command center: een agent-platform met 48+ Supabase Edge Functions, multi-provider AI (Gemini, Claude, Mistral, OpenAI), RAG-kennisbanken op pgvector, een HubSpot OAuth2-app en een analytics-cockpit. Het publieke gezicht is de Justin AI chatwidget — die nu live op deze site draait.",
+          techStack: ["React", "TypeScript", "Supabase", "Edge Functions", "pgvector", "Stripe", "HubSpot"],
         },
       ],
     },
