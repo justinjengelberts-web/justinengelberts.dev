@@ -74,6 +74,13 @@ export const translations = {
             "Multi-tenant CMS that lets non-technical business owners edit their custom websites. Built on a security-hardened AWS media pipeline: a fully private S3 bucket behind CloudFront Origin Access Control, presigned browser uploads, and least-privilege IAM — all defined as code with AWS CDK. A published npm SDK keeps every forked client site compatible.",
           techStack: ["Next.js", "TypeScript", "AWS CDK", "S3", "CloudFront", "Supabase", "Drizzle"],
         },
+        {
+          slug: "contenttool",
+          title: "ContentTool",
+          description:
+            "Agentic AI content engine built for Ad Hoc Data's marketing: a daily GitHub Actions pipeline scrapes industry sources, scores inspiration with Gemini, matches it against CBS open-data statistics, and drafts a full content calendar — three social posts a week, a weekly blog, and a monthly newsletter.",
+          techStack: ["Python", "FastAPI", "SvelteKit", "TypeScript", "Gemini", "GitHub Actions"],
+        },
       ],
     },
     // AI Workflow
@@ -175,6 +182,13 @@ export const translations = {
           description:
             "Multi-tenant CMS waarmee niet-technische ondernemers hun op maat gemaakte website zelf bewerken. Gebouwd op een security-hardened AWS media pipeline: een volledig private S3-bucket achter CloudFront Origin Access Control, presigned browser-uploads en least-privilege IAM — volledig als code gedefinieerd met AWS CDK. Een gepubliceerde npm SDK houdt elke geforkte klantsite compatibel.",
           techStack: ["Next.js", "TypeScript", "AWS CDK", "S3", "CloudFront", "Supabase", "Drizzle"],
+        },
+        {
+          slug: "contenttool",
+          title: "ContentTool",
+          description:
+            "Agentic AI content engine gebouwd voor de marketing van Ad Hoc Data: een dagelijkse GitHub Actions pipeline scrapet industriebronnen, scoort inspiratie met Gemini, matcht met CBS open data, en vult een complete contentkalender — drie social posts per week, een wekelijkse blog en een maandelijkse nieuwsbrief.",
+          techStack: ["Python", "FastAPI", "SvelteKit", "TypeScript", "Gemini", "GitHub Actions"],
         },
       ],
     },

@@ -21,12 +21,16 @@ const BelgiumMapPreview = dynamic(() =>
 const WebModernPreview = dynamic(() =>
   import("./WebModernPreview").then((m) => ({ default: m.WebModernPreview }))
 );
+const ContentToolPreview = dynamic(() =>
+  import("./ContentToolPreview").then((m) => ({ default: m.ContentToolPreview }))
+);
 
 const previews: Record<string, ComponentType> = {
   refundely: RefundelyPreview,
   "crewvee-crm": CrewVeeCRMPreview,
   "adhoc-selectietool": BelgiumMapPreview,
   "webmodern-platform": WebModernPreview,
+  contenttool: ContentToolPreview,
 };
 
 const techColors: Record<string, string> = {
