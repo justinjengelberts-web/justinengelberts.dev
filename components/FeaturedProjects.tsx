@@ -4,10 +4,30 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink, Lock, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useState, useCallback, useEffect } from "react";
+import dynamic from "next/dynamic";
+import type { ComponentType } from "react";
 import { useLanguage } from "@/lib/language-context";
-import { BelgiumMapPreview } from "./BelgiumMapPreview";
-import { RefundelyPreview } from "./RefundelyPreview";
-import { CrewVeeCRMPreview } from "./CrewVeeCRMPreview";
+import { LazyMount } from "./LazyMount";
+
+const RefundelyPreview = dynamic(() =>
+  import("./RefundelyPreview").then((m) => ({ default: m.RefundelyPreview }))
+);
+const CrewVeeCRMPreview = dynamic(() =>
+  import("./CrewVeeCRMPreview").then((m) => ({ default: m.CrewVeeCRMPreview }))
+);
+const BelgiumMapPreview = dynamic(() =>
+  import("./BelgiumMapPreview").then((m) => ({ default: m.BelgiumMapPreview }))
+);
+const WebModernPreview = dynamic(() =>
+  import("./WebModernPreview").then((m) => ({ default: m.WebModernPreview }))
+);
+
+const previews: Record<string, ComponentType> = {
+  refundely: RefundelyPreview,
+  "crewvee-crm": CrewVeeCRMPreview,
+  "adhoc-selectietool": BelgiumMapPreview,
+  "webmodern-platform": WebModernPreview,
+};
 
 const techColors: Record<string, string> = {
   "React": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
@@ -29,16 +49,35 @@ const techColors: Record<string, string> = {
   "HTML": "bg-orange-500/20 text-orange-300 border-orange-500/30",
   "LESS": "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
   "AES-256-GCM": "bg-rose-500/20 text-rose-300 border-rose-500/30",
+  "Next.js": "bg-white/15 text-zinc-200 border-white/20",
+  "AWS CDK": "bg-orange-500/20 text-orange-300 border-orange-500/30",
+  "S3": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+  "CloudFront": "bg-violet-500/20 text-violet-300 border-violet-500/30",
+  "Drizzle": "bg-lime-500/20 text-lime-300 border-lime-500/30",
+  "Python": "bg-sky-600/20 text-sky-300 border-sky-600/30",
+  "FastAPI": "bg-teal-500/20 text-teal-300 border-teal-500/30",
+  "SvelteKit": "bg-orange-600/20 text-orange-300 border-orange-600/30",
+  "Gemini": "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
+  "GitHub Actions": "bg-blue-400/20 text-blue-300 border-blue-400/30",
+  "Angular 21": "bg-red-500/20 text-red-300 border-red-500/30",
+  "SSR": "bg-zinc-400/20 text-zinc-300 border-zinc-400/30",
+  "Playwright": "bg-green-600/20 text-green-300 border-green-600/30",
+  "pgvector": "bg-emerald-600/20 text-emerald-300 border-emerald-600/30",
+  "Stripe": "bg-purple-600/20 text-purple-300 border-purple-600/30",
+  "HubSpot": "bg-orange-500/20 text-orange-300 border-orange-500/30",
 };
 
 const getColorForTech = (tech: string) =>
   techColors[tech] || "bg-white/10 text-zinc-300 border-white/10";
 
-function getPreview(index: number) {
-  if (index === 0) return <RefundelyPreview />;
-  if (index === 1) return <CrewVeeCRMPreview />;
-  if (index === 2) return <BelgiumMapPreview />;
-  return null;
+function getPreview(slug: string) {
+  const Preview = previews[slug];
+  if (!Preview) return null;
+  return (
+    <LazyMount rootMargin="300px">
+      <Preview />
+    </LazyMount>
+  );
 }
 
 export function FeaturedProjects() {
@@ -170,7 +209,7 @@ export function FeaturedProjects() {
 
                   {/* Preview area */}
                   <div className="aspect-video bg-zinc-900 relative overflow-hidden flex-shrink-0">
-                    {getPreview(index)}
+                    {getPreview(project.slug)}
                     {/* Project number badge */}
                     <div className="absolute bottom-3 right-3 z-10 text-[10px] font-mono font-medium text-white/30 tabular-nums leading-none">
                       {String(index + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(t.projects.items.length).padStart(2, "0")}

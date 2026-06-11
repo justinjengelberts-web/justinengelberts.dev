@@ -67,6 +67,13 @@ export const translations = {
             "Refactored and modernized the selection tool for Ad Hoc Data, a leading B2B data provider in the Netherlands and Belgium with 1.2M+ Belgian companies in their database. Added geographic search using GeoJSON polygons, enabling users to find companies within provinces, arrondissements, or postal code areas.",
           techStack: ["JavaScript", "Angular", "GeoJSON", "Turf.js", "MapLibre", "HTML", "LESS"],
         },
+        {
+          slug: "webmodern-platform",
+          title: "WebModern Platform",
+          description:
+            "Multi-tenant CMS that lets non-technical business owners edit their custom websites. Built on a security-hardened AWS media pipeline: a fully private S3 bucket behind CloudFront Origin Access Control, presigned browser uploads, and least-privilege IAM — all defined as code with AWS CDK. A published npm SDK keeps every forked client site compatible.",
+          techStack: ["Next.js", "TypeScript", "AWS CDK", "S3", "CloudFront", "Supabase", "Drizzle"],
+        },
       ],
     },
     // AI Workflow
@@ -161,6 +168,13 @@ export const translations = {
           description:
             "De selectietool van Ad Hoc Data gerefactored en gemoderniseerd. Ad Hoc Data is een toonaangevende B2B dataleverancier in Nederland en België met 1,2M+ Belgische bedrijven in hun database. Geografisch zoeken toegevoegd met GeoJSON polygons voor het vinden van bedrijven binnen provincies, arrondissementen of postcodegebieden.",
           techStack: ["JavaScript", "Angular", "GeoJSON", "Turf.js", "MapLibre", "HTML", "LESS"],
+        },
+        {
+          slug: "webmodern-platform",
+          title: "WebModern Platform",
+          description:
+            "Multi-tenant CMS waarmee niet-technische ondernemers hun op maat gemaakte website zelf bewerken. Gebouwd op een security-hardened AWS media pipeline: een volledig private S3-bucket achter CloudFront Origin Access Control, presigned browser-uploads en least-privilege IAM — volledig als code gedefinieerd met AWS CDK. Een gepubliceerde npm SDK houdt elke geforkte klantsite compatibel.",
+          techStack: ["Next.js", "TypeScript", "AWS CDK", "S3", "CloudFront", "Supabase", "Drizzle"],
         },
       ],
     },
