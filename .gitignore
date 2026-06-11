@@ -43,6 +43,7 @@ next-env.d.ts
 # screenshots and temp files
 *.png
 !public/email/*.png
+!public/projects/**/*.png
 Screenshot/
 .claude/
 .playwright-mcp/
