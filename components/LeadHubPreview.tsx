@@ -1,91 +1,110 @@
-const navItems = [
-  { label: "Dashboard", active: false },
-  { label: "AI Agents", active: true },
-  { label: "Leads", active: false },
-  { label: "Email", active: false },
-  { label: "Analytics", active: false },
+// Faithful mini-mockup of the real LeadHub CRM: dark slate sidebar (#1e293b)
+// with blue logo (#2563eb), light gray main area, Dutch labels, agents table.
+const sidebarSections = [
+  {
+    title: "Werk",
+    items: [
+      { label: "Pipeline", active: false },
+      { label: "Agenda", active: false },
+    ],
+  },
+  {
+    title: "Bedrijven",
+    items: [
+      { label: "Dashboard", active: true },
+      { label: "Agents", active: false },
+      { label: "Rapportages", active: false },
+    ],
+  },
+];
+
+const kpis = [
+  { label: "Totaal leads", value: "47" },
+  { label: "Pipeline MRR", value: "€12.450" },
+  { label: "Won MRR", value: "€2.500" },
 ];
 
 const agents = [
-  { name: "Justin AI Widget", model: "claude", status: "live", statusColor: "text-emerald-400 border-emerald-400/40 bg-emerald-400/10" },
-  { name: "Lead Qualifier", model: "gemini", status: "active", statusColor: "text-violet-300 border-violet-400/40 bg-violet-400/10" },
-  { name: "Email Composer", model: "mistral", status: "active", statusColor: "text-violet-300 border-violet-400/40 bg-violet-400/10" },
+  { name: "Justin AI Widget", model: "claude-sonnet-4-6", status: "Actief", tag: "bg-[#dcfce7] text-[#166534]" },
+  { name: "Planner Support", model: "gemini-2.5-flash", status: "Actief", tag: "bg-[#dcfce7] text-[#166534]" },
+  { name: "Inbound Sales", model: "mistral-large-latest", status: "Gepauzeerd", tag: "bg-[#fef3c7] text-[#92400e]" },
 ];
 
 export function LeadHubPreview() {
   return (
-    <div className="absolute inset-0 bg-[#0a0a12] flex select-none">
+    <div className="absolute inset-0 bg-[#f8fafc] flex select-none">
       {/* Sidebar */}
-      <div className="w-24 md:w-28 border-r border-white/5 flex flex-col flex-shrink-0">
-        <div className="px-3 py-2.5 border-b border-white/5">
-          <span className="text-[10px] font-bold text-white">
-            Lead<span className="text-violet-400">Hub</span>
+      <div className="w-[84px] md:w-24 bg-[#1e293b] flex flex-col flex-shrink-0">
+        <div className="flex items-center gap-1 px-2 py-2 border-b border-white/10">
+          <div className="w-3.5 h-3.5 rounded bg-[#2563eb] flex items-center justify-center flex-shrink-0">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+              <path d="M7 8h10M7 12h7M7 16h10" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+              <circle cx="17" cy="12" r="2.5" fill="white" opacity="0.8" />
+            </svg>
+          </div>
+          <span className="text-white text-[7px] font-semibold tracking-tight">LeadHub</span>
+          <span className="text-[4.5px] font-semibold tracking-widest uppercase text-[#93c5fd] bg-white/10 px-0.5 rounded">
+            CRM
           </span>
         </div>
-        <div className="py-2 px-2 space-y-0.5">
-          {navItems.map(({ label, active }) => (
-            <div
-              key={label}
-              className={`px-2 py-1 rounded text-[8px] md:text-[9px] font-medium ${
-                active ? "bg-violet-600/80 text-white" : "text-zinc-500"
-              }`}
-            >
-              {label}
+        <div className="px-1.5 py-1">
+          {sidebarSections.map((section) => (
+            <div key={section.title}>
+              <div className="text-[4.5px] uppercase tracking-wider text-white/30 px-1 pt-1 pb-0.5">
+                {section.title}
+              </div>
+              {section.items.map(({ label, active }) => (
+                <div
+                  key={label}
+                  className={`px-1.5 py-0.5 rounded text-[6px] font-medium ${
+                    active ? "bg-[#2563eb] text-white" : "text-[#94a3b8]"
+                  }`}
+                >
+                  {label}
+                </div>
+              ))}
             </div>
           ))}
-        </div>
-        <div className="mt-auto px-3 py-2 border-t border-white/5">
-          <span className="text-[7px] text-zinc-600 font-mono">48+ edge functions</span>
         </div>
       </div>
 
       {/* Main */}
-      <div className="flex-1 p-3 flex flex-col min-w-0">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-semibold text-white">AI Agents</span>
-          <span className="px-1.5 py-0.5 rounded-full border border-white/10 text-zinc-400 text-[8px]">
-            4 providers
-          </span>
-        </div>
+      <div className="flex-1 p-2.5 min-w-0 flex flex-col">
+        <div className="text-[9px] font-bold text-[#0f172a] tracking-tight">Dashboard</div>
+        <div className="text-[5.5px] text-[#64748b] mb-1.5">Overzicht van je pipeline</div>
 
-        {/* Agent cards */}
-        <div className="space-y-1.5 mb-2">
-          {agents.map((agent) => (
-            <div
-              key={agent.name}
-              className="flex items-center justify-between rounded-lg border border-white/5 bg-white/[0.03] px-2.5 py-1.5"
-            >
-              <div className="min-w-0">
-                <div className="text-[9px] md:text-[10px] font-medium text-zinc-200 truncate">
-                  {agent.name}
-                </div>
-                <div className="text-[7px] md:text-[8px] text-zinc-600 font-mono">
-                  {agent.model}
-                </div>
-              </div>
-              <span
-                className={`px-1.5 py-0.5 rounded-full border text-[7px] md:text-[8px] font-semibold uppercase flex-shrink-0 ${agent.statusColor}`}
-              >
-                {agent.status}
-              </span>
+        {/* KPI cards */}
+        <div className="grid grid-cols-3 gap-1 mb-1.5">
+          {kpis.map((kpi) => (
+            <div key={kpi.label} className="bg-white border border-[#e2e8f0] rounded-lg p-1.5">
+              <div className="text-[8px] font-bold text-[#0f172a]">{kpi.value}</div>
+              <div className="text-[5px] text-[#64748b] truncate">{kpi.label}</div>
             </div>
           ))}
         </div>
 
-        {/* Chat snippet */}
-        <div className="mt-auto rounded-lg border border-white/5 bg-white/[0.02] p-2">
-          <div className="text-[7px] text-zinc-600 mb-1 font-mono">
-            justinengelberts.dev · live conversation
+        {/* Agents table */}
+        <div className="bg-white border border-[#e2e8f0] rounded-lg flex-1 min-h-0 overflow-hidden flex flex-col">
+          <div className="px-2 py-1 border-b border-[#f1f5f9] flex items-center justify-between flex-shrink-0">
+            <span className="text-[7px] font-semibold text-[#0f172a]">Agents</span>
+            <span className="text-[5px] text-[#94a3b8]">12 agents</span>
           </div>
-          <div className="flex justify-end mb-1">
-            <div className="bg-violet-600/70 rounded-lg rounded-br-sm px-2 py-1 text-[8px] text-white max-w-[75%]">
-              What did Justin build with AWS?
-            </div>
-          </div>
-          <div className="flex">
-            <div className="bg-white/[0.06] rounded-lg rounded-bl-sm px-2 py-1 text-[8px] text-zinc-300 max-w-[80%]">
-              He built a private-by-default media pipeline with S3 + CloudFront…
-            </div>
+          <div className="divide-y divide-[#f1f5f9]">
+            {agents.map((agent) => (
+              <div key={agent.name} className="px-2 py-1 flex items-center gap-1.5">
+                <div className="min-w-0 flex-1">
+                  <div className="text-[6px] font-medium text-[#0f172a] truncate">
+                    {agent.name}
+                  </div>
+                  <span className="font-mono text-[5px] text-[#475569] bg-[#f1f5f9] rounded px-0.5">
+                    {agent.model}
+                  </span>
+                </div>
+                <span className={`text-[5px] font-medium rounded-full px-1 py-0.5 flex-shrink-0 ${agent.tag}`}>
+                  {agent.status}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
