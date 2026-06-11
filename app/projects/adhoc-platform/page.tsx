@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Server,
   Layers,
@@ -43,7 +44,7 @@ const content: { en: CaseStudyContent; nl: CaseStudyContent } = {
       {
         title: "Three iterations, one platform",
         description:
-          "Iteration 1: refactored the legacy Angular 1.x selection tool and added geographic search with GeoJSON polygons and Turf.js — finding companies by province, arrondissement, or postal code area on the Belgian database (1.2M companies). Iteration 2: replaced the Bootstrap UI with a custom design system. Iteration 3: full rebuild as Angular 21 SSR with a new, dual-database selection tool.",
+          "Iteration 1: refactored the legacy Angular 1.x selection tool and added geographic search with GeoJSON polygons and Turf.js — finding companies by province, arrondissement, or postal code area on the Belgian database (1.2M companies). Iteration 2: rebuilt the tool around industry-standard lead-gen UX (Apollo-style): sidebar filter navigation, a credits system, and live result counts. Iteration 3: full rebuild as Angular 21 SSR with a new, dual-database selection tool.",
       },
       {
         title: "Dual-database selection tool",
@@ -126,7 +127,7 @@ const content: { en: CaseStudyContent; nl: CaseStudyContent } = {
       {
         title: "Drie iteraties, één platform",
         description:
-          "Iteratie 1: de legacy Angular 1.x selectietool gerefactord en geografisch zoeken toegevoegd met GeoJSON-polygonen en Turf.js — bedrijven vinden per provincie, arrondissement of postcodegebied op de Belgische database (1,2M bedrijven). Iteratie 2: de Bootstrap-UI vervangen door een eigen design system. Iteratie 3: volledige rebuild als Angular 21 SSR met een nieuwe, dual-database selectietool.",
+          "Iteratie 1: de legacy Angular 1.x selectietool gerefactord en geografisch zoeken toegevoegd met GeoJSON-polygonen en Turf.js — bedrijven vinden per provincie, arrondissement of postcodegebied op de Belgische database (1,2M bedrijven). Iteratie 2: de tool herbouwd rond industry-standard lead-gen UX (Apollo-stijl): sidebar-filternavigatie, een credits-systeem en live aantallen. Iteratie 3: volledige rebuild als Angular 21 SSR met een nieuwe, dual-database selectietool.",
       },
       {
         title: "Dual-database selectietool",
@@ -201,20 +202,23 @@ const evolution = {
       },
       {
         number: "2",
-        title: "UI redesign + design system",
+        title: "Apollo-style rebuild",
         description:
-          "Replaced the dated Bootstrap UI with a custom design system. Drag the slider to compare the legacy interface with the redesigned one.",
+          "Rebuilt the tool around industry-standard lead-gen UX, inspired by tools like Apollo: sidebar filter navigation, a credits system, live result counts, and a focus mode. Drag the slider to compare the legacy interface with this iteration.",
       },
       {
         number: "3",
-        title: "Full Angular 21 SSR rebuild",
+        title: "Angular 21: one platform, two databases",
         description:
-          "Complete platform rewrite: server-side rendering, 137 components over 50+ routes, and the new dual-database selection tool with live counts — the version shown at the top of this page.",
+          "Complete platform rewrite as Angular 21 SSR. The selection tool now starts with a database choice — KVK Pro (3.8M Dutch companies from the official register) or AI Leads (3.4M web-indexed companies) — each with its own filter set, live counts, and a dual-export flow.",
       },
     ],
     beforeLabel: "Before",
     afterLabel: "After",
     dragHint: "Drag to compare",
+    v3ChooserCaption: "Step 1 — database choice with live statistics",
+    v3KvkCaption: "KVK Pro: 3.8M companies, live count and pricing",
+    v3AiCaption: "AI Leads: 3.4M companies, same flow, own filter set",
   },
   nl: {
     title: "Van legacy naar platform",
@@ -228,20 +232,23 @@ const evolution = {
       },
       {
         number: "2",
-        title: "UI-redesign + design system",
+        title: "Apollo-stijl rebuild",
         description:
-          "De gedateerde Bootstrap-UI vervangen door een eigen design system. Sleep de slider om de legacy-interface met het redesign te vergelijken.",
+          "De tool herbouwd rond industry-standard lead-gen UX, geïnspireerd op tools als Apollo: sidebar-filternavigatie, een credits-systeem, live aantallen en een focus mode. Sleep de slider om de legacy-interface met deze iteratie te vergelijken.",
       },
       {
         number: "3",
-        title: "Volledige Angular 21 SSR rebuild",
+        title: "Angular 21: één platform, twee databases",
         description:
-          "Complete platform-rewrite: server-side rendering, 137 componenten over 50+ routes, en de nieuwe dual-database selectietool met live aantallen — de versie die bovenaan deze pagina te zien is.",
+          "Complete platform-rewrite als Angular 21 SSR. De selectietool begint nu met een databasekeuze — KVK Pro (3,8M Nederlandse bedrijven uit het Handelsregister) of AI Leads (3,4M web-geïndexeerde bedrijven) — elk met een eigen filterset, live aantallen en een dual-export flow.",
       },
     ],
     beforeLabel: "Voor",
     afterLabel: "Na",
     dragHint: "Sleep om te vergelijken",
+    v3ChooserCaption: "Stap 1 — databasekeuze met live statistieken",
+    v3KvkCaption: "KVK Pro: 3,8M bedrijven, live aantal en prijsberekening",
+    v3AiCaption: "AI Leads: 3,4M bedrijven, zelfde flow, eigen filterset",
   },
 };
 
@@ -313,9 +320,61 @@ function EvolutionSection() {
                       beforeLabel={t.beforeLabel}
                       afterLabel={t.afterLabel}
                       beforeAlt="Legacy Bootstrap UI"
-                      afterAlt="Modern custom design system"
+                      afterAlt="Apollo-style rebuild with sidebar filters and credits"
                       dragHint={t.dragHint}
                     />
+                  </div>
+                ) : null}
+
+                {iteration.number === "3" ? (
+                  <div className="ml-12 space-y-4">
+                    <figure>
+                      <div className="rounded-2xl overflow-hidden border border-white/10">
+                        <Image
+                          src="/projects/adhoc/v3-database-chooser.png"
+                          alt="Database chooser: KVK Pro or AI Leads with live statistics"
+                          width={1920}
+                          height={1080}
+                          sizes="(max-width: 896px) 100vw, 848px"
+                          className="w-full h-auto block"
+                        />
+                      </div>
+                      <figcaption className="text-xs text-zinc-500 mt-2">
+                        {t.v3ChooserCaption}
+                      </figcaption>
+                    </figure>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <figure>
+                        <div className="rounded-2xl overflow-hidden border border-white/10">
+                          <Image
+                            src="/projects/adhoc/v3-kvk-pro.png"
+                            alt="KVK Pro selection tool with live count of 3.8 million companies"
+                            width={1920}
+                            height={1080}
+                            sizes="(max-width: 896px) 100vw, 416px"
+                            className="w-full h-auto block"
+                          />
+                        </div>
+                        <figcaption className="text-xs text-zinc-500 mt-2">
+                          {t.v3KvkCaption}
+                        </figcaption>
+                      </figure>
+                      <figure>
+                        <div className="rounded-2xl overflow-hidden border border-white/10">
+                          <Image
+                            src="/projects/adhoc/v3-ai-leads.png"
+                            alt="AI Leads selection tool with live count of 3.4 million companies"
+                            width={1920}
+                            height={1080}
+                            sizes="(max-width: 896px) 100vw, 416px"
+                            className="w-full h-auto block"
+                          />
+                        </div>
+                        <figcaption className="text-xs text-zinc-500 mt-2">
+                          {t.v3AiCaption}
+                        </figcaption>
+                      </figure>
+                    </div>
                   </div>
                 ) : null}
               </motion.div>
