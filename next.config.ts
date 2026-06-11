@@ -5,6 +5,20 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["framer-motion", "lucide-react"],
   },
+  async redirects() {
+    return [
+      {
+        source: '/projects/adhoc-selectietool',
+        destination: '/projects/adhoc-platform',
+        permanent: true,
+      },
+      {
+        source: '/projects/crewvee-crm',
+        destination: '/projects/leadhub',
+        permanent: true,
+      },
+    ]
+  },
   async rewrites() {
     return [
       {

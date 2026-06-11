@@ -59,18 +59,11 @@ export const translations = {
           techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
-          slug: "crewvee-crm",
-          title: "CrewVee CRM",
+          slug: "adhoc-platform",
+          title: "Ad Hoc Data Platform",
           description:
-            "Full-stack B2B CRM with agentic AI built for internal sales operations. Autonomous AI sales agents (multi-LLM: Claude, GPT-4o, Gemini) handle lead qualification 24/7, backed by RAG-powered knowledge bases and real-time conversation intelligence. Integrates with HubSpot, Pipedrive, and Salesforce via OAuth. Deployed on Supabase Edge Functions for near-zero latency.",
-          techStack: ["React", "TypeScript", "Supabase", "Claude AI", "OpenAI", "Edge Functions", "React Query"],
-        },
-        {
-          slug: "adhoc-selectietool",
-          title: "Ad Hoc Data Leadlist Selector",
-          description:
-            "Refactored and modernized the selection tool for Ad Hoc Data, a leading B2B data provider in the Netherlands and Belgium with 1.2M+ Belgian companies in their database. Added geographic search using GeoJSON polygons, enabling users to find companies within provinces, arrondissements, or postal code areas.",
-          techStack: ["JavaScript", "Angular", "GeoJSON", "Turf.js", "MapLibre", "HTML", "LESS"],
+            "Complete rebuild of Ad Hoc Data's web platform across three refactor iterations: from legacy AngularJS to Angular 21 SSR, including a dual-database selection tool — KVK Pro (3.7M Dutch companies) and AI Leads (3.4M web-indexed companies across four countries) — with live record counts, 3,800+ technology filters, and dual export.",
+          techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "GeoJSON", "Playwright"],
         },
         {
           slug: "webmodern-platform",
@@ -85,13 +78,6 @@ export const translations = {
           description:
             "Agentic AI content engine built for Ad Hoc Data's marketing: a daily GitHub Actions pipeline scrapes industry sources, scores inspiration with Gemini, matches it against CBS open-data statistics, and drafts a full content calendar — three social posts a week, a weekly blog, and a monthly newsletter.",
           techStack: ["Python", "FastAPI", "SvelteKit", "TypeScript", "Gemini", "GitHub Actions"],
-        },
-        {
-          slug: "adhoc-website",
-          title: "Ad Hoc Data Website Rebuild",
-          description:
-            "Full rewrite of Ad Hoc Data's marketing site from legacy AngularJS to Angular 21 with server-side rendering: 137 components, 50+ routes, dual-language NL/EN with hreflang, JSON-LD structured data, live search across the SBI-2025 industry taxonomy, and Playwright testing across 10 viewports.",
-          techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "MapLibre", "Playwright"],
         },
         {
           slug: "leadhub",
@@ -187,18 +173,11 @@ export const translations = {
           techStack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Mistral AI", "Edge Functions", "AES-256-GCM"],
         },
         {
-          slug: "crewvee-crm",
-          title: "CrewVee CRM",
+          slug: "adhoc-platform",
+          title: "Ad Hoc Data Platform",
           description:
-            "Full-stack B2B CRM met agentic AI voor interne salesoperaties. Autonome AI-salesagenten (multi-LLM: Claude, GPT-4o, Gemini) kwalificeren leads 24/7, ondersteund door RAG-powered kennisbanken en real-time conversatie-intelligentie. Integreert met HubSpot, Pipedrive en Salesforce via OAuth. Gebouwd op Supabase Edge Functions.",
-          techStack: ["React", "TypeScript", "Supabase", "Claude AI", "OpenAI", "Edge Functions", "React Query"],
-        },
-        {
-          slug: "adhoc-selectietool",
-          title: "Ad Hoc Data Leadlist Selector",
-          description:
-            "De selectietool van Ad Hoc Data gerefactored en gemoderniseerd. Ad Hoc Data is een toonaangevende B2B dataleverancier in Nederland en België met 1,2M+ Belgische bedrijven in hun database. Geografisch zoeken toegevoegd met GeoJSON polygons voor het vinden van bedrijven binnen provincies, arrondissementen of postcodegebieden.",
-          techStack: ["JavaScript", "Angular", "GeoJSON", "Turf.js", "MapLibre", "HTML", "LESS"],
+            "Complete rebuild van het webplatform van Ad Hoc Data in drie refactor-iteraties: van legacy AngularJS naar Angular 21 SSR, inclusief een dual-database selectietool — KVK Pro (3,7M Nederlandse bedrijven) en AI Leads (3,4M web-geïndexeerde bedrijven in vier landen) — met live aantallen, 3.800+ technologiefilters en dual export.",
+          techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "GeoJSON", "Playwright"],
         },
         {
           slug: "webmodern-platform",
@@ -213,13 +192,6 @@ export const translations = {
           description:
             "Agentic AI content engine gebouwd voor de marketing van Ad Hoc Data: een dagelijkse GitHub Actions pipeline scrapet industriebronnen, scoort inspiratie met Gemini, matcht met CBS open data, en vult een complete contentkalender — drie social posts per week, een wekelijkse blog en een maandelijkse nieuwsbrief.",
           techStack: ["Python", "FastAPI", "SvelteKit", "TypeScript", "Gemini", "GitHub Actions"],
-        },
-        {
-          slug: "adhoc-website",
-          title: "Ad Hoc Data Website Rebuild",
-          description:
-            "Volledige rewrite van de marketingsite van Ad Hoc Data van legacy AngularJS naar Angular 21 met server-side rendering: 137 componenten, 50+ routes, tweetalig NL/EN met hreflang, JSON-LD structured data, live search door de SBI-2025 bedrijfstakkenstructuur en Playwright-tests op 10 viewports.",
-          techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "MapLibre", "Playwright"],
         },
         {
           slug: "leadhub",

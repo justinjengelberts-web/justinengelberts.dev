@@ -1,5 +1,13 @@
 import type { MetadataRoute } from "next";
 
+const projectSlugs = [
+  "refundely",
+  "adhoc-platform",
+  "webmodern-platform",
+  "contenttool",
+  "leadhub",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
@@ -8,17 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
-    {
-      url: "https://justinengelberts.dev/projects/refundely",
+    ...projectSlugs.map((slug) => ({
+      url: `https://justinengelberts.dev/projects/${slug}`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "monthly" as const,
       priority: 0.8,
-    },
-    {
-      url: "https://justinengelberts.dev/projects/adhoc-selectietool",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    })),
   ];
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, ExternalLink, Lock, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useState, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
@@ -11,12 +11,6 @@ import { LazyMount } from "./LazyMount";
 
 const RefundelyPreview = dynamic(() =>
   import("./RefundelyPreview").then((m) => ({ default: m.RefundelyPreview }))
-);
-const CrewVeeCRMPreview = dynamic(() =>
-  import("./CrewVeeCRMPreview").then((m) => ({ default: m.CrewVeeCRMPreview }))
-);
-const BelgiumMapPreview = dynamic(() =>
-  import("./BelgiumMapPreview").then((m) => ({ default: m.BelgiumMapPreview }))
 );
 const WebModernPreview = dynamic(() =>
   import("./WebModernPreview").then((m) => ({ default: m.WebModernPreview }))
@@ -33,11 +27,9 @@ const LeadHubPreview = dynamic(() =>
 
 const previews: Record<string, ComponentType> = {
   refundely: RefundelyPreview,
-  "crewvee-crm": CrewVeeCRMPreview,
-  "adhoc-selectietool": BelgiumMapPreview,
+  "adhoc-platform": AdhocWebsitePreview,
   "webmodern-platform": WebModernPreview,
   contenttool: ContentToolPreview,
-  "adhoc-website": AdhocWebsitePreview,
   leadhub: LeadHubPreview,
 };
 
@@ -233,15 +225,7 @@ export function FeaturedProjects() {
 
                     {/* Title row */}
                     <div className="mb-3">
-                      {project.slug === "crewvee-crm" ? (
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-xl font-semibold text-white">CrewVee CRM</h3>
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-[10px] font-medium tracking-wide uppercase">
-                            <Lock className="w-2.5 h-2.5" />
-                            Internal
-                          </span>
-                        </div>
-                      ) : project.slug === "refundely" ? (
+                      {project.slug === "refundely" ? (
                         <Link href={`/projects/${project.slug}`} className="inline-block">
                           <span className="inline-block bg-white/90 px-4 py-2 rounded-xl border border-white/50 shadow-lg shadow-emerald-500/10 hover:bg-white hover:shadow-emerald-500/20 transition-all duration-300 cursor-pointer">
                             <span className="text-xl font-bold tracking-tight text-slate-900">

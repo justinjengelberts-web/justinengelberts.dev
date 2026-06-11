@@ -76,6 +76,8 @@ export interface CaseStudyPageProps {
   techStack: { name: string; color: string }[];
   preview: ReactNode;
   ctaHref?: string;
+  /** Optional custom sections rendered between Features and Results. */
+  extraSections?: ReactNode;
 }
 
 export function CaseStudyPage({
@@ -84,6 +86,7 @@ export function CaseStudyPage({
   techStack,
   preview,
   ctaHref,
+  extraSections,
 }: CaseStudyPageProps) {
   const { language } = useLanguage();
   const t = content[language];
@@ -275,6 +278,8 @@ export function CaseStudyPage({
           </motion.div>
         </div>
       </section>
+
+      {extraSections}
 
       {/* Results */}
       <section className="py-16 px-6">

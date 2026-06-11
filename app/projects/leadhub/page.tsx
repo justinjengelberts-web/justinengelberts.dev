@@ -44,6 +44,11 @@ const content: { en: CaseStudyContent; nl: CaseStudyContent } = {
           "A verified HubSpot app (platform 2025.2) with a CRM Record Card that shows AI conversation transcripts and sync status inside HubSpot itself, including live staff takeover of an ongoing agent conversation.",
       },
       {
+        title: "CRM & lead pipeline",
+        description:
+          "A full CRM sits behind the agents: leads flow in from the connected sites with a combined lead score, pipeline and MRR tracking, and Postmark email flows triggered by lifecycle status — so agent conversations turn into a managed sales pipeline automatically.",
+      },
+      {
         title: "Analytics cockpit",
         description:
           "Google Search Console, GA4, and Microsoft Clarity wired into one dashboard with real-time KPIs and anomaly alerts — one place to watch every property I run.",
@@ -125,6 +130,11 @@ const content: { en: CaseStudyContent; nl: CaseStudyContent } = {
         title: "HubSpot OAuth2 platform-app",
         description:
           "Een geverifieerde HubSpot-app (platform 2025.2) met een CRM Record Card die AI-gesprekstranscripten en sync-status in HubSpot zelf toont, inclusief live overname van een lopend agentgesprek door een medewerker.",
+      },
+      {
+        title: "CRM & lead pipeline",
+        description:
+          "Achter de agents zit een volwaardig CRM: leads stromen binnen vanaf de gekoppelde sites met een gecombineerde leadscore, pipeline- en MRR-tracking, en Postmark e-mailflows getriggerd door lifecycle-status — zo worden agentgesprekken automatisch een beheerde salespipeline.",
       },
       {
         title: "Analytics-cockpit",
