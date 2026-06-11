@@ -81,6 +81,13 @@ export const translations = {
             "Agentic AI content engine built for Ad Hoc Data's marketing: a daily GitHub Actions pipeline scrapes industry sources, scores inspiration with Gemini, matches it against CBS open-data statistics, and drafts a full content calendar — three social posts a week, a weekly blog, and a monthly newsletter.",
           techStack: ["Python", "FastAPI", "SvelteKit", "TypeScript", "Gemini", "GitHub Actions"],
         },
+        {
+          slug: "adhoc-website",
+          title: "Ad Hoc Data Website Rebuild",
+          description:
+            "Full rewrite of Ad Hoc Data's marketing site from legacy AngularJS to Angular 21 with server-side rendering: 137 components, 50+ routes, dual-language NL/EN with hreflang, JSON-LD structured data, live search across the SBI-2025 industry taxonomy, and Playwright testing across 10 viewports.",
+          techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "MapLibre", "Playwright"],
+        },
       ],
     },
     // AI Workflow
@@ -189,6 +196,13 @@ export const translations = {
           description:
             "Agentic AI content engine gebouwd voor de marketing van Ad Hoc Data: een dagelijkse GitHub Actions pipeline scrapet industriebronnen, scoort inspiratie met Gemini, matcht met CBS open data, en vult een complete contentkalender — drie social posts per week, een wekelijkse blog en een maandelijkse nieuwsbrief.",
           techStack: ["Python", "FastAPI", "SvelteKit", "TypeScript", "Gemini", "GitHub Actions"],
+        },
+        {
+          slug: "adhoc-website",
+          title: "Ad Hoc Data Website Rebuild",
+          description:
+            "Volledige rewrite van de marketingsite van Ad Hoc Data van legacy AngularJS naar Angular 21 met server-side rendering: 137 componenten, 50+ routes, tweetalig NL/EN met hreflang, JSON-LD structured data, live search door de SBI-2025 bedrijfstakkenstructuur en Playwright-tests op 10 viewports.",
+          techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "MapLibre", "Playwright"],
         },
       ],
     },

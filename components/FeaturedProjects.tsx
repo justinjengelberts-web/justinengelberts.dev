@@ -24,6 +24,9 @@ const WebModernPreview = dynamic(() =>
 const ContentToolPreview = dynamic(() =>
   import("./ContentToolPreview").then((m) => ({ default: m.ContentToolPreview }))
 );
+const AdhocWebsitePreview = dynamic(() =>
+  import("./AdhocWebsitePreview").then((m) => ({ default: m.AdhocWebsitePreview }))
+);
 
 const previews: Record<string, ComponentType> = {
   refundely: RefundelyPreview,
@@ -31,6 +34,7 @@ const previews: Record<string, ComponentType> = {
   "adhoc-selectietool": BelgiumMapPreview,
   "webmodern-platform": WebModernPreview,
   contenttool: ContentToolPreview,
+  "adhoc-website": AdhocWebsitePreview,
 };
 
 const techColors: Record<string, string> = {
