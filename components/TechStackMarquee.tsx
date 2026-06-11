@@ -26,6 +26,11 @@ const techColors: Record<string, string> = {
   "Angular": "bg-[#DD0031]",
   "Edge Functions": "bg-[#F59E0B]",
   "AES-256-GCM": "bg-[#10B981]",
+  "AWS": "bg-[#FF9900]",
+  "CloudFront": "bg-[#8C4FFF]",
+  "Python": "bg-[#3776AB]",
+  "FastAPI": "bg-[#009688]",
+  "SvelteKit": "bg-[#FF3E00]",
 };
 
 export function TechStackMarquee() {

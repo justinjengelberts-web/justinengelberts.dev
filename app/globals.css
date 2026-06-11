@@ -140,3 +140,9 @@
 button[data-nextjs-dev-tools-button] {
   display: none !important;
 }
+/* Visible keyboard focus on all interactive elements (dark theme) */
+:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
