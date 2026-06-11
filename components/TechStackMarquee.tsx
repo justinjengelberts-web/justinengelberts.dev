@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
+import { motion, useMotionValue, useAnimationFrame, useInView } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 
 // Brand colors for each technology
@@ -35,6 +35,7 @@ export function TechStackMarquee() {
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
+  const inView = useInView(containerRef, { margin: "100px" });
 
   // Track mouse/touch state
   const [isHovering, setIsHovering] = useState(false);
@@ -95,6 +96,7 @@ export function TechStackMarquee() {
 
   // Animation loop
   useAnimationFrame(() => {
+    if (!inView) return;
     if (singleSetWidth.current === 0) return;
 
     // Skip animation during touch drag - touch move handles position directly
