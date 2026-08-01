@@ -19,7 +19,7 @@ const content = {
     solutionPoints: [
       {
         title: "AI-Powered Document Extraction",
-        description: "Built serverless edge functions using Mistral AI with intelligent model fallback. Starts with mistral-small for cost efficiency, validates extraction quality, and automatically escalates to mistral-medium or mistral-large when critical fields like deposit amounts or IBANs need better accuracy. Per-branch AI rules allow customization for specific invoice formats."
+        description: "Built serverless edge functions using Mistral AI with an outcome-validated model ladder. OCR runs on mistral-ocr and extraction starts on mistral-small for cost efficiency; escalation to mistral-medium is triggered by the result rather than the input. A missing deposit amount, tenant name or IBAN escalates, and so does a deposit that comes back exactly equal to the invoice total, because those are separate line items and identical values mean the model grabbed the wrong one. Per-branch AI rules allow customization for specific invoice formats."
       },
       {
         title: "SEPA Payment Automation",
@@ -27,7 +27,7 @@ const content = {
       },
       {
         title: "Enterprise Security & Encryption",
-        description: "Implemented AES-256-GCM client-side encryption for all IBAN data. Bank details are encrypted before transmission and stored securely, with server-side decryption only when needed. Full audit trail for compliance."
+        description: "Implemented AES-256-GCM encryption for all IBAN data through a dedicated server-side crypto service, so bank details are never stored in plaintext and are decrypted only for the operation that needs them. Full audit trail for compliance."
       },
       {
         title: "Multi-Tenant Architecture",
@@ -85,7 +85,7 @@ const content = {
     solutionPoints: [
       {
         title: "AI-Gestuurde Document Extractie",
-        description: "Serverless edge functions gebouwd met Mistral AI en intelligente model-fallback. Start met mistral-small voor kostenefficiëntie, valideert extractiekwaliteit, en escaleert automatisch naar mistral-medium of mistral-large wanneer kritieke velden zoals borgbedragen of IBANs betere nauwkeurigheid nodig hebben. Per-vestiging AI-regels voor specifieke factuurformaten."
+        description: "Serverless edge functions gebouwd met Mistral AI en een modelladder die op de uitkomst valideert. OCR draait op mistral-ocr en extractie start op mistral-small voor kostenefficiëntie; escalatie naar mistral-medium wordt getriggerd door het resultaat, niet door de input. Een ontbrekend borgbedrag, huurdersnaam of IBAN escaleert, en een borg die exact gelijk uitkomt aan het factuurtotaal ook, want dat zijn losse regels en gelijke bedragen betekenen dat het model de verkeerde heeft gepakt. Per-vestiging AI-regels voor specifieke factuurformaten."
       },
       {
         title: "SEPA Betaling Automatisering",
@@ -93,7 +93,7 @@ const content = {
       },
       {
         title: "Enterprise Security & Encryptie",
-        description: "AES-256-GCM client-side encryptie geïmplementeerd voor alle IBAN-gegevens. Bankgegevens worden versleuteld voor verzending en veilig opgeslagen, met server-side decryptie alleen wanneer nodig. Volledige audit trail voor compliance."
+        description: "AES-256-GCM encryptie geïmplementeerd voor alle IBAN-gegevens via een aparte server-side crypto-service, zodat bankgegevens nooit in platte tekst worden opgeslagen en alleen worden ontsleuteld voor de bewerking die ze nodig heeft. Volledige audit trail voor compliance."
       },
       {
         title: "Multi-Tenant Architectuur",

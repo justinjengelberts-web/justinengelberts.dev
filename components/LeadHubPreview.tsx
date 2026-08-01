@@ -27,7 +27,7 @@ const kpis = [
 const agents = [
   { name: "Justin AI Widget", model: "claude-sonnet-4-6", status: "Actief", tag: "bg-[#dcfce7] text-[#166534]" },
   { name: "Planner Support", model: "gemini-2.5-flash", status: "Actief", tag: "bg-[#dcfce7] text-[#166534]" },
-  { name: "Inbound Sales", model: "mistral-large-latest", status: "Gepauzeerd", tag: "bg-[#fef3c7] text-[#92400e]" },
+  { name: "Inbound Sales", model: "claude-sonnet-4-6", status: "Gepauzeerd", tag: "bg-[#fef3c7] text-[#92400e]" },
 ];
 
 export function LeadHubPreview() {

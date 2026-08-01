@@ -25,11 +25,11 @@ async function processInvoice(encryptedFile: Buffer) {
     }]
   });
 
-  // Validate & escalate if needed
+  // Validate the OUTCOME, escalate only when it fails
   if (!isValid(result)) {
     return mistral.chat({
-      model: "mistral-large-latest",
-      // ... retry with larger model
+      model: "mistral-medium-latest",
+      // ... retry on the heavier tier
     });
   }
 

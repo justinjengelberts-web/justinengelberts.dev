@@ -46,39 +46,45 @@ const DEFAULT_RADIUS_KM = 25;
 const MIN_RADIUS_KM = 5;
 const MAX_RADIUS_KM = 100;
 
-// Company density per km² - calibrated for ~1.2M total across Belgium (~30,500 km²)
-// Average ~39/km², but heavily skewed to urban areas
+// Modelled company density per km², used only to make this DEMO map respond to a
+// selection. The ~1.2M national figure it is scaled against is real (Belgian company
+// register); the per-region split below is a coarse estimate, not register data.
+//
+// Deterministic on purpose: an earlier version added Math.floor(Math.random() * n) to
+// every band, so selecting the same region twice produced two different counts. That
+// reads as broken to a visitor and as fabricated data to anyone opening this file. A
+// fixed midpoint per band is just as illustrative and cannot be mistaken for a live query.
 const getCompanyDensityPerKm2 = (lat: number, lng: number): number => {
-  // Brussels region - highest density (capital) ~1000/km²
+  // Brussels region - highest density (capital)
   if (lat > 50.8 && lat < 50.9 && lng > 4.3 && lng < 4.45) {
-    return 900 + Math.floor(Math.random() * 200);
+    return 1000;
   }
-  // Antwerp city area - very high density ~150/km²
+  // Antwerp city area - very high density
   if (lat > 51.1 && lat < 51.3 && lng > 4.3 && lng < 4.5) {
-    return 120 + Math.floor(Math.random() * 60);
+    return 150;
   }
-  // Ghent area ~100/km²
+  // Ghent area
   if (lat > 50.9 && lat < 51.1 && lng > 3.6 && lng < 3.85) {
-    return 80 + Math.floor(Math.random() * 40);
+    return 100;
   }
-  // Other Flemish urban areas (Leuven, Mechelen, etc.) ~70/km²
+  // Other Flemish urban areas (Leuven, Mechelen, etc.)
   if (lat > 50.8 && lng > 3.5 && lng < 5.5) {
-    return 55 + Math.floor(Math.random() * 30);
+    return 70;
   }
-  // Flanders general - medium-high density ~50/km²
+  // Flanders general - medium-high density
   if (lat > 50.7) {
-    return 40 + Math.floor(Math.random() * 20);
+    return 50;
   }
-  // Wallonia major cities (Liège, Charleroi, Namur area) ~45/km²
+  // Wallonia major cities (Liège, Charleroi, Namur area)
   if (lat > 50.3 && lat < 50.7 && lng > 4.3 && lng < 5.8) {
-    return 35 + Math.floor(Math.random() * 20);
+    return 45;
   }
-  // Wallonia medium - medium density ~20/km²
+  // Wallonia medium - medium density
   if (lat > 50.0 && lat < 50.7) {
-    return 15 + Math.floor(Math.random() * 10);
+    return 20;
   }
-  // Wallonia south (Luxembourg province, Ardennes) - lowest density ~8/km²
-  return 6 + Math.floor(Math.random() * 4);
+  // Wallonia south (Luxembourg province, Ardennes) - lowest density
+  return 8;
 };
 
 // Component to handle map clicks
