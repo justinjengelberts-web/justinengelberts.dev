@@ -15,6 +15,7 @@ interface ImageCompareSliderProps {
   beforeAlt?: string;
   afterAlt?: string;
   dragHint?: string;
+  beforeObjectFit?: "contain" | "cover";
 }
 
 export function ImageCompareSlider({
@@ -27,6 +28,7 @@ export function ImageCompareSlider({
   beforeAlt = "Before image",
   afterAlt = "After image",
   dragHint = "Drag to compare",
+  beforeObjectFit = "contain",
 }: ImageCompareSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -85,36 +87,38 @@ export function ImageCompareSlider({
   return (
     <motion.div
       ref={containerRef}
-      className="relative w-full rounded-2xl overflow-hidden border border-white/10 cursor-ew-resize select-none bg-zinc-900"
+      className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-[#f7f8fb] select-none"
+      style={{ aspectRatio: `${width} / ${height}` }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* After Image (Background - full width, sets container height) */}
+      {/* Both interfaces preserve their native proportions inside one responsive frame. */}
       <Image
         src={afterImage}
         alt={afterAlt}
-        width={width}
-        height={height}
-        sizes="(max-width: 896px) 100vw, 896px"
-        className="w-full h-auto block"
+        fill
+        sizes="(max-width: 1024px) 100vw, 1024px"
+        className="object-contain"
         draggable={false}
       />
 
       {/* Before Image (Clipped, absolutely positioned) */}
       <div
-        className="absolute inset-0 overflow-hidden"
+        className="absolute inset-0 overflow-hidden bg-white"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <Image
-          src={beforeImage}
-          alt={beforeAlt}
-          fill
-          sizes="(max-width: 896px) 100vw, 896px"
-          className="object-contain"
-          draggable={false}
-        />
+        <div className="absolute inset-x-[2%] top-[3%] bottom-0">
+          <Image
+            src={beforeImage}
+            alt={beforeAlt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className={`object-top ${beforeObjectFit === "cover" ? "object-cover" : "object-contain"}`}
+            draggable={false}
+          />
+        </div>
       </div>
 
       {/* Slider Line */}
@@ -162,20 +166,20 @@ export function ImageCompareSlider({
 
       {/* Labels */}
       <div
-        className="absolute top-4 left-4 px-3 py-1.5 bg-red-500/90 backdrop-blur-sm text-white text-xs font-semibold rounded-full uppercase tracking-wider transition-opacity duration-300"
+        className="absolute bottom-2 left-2 px-2 py-1 text-[10px] sm:bottom-4 sm:left-4 sm:px-3 sm:py-1.5 bg-red-500/90 backdrop-blur-sm text-white sm:text-xs font-semibold rounded-full uppercase tracking-wider transition-opacity duration-300"
         style={{ opacity: sliderPosition > 15 ? 1 : 0 }}
       >
         {beforeLabel}
       </div>
       <div
-        className="absolute top-4 right-4 px-3 py-1.5 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-semibold rounded-full uppercase tracking-wider transition-opacity duration-300"
+        className="absolute bottom-2 right-2 px-2 py-1 text-[10px] sm:bottom-4 sm:right-4 sm:px-3 sm:py-1.5 bg-emerald-500/90 backdrop-blur-sm text-white sm:text-xs font-semibold rounded-full uppercase tracking-wider transition-opacity duration-300"
         style={{ opacity: sliderPosition < 85 ? 1 : 0 }}
       >
         {afterLabel}
       </div>
 
       {/* Hint Text - z-0 to stay behind slider */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full text-white/60 text-xs pointer-events-none z-0">
+      <div className="absolute bottom-4 left-1/2 hidden -translate-x-1/2 px-4 sm:block py-2 bg-black/50 backdrop-blur-sm rounded-full text-white/60 text-xs pointer-events-none z-0">
         {dragHint}
       </div>
     </motion.div>

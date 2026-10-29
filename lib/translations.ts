@@ -60,9 +60,9 @@ export const translations = {
         },
         {
           slug: "adhoc-platform",
-          title: "Ad Hoc Data Platform",
+          title: "Ad Hoc Data: Platform & Website",
           description:
-            "Complete rebuild of Ad Hoc Data's web platform across three refactor iterations: from legacy AngularJS to Angular 21 SSR, including a dual-database selection tool — KVK Pro (3.7M Dutch companies) and AI Leads (3.4M web-indexed companies across four countries) — with live record counts, 3,800+ technology filters, and dual export.",
+            "Complete Angular 21 SSR rebuild for Ad Hoc Data: a bilingual public website, two data products, self-service selection and checkout flows, a customer portal, API documentation, and a scalable SEO content architecture.",
           techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "GeoJSON", "Playwright"],
         },
         {
@@ -174,9 +174,9 @@ export const translations = {
         },
         {
           slug: "adhoc-platform",
-          title: "Ad Hoc Data Platform",
+          title: "Ad Hoc Data: Platform & Website",
           description:
-            "Complete rebuild van het webplatform van Ad Hoc Data in drie refactor-iteraties: van legacy AngularJS naar Angular 21 SSR, inclusief een dual-database selectietool — KVK Pro (3,7M Nederlandse bedrijven) en AI Leads (3,4M web-geïndexeerde bedrijven in vier landen) — met live aantallen, 3.800+ technologiefilters en dual export.",
+            "Volledige Angular 21 SSR-rebuild voor Ad Hoc Data: een tweetalige publieke website, twee dataproducten, self-service selectie- en checkoutflows, een klantportal, API-documentatie en een schaalbare SEO-contentarchitectuur.",
           techStack: ["Angular 21", "SSR", "TypeScript", "PostgreSQL", "Drizzle", "GeoJSON", "Playwright"],
         },
         {
